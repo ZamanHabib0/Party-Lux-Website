@@ -28,9 +28,10 @@ export default function HomeTwo() {
       <Price />
       <TestimonialTwo />
       <Screenshot hasBg />
-      <AccordionWithImg />
-      <LatestNewsOne light bgColor="gray-light-bg" />
       <TeamTwo />
+      <AccordionWithImg />
+      {/* <LatestNewsOne light bgColor="gray-light-bg" /> */}
+      
       <Contact bgColor="gray-light-bg" />
       <BrandCarousel />
       <Subsribe />

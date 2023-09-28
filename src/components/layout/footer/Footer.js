@@ -3,6 +3,12 @@ import React from "react";
 export default function Footer({ space }) {
   return (
     <>
+     <div className="shape-img subscribe-wrap">
+        <img
+          src="assets/img/footer-top-shape.png"
+          alt="footer shape"
+          className="img-fluid"
+        /></div>
       <footer className="footer-section">
         <div
           className={`footer-top background-img-2 ${space ? "pt-150" : "pt-60"}`}
@@ -167,6 +173,7 @@ export default function Footer({ space }) {
           </div>
         </div>
       </footer>
+      
     </>
   );
 }

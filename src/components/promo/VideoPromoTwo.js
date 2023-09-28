@@ -23,9 +23,10 @@ export default function VideoPromoTwo() {
                   className="popup-youtube video-play-icon d-inline-block"
                 >
                   <span
-                    className="ti-control-play"
+                  className="ti-control-play" style={{ color: "#ad00ff" }}
+                  // className="ti-control-play" 
                     onClick={() => setOpen(true)}
-                  ></span>{" "}
+                  >  </span>{" "}
                 </Link>
                 <h5 className="mt-4 text-white">Watch video overview</h5>
 

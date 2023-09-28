@@ -20,7 +20,7 @@ export default function AboutApp() {
                 <li className="py-2">
                   <div className="d-flex align-items-center">
                     <div>
-                      <div className="badge badge-circle badge-primary mr-3">
+                      <div className="badge badge-circle badge-custom-color mr-3">
                         <span className="ti-check"></span>
                       </div>
                     </div>
@@ -32,7 +32,7 @@ export default function AboutApp() {
                 <li className="py-2">
                   <div className="d-flex align-items-center">
                     <div>
-                      <div className="badge badge-circle badge-primary mr-3">
+                      <div className="badge badge-circle badge-custom-color mr-3">
                         <span className="ti-check"></span>
                       </div>
                     </div>
@@ -46,7 +46,7 @@ export default function AboutApp() {
                 <li className="py-2">
                   <div className="d-flex align-items-center">
                     <div>
-                      <div className="badge badge-circle badge-primary mr-3">
+                      <div className="badge badge-circle badge-custom-color mr-3">
                         <span className="ti-check"></span>
                       </div>
                     </div>
@@ -60,7 +60,7 @@ export default function AboutApp() {
                 <li className="py-2">
                   <div className="d-flex align-items-center">
                     <div>
-                      <div className="badge badge-circle badge-primary mr-3">
+                      <div className="badge badge-circle badge-custom-color mr-3">
                         <span className="ti-check"></span>
                       </div>
                     </div>
@@ -74,7 +74,7 @@ export default function AboutApp() {
                 <li className="py-2">
                   <div className="d-flex align-items-center">
                     <div>
-                      <div className="badge badge-circle badge-primary mr-3">
+                      <div className="badge badge-circle badge-custom-color mr-3">
                         <span className="ti-check"></span>
                       </div>
                     </div>

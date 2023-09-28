@@ -27,7 +27,7 @@ export default function Price({ hasBg }) {
                   <h5 className="mb-2">Party Lux</h5>
                   <div className="pricing-img mt-3 mb-4">
                     <img
-                      src="assets/img/basic.svg"
+                      src="assets/img/logo-color-1x.png"
                       alt="pricing img"
                       className="img-fluid"
                     />
@@ -41,6 +41,7 @@ export default function Price({ hasBg }) {
                       <li>Throw your own party</li>
                       <li><br /></li>
                       <li><br /></li>
+                      
                      {/* <div style="height: 100px; width: 10px;"></div> */}
                     </ul>
                     <div className="py-4 border-0 pricing-header">
@@ -59,7 +60,7 @@ export default function Price({ hasBg }) {
                   <h5 className="mb-2">Party Lux Vip</h5>
                   <div className="pricing-img mt-3 mb-4">
                     <img
-                      src="assets/img/standard.svg"
+                      src="assets/img/LuxVIP.png"
                       alt="pricing img"
                       className="img-fluid"
                     />

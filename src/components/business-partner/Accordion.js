@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 export default function Accordion({ Title }) {
   const [images, setImages] = useState([]);
 
@@ -13,6 +14,13 @@ export default function Accordion({ Title }) {
 
     setImages([...images, ...validImageFiles]);
   };
+
+
+  const handleCancel = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1); // Remove the image at the specified index
+    setImages(newImages);
+  };
   return (
     <>
       <section className={`container accordions ${Title ? "ptb-100" : ""}`}>
@@ -22,7 +30,7 @@ export default function Accordion({ Title }) {
               <div className="section-heading mb-5">
                 <h2>Register Your Business</h2>
                 <p className="lead">
-                Empower your dreams, register your business today, and pave the path to a brighter future with our app.
+                  Empower your dreams, register your business today, and pave the path to a brighter future with our app.
                 </p>
               </div>
             </div>
@@ -33,109 +41,119 @@ export default function Accordion({ Title }) {
         <div className="row">
           <div className="col-lg-6">
             <div id="accordion-1" className="accordion accordion-faq">
-            <form className="login-signup-form">
-                  <div className="form-group">
-                    <label className="pb-1">Business Name</label>
-                    <div className="input-group input-group-merge">
-                      <div className="input-icon">
-                        <span className="ti-briefcase color-primary"></span>
-                      </div>
-                      <input
-                        type="name"
-                        className="form-control"
-                        placeholder="Enter Business Name"
-                      />
+              <form className="login-signup-form">
+                <div className="form-group">
+                  <label className="pb-1">Business Name</label>
+                  <div className="input-group input-group-merge">
+                    <div className="input-icon">
+                      <span className="ti-briefcase color-primary"></span>
                     </div>
+                    <input
+                      type="name"
+                      className="form-control"
+                      placeholder="Enter Business Name"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <div className="row">
+                    <div className="col">
+                      <label className="pb-1">Business Category</label>
+                    </div>
+
+                  </div>
+                  <div className="input-group input-group-merge">
+                    <div className="input-icon">
+                      <span className="ti-view-grid color-primary"></span>
+                    </div>
+                    <input
+                      type="name"
+                      className="form-control"
+                      placeholder="Enter Business Category"
+                    />
+                  </div>
                   </div>
 
                   <div className="form-group">
-                    <div className="row">
-                      <div className="col">
-                        <label className="pb-1">Business Category</label>
-                      </div>
-                     
-                    </div>
-                    <div className="input-group input-group-merge">
-                      <div className="input-icon">
-                        <span className="ti-view-grid color-primary"></span>
-                      </div>
-                      <input
-                        type="name"
-                        className="form-control"
-                        placeholder="Enter Business Category"
-                      />
-                    </div>
-
-                    <div className="input-group">
-                   
-                      {/* <input
-                        type="name"
-                        className="form-control"
-                        placeholder="Enter Business Category" 
-                        row = '3'
-                      /> */}
-
-<textarea className="form-control"  rows="8"></textarea>
-
-                    </div>
-                  </div>
-
-   
-
+                  <label className="pb-1 pt-1">Business description</label>
+                  <div className="input-group ">
                  
-                </form>
+                 <textarea className="form-control fixed-height" rows="4" placeholder="Enter description "></textarea>
+               </div>
+                </div>
+
+              
+
+                
+       
+
+
+
+              </form>
             </div>
           </div>
           <div className="col-lg-6">
             <div id="accordion-2" className="accordion accordion-faq">
-            <form className="login-signup-form">
-                  <div className="form-group">
-                    <label className="pb-1">Upload Business Images</label>
-                    <div className="input-group input-group-merge">
-                
-                    <div className="mb-2">
-               <div className="image-preview-container" style={imageContainerStyle}>
-              {images.map((image, index) => (
-            <div className="image-preview-box" style={imageBoxStyle} key={index}>
-            <img src={URL.createObjectURL(image)} alt={`Image ${index}`} style={imageStyle} />
-          </div>
-        ))}
-      </div>
-      <input
-        type="file"
-        id="file-input"
-        onChange={handleChange}
-        name="ImageStyle"
-        multiple
-        accept=".jpg, .jpeg, .png" // Specify the accepted file types
-      />
-    </div>
-                  </div>
-                  </div>
+              <form className="login-signup-form">
+                <div className="form-group">
+                  <label className="pb-1">Upload Business Images</label>
+                  <div className="input-group input-group-merge">
 
-                  <div className="form-group">
-                    <div className="row">
-                      <div className="col">
-                        <label className="pb-1">Password</label>
-                      </div>
-                     
-                    </div>
-                    <div className="input-group input-group-merge">
-                      <div className="input-icon">
-                        <span className="ti-lock color-primary"></span>
+                    <div className="mb-2">
+                      <div className="image-preview-container" style={imageContainerStyle}>
+                        {images.map((image, index) => (
+                          <div className="image-preview-box" style={imageBoxStyle} key={index}>
+                            <button type="button" onClick={() => handleCancel(index)} className="cancel-button"  >
+
+                              <img
+                                src="assets/img/cancel.png"
+                                width="20"
+                                alt="cancel"
+                                className="img-fluid"
+                              />
+
+                            </button>
+                            <img src={URL.createObjectURL(image)} alt={`Image ${index}`} style={imageStyle} />
+                          </div>
+                        ))}
                       </div>
                       <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Enter your password"
+                        type="file"
+                        id="file-input"
+                        onChange={handleChange}
+                        name="ImageStyle"
+                        multiple
+                        accept=".jpg, .jpeg, .png"
                       />
                     </div>
+
                   </div>
+                </div>
 
-   
+                <div className="form-group">
+                  <div className="row">
+                    <div className="col">
+                      <label className="pb-1">Password</label>
+                    </div>
 
-                 
-                </form>
+                  </div>
+                  <div className="input-group input-group-merge">
+                    <div className="input-icon">
+                      <span className="ti-lock color-primary"></span>
+                    </div>
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+                </div>
+
+
+
+
+              </form>
             </div>
           </div>
         </div>
@@ -146,11 +164,15 @@ export default function Accordion({ Title }) {
 
 
 
+
+
+
+
 const imageContainerStyle = {
   display: 'flex',
   flexWrap: 'wrap',
   gap: '10px',
-  margin : '10px'
+  margin: '10px'
 };
 
 const imageBoxStyle = {

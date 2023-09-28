@@ -32,8 +32,11 @@ export default function Screenshot({ hasBg }) {
       <section
         id="screenshots"
         className={`screenshots-section ptb-100 ${
-          hasBg ? "gray-light-bg" : ""
-        }`}
+          hasBg ? "gray-light-bg " : ""
+        }`  }   style={{
+          background:
+            "url('assets/img/screenshot-bg.png')no-repeat center center / cover",
+        }}
       >
         <div className="container">
           <div className="row justify-content-center">
@@ -46,7 +49,7 @@ export default function Screenshot({ hasBg }) {
                 ) : (
                   ""
                 )} */}
-                <h2>An Inside Look Of Party Lux</h2>
+                <h2 className="text-light" >An Inside Look Of Party Lux</h2>
                 {/* <p className="lead">
                   Credibly synthesize multimedia based networks vis-a-vis
                   top-line growth strategies. Continually leverage existing
@@ -56,7 +59,7 @@ export default function Screenshot({ hasBg }) {
             </div>
           </div>
           <div className="screen-slider-content mt-5">
-            <div className="screenshot-frame"></div>
+            <div className="screenshot-frame "></div>
             <OwlCarousel
               className="screen-carousel owl-carousel owl-theme dot-indicator"
               {...options}

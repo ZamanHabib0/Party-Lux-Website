@@ -68,7 +68,8 @@ export default function FeatureImg({ ImgSource }) {
                 <img
                   alt="placeholder"
                   src={ImgSource}
-                  className="img-center img-fluid"
+                  className="img-center "
+                  style={{height : "93vh"}}
                 />
               </div>
             </div>

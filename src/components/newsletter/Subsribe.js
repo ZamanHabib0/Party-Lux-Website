@@ -2,46 +2,16 @@ import React from "react";
 
 export default function Subsribe() {
   return (
-    // <>
 
-  //   <div className="container">
-  //   <div className="row justify-content-center">
-  //     <div className="col-md-6">
-  //       <form
-  //         action="#"
-  //         method="post"
-  //         className="subscribe-form subscribe-form-footer d-none d-md-block d-lg-block"
-  //       >
-  //         <div className="d-flex align-items-center">
-  //           <input
-  //             type="text"
-  //             className="form-control input"
-  //             id="email-footer"
-  //             name="email"
-  //             placeholder="info@yourdomain.com"
-  //           />
-  //           <input
-  //             type="submit"
-  //             className="button btn solid-btn"
-  //             id="submit-footer"
-  //             value="Subscribe"
-  //           />
-  //         </div>
-  //       </form>
-  //     </div>
-  //   </div>
-  // </div>
-
-
-    // </>
     <>
 
       <div className="container news-letter-subscriber-box mb-5  " 
     
        style={{
          background:
-           "url('assets/img/subscriber-bg.jpg')no-repeat center center / cover",
+           "url('assets/img/bg-subscriber.jpg')no-repeat center center / cover",
        }}
+ 
       >
         <div className="row  justify-content-between">
           <div className="col-md-6">

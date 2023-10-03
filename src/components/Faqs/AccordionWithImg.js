@@ -102,7 +102,9 @@ export default function AccordionWithImg() {
                 <img
                   src="assets/img/image-13.png"
                   alt="download"
-                  className="img-fluid"
+                  className="faq-img feature-img"
+                  // style={{height : "63vh"}}
+            
                 />
               </div>
             </div>

@@ -74,24 +74,7 @@ const Navbar = ({ darkBg, classOption }) => {
                   <HashLink className="nav-link" smooth to="#features">
                     Features
                   </HashLink>
-                </li>
-                {/* <li className="nav-item">
-                  <HashLink className="nav-link" smooth to="/become-partner">
-                    Business
-                  </HashLink>
-                </li> */}
-                {/* <li className="nav-item">
-                  <HashLink className="nav-link" smooth to='/login-two'>
-                    Login
-                  </HashLink>
-                </li>
-                <li className="nav-item">
-                  <HashLink className="nav-link" smooth to='/signup-two'>
-                    Sign Up
-                  </HashLink>
-                </li> */}
-              
-                
+                </li>              
                 <li className="nav-item">
                   <HashLink className="nav-link" smooth to="#team">
                     Team
@@ -104,7 +87,7 @@ const Navbar = ({ darkBg, classOption }) => {
                 </li>
                 <li className="nav-item">
                   <HashLink className= { `${scroll > headerTop ? "become-partner-scroll-btn" : "become-partner-btn"} ` }
-                 smooth to='/become-partner'>
+                 smooth to='/coming-soon'>
                   Become a Partner
                   </HashLink>
                 

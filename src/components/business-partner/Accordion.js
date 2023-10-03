@@ -23,142 +23,46 @@ export default function Accordion({ Title }) {
   };
   return (
     <>
-      <section className={`container accordions ${Title ? "ptb-100" : ""}`}>
-        {Title ? (
-          <div className="row">
-            <div className="col-lg-8 col-md-9">
-              <div className="section-heading mb-5">
-                <h2>Register Your Business</h2>
-                <p className="lead">
-                  Empower your dreams, register your business today, and pave the path to a brighter future with our app.
-                </p>
-              </div>
+
+    <div className="container" 
+    >
+    
+    <div>
+                 <img
+                  src= "assets/img/logo-color-1x.png"  
+                  width="230"
+                  alt="logo"
+                  className="img-fluid mt-5 mb-5"
+                />
+    </div>
+    
+      <div className="row  justify-content-between">
+        <div className="col-md-5">
+           <div className="container bg-light mt-5 p-3" > 
+          <p>asdasd</p>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
-        <div className="row">
-          <div className="col-lg-6">
-            <div id="accordion-1" className="accordion accordion-faq">
-              <form className="login-signup-form">
-                <div className="form-group">
-                  <label className="pb-1">Business Name</label>
-                  <div className="input-group input-group-merge">
-                    <div className="input-icon">
-                      <span className="ti-briefcase color-primary"></span>
-                    </div>
-                    <input
-                      type="name"
-                      className="form-control"
-                      placeholder="Enter Business Name"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <div className="row">
-                    <div className="col">
-                      <label className="pb-1">Business Category</label>
-                    </div>
-
-                  </div>
-                  <div className="input-group input-group-merge">
-                    <div className="input-icon">
-                      <span className="ti-view-grid color-primary"></span>
-                    </div>
-                    <input
-                      type="name"
-                      className="form-control"
-                      placeholder="Enter Business Category"
-                    />
-                  </div>
-                  </div>
-
-                  <div className="form-group">
-                  <label className="pb-1 pt-1">Business description</label>
-                  <div className="input-group ">
-                 
-                 <textarea className="form-control fixed-height" rows="4" placeholder="Enter description "></textarea>
-               </div>
-                </div>
-
-              
-
-                
-       
-
-
-
-              </form>
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div id="accordion-2" className="accordion accordion-faq">
-              <form className="login-signup-form">
-                <div className="form-group">
-                  <label className="pb-1">Upload Business Images</label>
-                  <div className="input-group input-group-merge">
-
-                    <div className="mb-2">
-                      <div className="image-preview-container" style={imageContainerStyle}>
-                        {images.map((image, index) => (
-                          <div className="image-preview-box" style={imageBoxStyle} key={index}>
-                            <button type="button" onClick={() => handleCancel(index)} className="cancel-button"  >
-
-                              <img
-                                src="assets/img/cancel.png"
-                                width="20"
-                                alt="cancel"
-                                className="img-fluid"
-                              />
-
-                            </button>
-                            <img src={URL.createObjectURL(image)} alt={`Image ${index}`} style={imageStyle} />
-                          </div>
-                        ))}
-                      </div>
-                      <input
-                        type="file"
-                        id="file-input"
-                        onChange={handleChange}
-                        name="ImageStyle"
-                        multiple
-                        accept=".jpg, .jpeg, .png"
-                      />
-                    </div>
-
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <div className="row">
-                    <div className="col">
-                      <label className="pb-1">Password</label>
-                    </div>
-
-                  </div>
-                  <div className="input-group input-group-merge">
-                    <div className="input-icon">
-                      <span className="ti-lock color-primary"></span>
-                    </div>
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Enter your password"
-                    />
-                  </div>
-                </div>
-
-
-
-
-              </form>
-            </div>
-          </div>
         </div>
-      </section>
-    </>
+
+
+        <div className="col-md-5">
+        <div className="col-md-5">
+           <div className="container bg-light mt-5 p-3 "   style={{
+          background:
+            "url('assets/img/become-partner-side-img.png')no-repeat center center / cover",
+        }}> 
+     <img
+                  src= "assets/img/logo-color-1x.png"  
+                  width="230"
+                  alt="logo"
+                  className="img-fluid mt-5 mb-5"
+                />
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </>
   );
 }
 

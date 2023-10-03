@@ -1,3 +1,5 @@
+import { HashLink } from 'react-router-hash-link';
+
 export default function Price({ hasBg }) {
   return (
     <>
@@ -23,9 +25,9 @@ export default function Price({ hasBg }) {
             </div>
             <div className="row justify-content-center">
               <div className="col-lg-4 col-md">
-                <div className="card text-center single-pricing-pack p-5">
-                  <h5 className="mb-2">Party Lux</h5>
-                  <div className="pricing-img mt-3 mb-4">
+                <div className="card text-center single-pricing-pack p-5" style={{backgroundColor : "black"}}>
+                  {/* <h5 className="mb-2">Party Lux</h5> */}
+                  <div className="pricing-img mt-3 mb-4 ">
                     <img
                       src="assets/img/logo-color-1x.png"
                       alt="pricing img"
@@ -34,10 +36,10 @@ export default function Price({ hasBg }) {
                   </div>
 
                   <div className="card-body p-0">
-                    <ul className="list-unstyled text-sm pricing-feature-list">
+                    <ul className="list-unstyled text-sm pricing-feature-list text-light ">
                       <li><br /></li>
                       <li><br /></li>
-                      <li>Nearby Parties</li>
+                      <li >Nearby Parties</li>
                       <li>Throw your own party</li>
                       <li><br /></li>
                       <li><br /></li>
@@ -45,20 +47,24 @@ export default function Price({ hasBg }) {
                      {/* <div style="height: 100px; width: 10px;"></div> */}
                     </ul>
                     <div className="py-4 border-0 pricing-header">
-                      <div className="h1 text-center mb-0 color-secondary">
+                      <div className="h1 text-center mb-0 color-secondary text-light">
                         $<span className="price font-weight-bolder">O</span>
                       </div>
                     </div>
-                    <a href="#/" className="btn outline-btn" target="_blank">
+                    <a href="#/" className="button btn solid-btn" target=""  style={{color : "white"}}>
                      Already Unlocked
                     </a>
+                    {/* <HashLink className= { "button btn solid-btn"   } 
+                 smooth to='/'>
+                      Already Unlocked
+                  </HashLink> */}
                   </div>
                 </div>
               </div>
               <div className="col-lg-4 col-md">
-                <div className="card text-center popular-price single-pricing-pack p-5">
-                  <h5 className="mb-2">Party Lux Vip</h5>
-                  <div className="pricing-img mt-3 mb-4">
+                <div className="card text-center popular-price single-pricing-pack p-5 " style={{backgroundColor : "black"}}>
+                  {/* <h5 className="mb-2">Party Lux Vip</h5> */}
+                  <div className="pricing-img mt-2 mb-4">
                     <img
                       src="assets/img/LuxVIP.png"
                       alt="pricing img"
@@ -67,7 +73,7 @@ export default function Price({ hasBg }) {
                   </div>
 
                   <div className="card-body p-0">
-                    <ul className="list-unstyled text-sm pricing-feature-list">
+                    <ul className="list-unstyled text-sm pricing-feature-list text-light ">
                       <li>Nearby Parties</li>
                       <li>Party Ratios</li>
                       <li>Verified Photos</li>
@@ -76,13 +82,18 @@ export default function Price({ hasBg }) {
                       <li>Event Analytics</li>
                     </ul>
                     <div className="py-4 border-0 pricing-header">
-                      <div className="h1 text-center mb-0 color-secondary">
+                      <div className="h1 text-center mb-0 color-secondary text-light">
                         $<span className="price font-weight-bolder">9.99 </span>
                       </div>
                     </div>
-                    <a href="#/" className="btn solid-btn" target="_blank">
+                    {/* <a href="#/" className="unlock-btn" target="_blank">
                       Unlock Now
-                    </a>
+                    </a> */}
+                    <HashLink  className="button btn solid-btn" target=""  style={{color : "white"}}
+                 smooth to='/'>
+                     Unlock Now  
+                  </HashLink>
+                
                   </div>
                 </div>
               </div>
@@ -118,7 +129,7 @@ export default function Price({ hasBg }) {
                 </div>
               </div> */}
             </div>
-            <div className="mt-5 text-center">
+            {/* <div className="mt-5 text-center">
               <p className="mb-2">
                 If you need custom services or Need more?
                 <a href="#/" className="color-secondary">
@@ -126,7 +137,7 @@ export default function Price({ hasBg }) {
                   Contact us{" "}
                 </a>
               </p>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>

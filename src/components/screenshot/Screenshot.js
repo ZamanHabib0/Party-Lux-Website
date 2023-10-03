@@ -35,7 +35,7 @@ export default function Screenshot({ hasBg }) {
           hasBg ? "gray-light-bg " : ""
         }`  }   style={{
           background:
-            "url('assets/img/screenshot-bg.png')no-repeat center center / cover",
+            "url('assets/img/bg-screenshot.jpg')no-repeat center center / cover",
         }}
       >
         <div className="container">

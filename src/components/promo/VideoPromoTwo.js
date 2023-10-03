@@ -11,7 +11,7 @@ export default function VideoPromoTwo() {
         className="video-promo ptb-100 background-img"
         style={{
           background:
-            "url('assets/img/video-bg.jpg')no-repeat center center / cover",
+            "url('assets/img/bg-video.jpg')no-repeat center center / cover",
         }}
       >
         <div className="container">

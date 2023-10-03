@@ -9,11 +9,14 @@ import PageHeader from "../components/team/PageHeader";
 export default function Faq() {
   return (
     <Layout>
-      <Navbar darkBg />
-      <PageHeader HeaderTitle="Become A Partner" Parent="Pages" PageTitle="business Partner" />
+        <div className="become-partner-bg-img"  style={{
+          background:
+            "url('assets/img/partner-bg.jpg')no-repeat center center / cover",
+        }}>
+
       <Accordion Title />
-      <FaqStatic Title space />
-      <Footer />
+
+      </div>
     </Layout>
   );
 }

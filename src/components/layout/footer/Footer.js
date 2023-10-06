@@ -143,7 +143,7 @@ export default function Footer({ space }) {
                 <div className="col-md-6 col-lg-7">
                   <div className="copyright-wrap small-text">
                     <p className="mb-0 text-white">
-                      © ThemeTags Design Agency, All rights reserved
+                    ©2023 PARTYLUX. Website designed by Syncrozone
                     </p>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function Footer({ space }) {
                   <div className="terms-policy-wrap text-lg-right text-md-right text-left">
                     <ul className="list-inline">
                       <li className="list-inline-item">
-                        <a className="small-text" href="#/">
+                        <a className="small-text" href="/terms-and-conditions">
                           Terms
                         </a>
                       </li>
@@ -161,7 +161,7 @@ export default function Footer({ space }) {
                         </a>
                       </li>
                       <li className="list-inline-item">
-                        <a className="small-text" href="#/">
+                        <a className="small-text" href="/privacy-policy">
                           Privacy Policy
                         </a>
                       </li>

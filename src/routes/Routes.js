@@ -20,6 +20,8 @@ import BlogGrid from "../pages/BlogGrid";
 import BlogWithSidebar from "../pages/BlogWithSidebar";
 import BlogDetails from "../pages/BlogDetails";
 import ScrollToTop from "./ScrollToTop";
+import PrivacyPolicy from "../pages/privacyPolicy.js";
+import TermsAndConditions from "../pages/TermsAndConditions.js";
 
 const AppRoutes = () => {
   return (
@@ -44,6 +46,8 @@ const AppRoutes = () => {
         <Route path="/blog-grid" element={<BlogGrid />} />
         <Route path="/blog-sidebar" element={<BlogWithSidebar />} />
         <Route path="/blog-details" element={<BlogDetails />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

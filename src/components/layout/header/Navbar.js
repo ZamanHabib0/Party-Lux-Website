@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
 
-const Navbar = ({ darkBg, classOption }) => {
+const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Features = "#features", Team = "#team", Contact = "#contact", BecomeApartner = "/become-partner" }) => {
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
 
@@ -60,34 +60,34 @@ const Navbar = ({ darkBg, classOption }) => {
             >
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                <HashLink className="nav-link" smooth to='#'>
+                <HashLink className="nav-link" smooth to= {Home}>
                 Home
                   </HashLink>
                 
                 </li>
                 <li className="nav-item">
-                  <HashLink className="nav-link" smooth to='#pricing'>
+                  <HashLink className="nav-link" smooth to= {Unlock}>
                     Unlock
                   </HashLink>
                 </li>
                 <li className="nav-item">
-                  <HashLink className="nav-link" smooth to="#features">
+                  <HashLink className="nav-link" smooth to={Features}>
                     Features
                   </HashLink>
                 </li>              
                 <li className="nav-item">
-                  <HashLink className="nav-link" smooth to="#team">
+                  <HashLink className="nav-link" smooth to= {Team}>
                     Team
                   </HashLink>
                 </li>
                 <li className="nav-item">
-                  <HashLink className="nav-link" smooth to="#contact">
+                  <HashLink className="nav-link" smooth to= {Contact}>
                     Contact
                   </HashLink>
                 </li>
                 <li className="nav-item">
                   <HashLink className= { `${scroll > headerTop ? "become-partner-scroll-btn" : "become-partner-btn"} ` }
-                 smooth to='/coming-soon'>
+                 smooth to= {BecomeApartner}>
                   Become a Partner
                   </HashLink>
                 

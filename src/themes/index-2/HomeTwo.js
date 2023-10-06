@@ -1,7 +1,6 @@
 import Footer from "../../components/layout/footer/Footer";
 import AboutApp from "../../components/about/AboutApp";
 import AccordionWithImg from "../../components/Faqs/AccordionWithImg";
-import LatestNewsOne from "../../components/blogs/LatestNewsOne";
 import Contact from "../../components/contact/Contact";
 import FeatureImg from "../../components/features/FeatureImg";
 import Navbar from "../../components/layout/header/Navbar";
@@ -19,7 +18,7 @@ import Screenshot from "../../components/screenshot/Screenshot";
 export default function HomeTwo() {
   return (
     <Layout>
-      <Navbar darkBg />
+      <Navbar darkBg  />
       <HeroTwo />
       <PromoTwo />
       <AboutApp />

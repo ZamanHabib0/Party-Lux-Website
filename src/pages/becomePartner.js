@@ -14,7 +14,7 @@ export default function Faq() {
             "url('assets/img/partner-bg.jpg')no-repeat center center / cover",
         }}>
 
-      <Accordion Title />
+      <Accordion  />
 
       </div>
     </Layout>

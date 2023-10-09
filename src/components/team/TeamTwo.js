@@ -25,18 +25,19 @@ export default function Team({ hasTitle, bgColor }) {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-3 col-sm-6">
+         
+            <div className="col-lg-4 col-sm-6">
               <div className="single-team-member position-relative">
                 <div className="team-image">
                   <img
-                    src="assets/img/team-4.jpg"
+                    src="assets/img/cmo-founder.jpg"
                     alt="Team Members"
                     className="img-fluid rounded-circle"
                   />
                 </div>
                 <div className="team-info text-white rounded-circle d-flex flex-column align-items-center justify-content-center">
-                  <h5 className="mb-0">Edna Mason</h5>
-                  <h6>Senior Designer</h6>
+                  <h5 className="mb-0">ZACH BERRIER</h5>
+                  <h6>CMO | CO-FOUNDER</h6>
                   <ul className="list-inline team-social social-icon mt-4 text-white">
                     <li className="list-inline-item">
                       <a href="#/">
@@ -62,18 +63,18 @@ export default function Team({ hasTitle, bgColor }) {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            <div className="col-lg-4 col-sm-6">
               <div className="single-team-member position-relative">
                 <div className="team-image">
                   <img
-                    src="assets/img/team-1.jpg"
+                    src="assets/img/founder-main.JPG"
                     alt="Team Members"
                     className="img-fluid rounded-circle"
                   />
                 </div>
                 <div className="team-info text-white rounded-circle d-flex flex-column align-items-center justify-content-center">
-                  <h5 className="mb-0">Edna Mason</h5>
-                  <h6>Senior Designer</h6>
+                  <h5 className="mb-0">JACOB CABATANA</h5>
+                  <h6>CEO | FOUNDER </h6>
                   <ul className="list-inline team-social social-icon mt-4 text-white">
                     <li className="list-inline-item">
                       <a href="#/">
@@ -99,18 +100,18 @@ export default function Team({ hasTitle, bgColor }) {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            <div className="col-lg-4 col-sm-6">
               <div className="single-team-member position-relative">
                 <div className="team-image">
                   <img
-                    src="assets/img/team-2.jpg"
+                    src="assets/img/cfo-founder.JPG"
                     alt="Team Members"
                     className="img-fluid rounded-circle"
                   />
                 </div>
                 <div className="team-info text-white rounded-circle d-flex flex-column align-items-center justify-content-center">
-                  <h5 className="mb-0">Edna Mason</h5>
-                  <h6>Senior Designer</h6>
+                  <h5 className="mb-0">CONNER BROWN</h5>
+                  <h6>CFO | CO-FOUNDER</h6>
                   <ul className="list-inline team-social social-icon mt-4 text-white">
                     <li className="list-inline-item">
                       <a href="#/">
@@ -136,7 +137,7 @@ export default function Team({ hasTitle, bgColor }) {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            {/* <div className="col-lg-3 col-sm-6">
               <div className="single-team-member position-relative">
                 <div className="team-image">
                   <img
@@ -172,7 +173,7 @@ export default function Team({ hasTitle, bgColor }) {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

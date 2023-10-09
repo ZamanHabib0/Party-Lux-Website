@@ -22,6 +22,9 @@ import BlogDetails from "../pages/BlogDetails";
 import ScrollToTop from "./ScrollToTop";
 import PrivacyPolicy from "../pages/privacyPolicy.js";
 import TermsAndConditions from "../pages/TermsAndConditions.js";
+import EndUserLicenseAgrement from "../pages/EndUserLicenseAgrement.js";
+import Disclaimer from "../pages/Disclaimer.js";
+import ReturnPolicy from "../pages/ReturnPolicy.js";
 
 const AppRoutes = () => {
   return (
@@ -48,6 +51,9 @@ const AppRoutes = () => {
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/end-user-license-agreement" element={<EndUserLicenseAgrement />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

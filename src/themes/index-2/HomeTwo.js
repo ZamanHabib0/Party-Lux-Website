@@ -11,8 +11,8 @@ import VideoPromoTwo from "../../components/promo/VideoPromoTwo";
 import TeamTwo from "../../components/team/TeamTwo";
 import HeroTwo from "./HeroTwo";
 import Subsribe from "../../components/newsletter/Subsribe";
-import BrandCarousel from "../../components/testimonial/BrandCarousel";
-import TestimonialTwo from "../../components/testimonial/TestimonialTwo";
+// import BrandCarousel from "../../components/testimonial/BrandCarousel";
+// import TestimonialTwo from "../../components/testimonial/TestimonialTwo";
 import Screenshot from "../../components/screenshot/Screenshot";
 
 export default function HomeTwo() {
@@ -25,14 +25,14 @@ export default function HomeTwo() {
       <FeatureImg ImgSource="assets/img/image-10.png" />
       <VideoPromoTwo />
       <Price />
-      <TestimonialTwo />
+      {/* <TestimonialTwo /> */}
       <Screenshot hasBg />
       <TeamTwo />
       <AccordionWithImg />
       {/* <LatestNewsOne light bgColor="gray-light-bg" /> */}
       
       <Contact bgColor="gray-light-bg" />
-      <BrandCarousel />
+      {/* <BrandCarousel /> */}
       <Subsribe />
       <Footer space />
     </Layout>

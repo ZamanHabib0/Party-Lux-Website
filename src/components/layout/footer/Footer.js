@@ -156,15 +156,26 @@ export default function Footer({ space }) {
                         </a>
                       </li>
                       <li className="list-inline-item">
-                        <a className="small-text" href="#/">
-                          Security
-                        </a>
-                      </li>
-                      <li className="list-inline-item">
                         <a className="small-text" href="/privacy-policy">
                           Privacy Policy
                         </a>
                       </li>
+                      <li className="list-inline-item">
+                        <a className="small-text" href="/end-user-license-agreement">
+                        End User
+                        </a>
+                      </li>
+                      <li className="list-inline-item">
+                        <a className="small-text" href="/disclaimer">
+                        Disclaimer
+                        </a>
+                      </li>
+                      <li className="list-inline-item">
+                        <a className="small-text" href="/return-policy">
+                        Return Policy
+                        </a>
+                      </li>
+                     
                     </ul>
                   </div>
                 </div>

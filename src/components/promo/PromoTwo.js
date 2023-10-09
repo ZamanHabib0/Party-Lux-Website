@@ -9,31 +9,31 @@ export default function PromoTwo() {
             <div className="col-lg-6 col-md-10">
               <div className="section-heading mb-5">
                 <span className="text-uppercase color-secondary sub-title">
-                  Key features
+                PARTY ESSENTIALS 
                 </span>
                 <h2 className="mb-6">
-                  We Will Helps you to Build Beautiful Websites
+                WE'RE CHANGING THE WAY THE WORLD PARTIES, FOR THE BETTER
                 </h2>
               </div>
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-3 col-sm-6 mb-lg-0">
+            <div className="col-lg-4 col-sm-6 mb-lg-0">
               <div className="card single-promo-card single-promo-hover">
                 <div className="card-body">
                   <div className="pb-2">
                     <span className="ti-credit-card icon-md color-secondary"></span>
                   </div>
                   <div className="pt-2 pb-3">
-                    <h5>Modular</h5>
+                    <h5>EASY TO USE</h5>
                     <p className="text-muted mb-0">
-                      All components are built to be used in any combination.
+                    WITH A COUPLE TAPS ON YOUR PHONE, YOU'LL KNOW WHERE THE BEST PARTY IS AT.                  
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            {/* <div className="col-lg-3 col-sm-6">
               <div className="card single-promo-card single-promo-hover mb-lg-0">
                 <div className="card-body">
                   <div className="pb-2">
@@ -47,32 +47,34 @@ export default function PromoTwo() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
+            </div> */}
+            <div className="col-lg-4 col-sm-6">
               <div className="card single-promo-card single-promo-hover mb-lg-0">
                 <div className="card-body">
                   <div className="pb-2">
                     <span className="ti-vector icon-md color-secondary"></span>
                   </div>
                   <div className="pt-2 pb-3">
-                    <h5>Scalable</h5>
+                    <h5>DIGITAL MARKETING</h5>
                     <p className="text-muted mb-0">
-                      Remain consistent while developing new features.
+                    WE CREATED A PLATFORM SPECIFICALLY FOR USERS AND BUSINESSES       
+                    <br></br>
+                    <br></br>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            <div className="col-lg-4 col-sm-6">
               <div className="card single-promo-card single-promo-hover mb-lg-0">
                 <div className="card-body">
                   <div className="pb-2">
                     <span className="ti-receipt icon-md color-secondary"></span>
                   </div>
                   <div className="pt-2 pb-3">
-                    <h5>Customizable</h5>
+                    <h5>SIDE HUSTLE</h5>
                     <p className="text-muted mb-0">
-                      Change a few variables and the whole theme adapts.
+                    GREEK LIFE OR SMALL GET TOGETHER? PARTY LUX ALLOWS YOU TO THROW YOUR OWN PARTIES
                     </p>
                   </div>
                 </div>

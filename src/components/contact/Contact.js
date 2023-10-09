@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function Contact({ bgColor }) {
+  // Define state variables to store form data
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    message: "",
+  });
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/v1/mobile/support/send-email-toSupport",
+        formData
+      );
+
+      if (response.status === 200) {
+        setSuccessMessage("Message sent successfully!");
+        setErrorMessage(""); // Clear any previous error messages
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          message: "",
+        });
+        
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
+
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setSuccessMessage(""); // Clear any previous success messages
+      setErrorMessage("An error occurred while sending the message. Please try again.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
+
+   
+  };
 
 
-
-
-
-  
   return (
     <>
       <section
@@ -32,16 +82,14 @@ export default function Contact({ bgColor }) {
                 <h6>
                   <strong>Head Office</strong>
                 </h6>
-                <p>121 King St, Melbourne VIC 3000, Australia</p>
+                <p>1223 PICCADILLY DR HURLBURT FIELD, FL 32544</p>
                 <ul>
-                  <li>
-                    <span>Phone: +61 2 8376 6284</span>
-                  </li>
+                 
                   <li>
                     <span>
                       Email :
-                      <a href="mailto:hello@yourdomain.com">
-                        hello@yourdomain.com
+                      <a href="mailto:SUPPORT@PARTYLUX.APP">
+                       SUPPORT@PARTYLUX.APP
                       </a>
                     </span>
                   </li>
@@ -54,6 +102,7 @@ export default function Contact({ bgColor }) {
                 method="POST"
                 id="contactForm"
                 className="contact-us-form"
+                onSubmit={handleSubmit}
               >
                 <h5>Reach us quickly</h5>
                 <div className="row">
@@ -64,8 +113,10 @@ export default function Contact({ bgColor }) {
                         className="form-control"
                         name="name"
                         id="name"
-                        placeholder="Enter name"
+                        placeholder="Enter your name"
                         required="required"
+                        value={formData.name}
+                        onChange={handleInputChange}
                       />
                     </div>
                   </div>
@@ -76,8 +127,10 @@ export default function Contact({ bgColor }) {
                         className="form-control"
                         name="email"
                         id="email"
-                        placeholder="Enter email"
+                        placeholder="Enter your email"
                         required="required"
+                        value={formData.email}
+                        onChange={handleInputChange}
                       />
                     </div>
                   </div>
@@ -88,10 +141,11 @@ export default function Contact({ bgColor }) {
                       <input
                         type="text"
                         name="phone"
-                        defaultValue=""
                         className="form-control"
                         id="phone"
                         placeholder="Your Phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
                       />
                     </div>
                   </div>
@@ -100,11 +154,11 @@ export default function Contact({ bgColor }) {
                       <input
                         type="text"
                         name="company"
-                        defaultValue=""
-                        size="40"
                         className="form-control"
                         id="company"
                         placeholder="Your Company"
+                        value={formData.company}
+                        onChange={handleInputChange}
                       />
                     </div>
                   </div>
@@ -114,11 +168,12 @@ export default function Contact({ bgColor }) {
                     <div className="form-group">
                       <textarea
                         name="message"
-                        id="message"
                         className="form-control"
                         rows="7"
                         cols="25"
                         placeholder="Message"
+                        value={formData.message}
+                        onChange={handleInputChange}
                       ></textarea>
                     </div>
                   </div>
@@ -136,6 +191,32 @@ export default function Contact({ bgColor }) {
                 </div>
               </form>
               <p className="form-message"></p>
+              {successMessage && (
+            <div className="alert alert-success alert-dismissible fade show" role="alert">
+              {successMessage}
+              <button
+                type="button"
+                className="close"
+                onClick={() => setSuccessMessage("")}
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          )}
+          {errorMessage && (
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+              {errorMessage}
+              <button
+                type="button"
+                className="close"
+                onClick={() => setErrorMessage("")}
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          )}
             </div>
           </div>
         </div>

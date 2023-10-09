@@ -25,6 +25,8 @@ import TermsAndConditions from "../pages/TermsAndConditions.js";
 import EndUserLicenseAgrement from "../pages/EndUserLicenseAgrement.js";
 import Disclaimer from "../pages/Disclaimer.js";
 import ReturnPolicy from "../pages/ReturnPolicy.js";
+import CookiePolicy from "../pages/CookiePolicy.js";
+import AcceptableUsePolicy from "../pages/AcceptableUsePolicy.js";
 
 const AppRoutes = () => {
   return (
@@ -54,6 +56,8 @@ const AppRoutes = () => {
         <Route path="/end-user-license-agreement" element={<EndUserLicenseAgrement />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/acceptable-use-policy" element={<AcceptableUsePolicy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

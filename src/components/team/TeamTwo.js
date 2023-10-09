@@ -17,16 +17,15 @@ export default function Team({ hasTitle, bgColor }) {
                 )}
                 <h2>Our Team Members</h2>
                 <p className="lead">
-                  Following reasons show advantages of adding AppCo to your lead
+                  {/* Following reasons show advantages of adding AppCo to your lead
                   pages, foster market positioning products without demos and
-                  checkouts.
+                  checkouts. */}
                 </p>
               </div>
             </div>
           </div>
           <div className="row">
-         
-            <div className="col-lg-4 col-sm-6">
+          <div className="col-lg-4 col-sm-6">
               <div className="single-team-member position-relative">
                 <div className="team-image">
                   <img
@@ -36,30 +35,9 @@ export default function Team({ hasTitle, bgColor }) {
                   />
                 </div>
                 <div className="team-info text-white rounded-circle d-flex flex-column align-items-center justify-content-center">
-                  <h5 className="mb-0">ZACH BERRIER</h5>
-                  <h6>CMO | CO-FOUNDER</h6>
-                  <ul className="list-inline team-social social-icon mt-4 text-white">
-                    <li className="list-inline-item">
-                      <a href="#/">
-                        <span className="ti-facebook"></span>
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#/">
-                        <span className="ti-twitter"></span>
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#/">
-                        <span className="ti-github"></span>
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#/">
-                        <span className="ti-dribbble"></span>
-                      </a>
-                    </li>
-                  </ul>
+                  <h5 className="mb-0">JACOB CABATANA</h5>
+                  <h6>CEO | FOUNDER </h6>
+                
                 </div>
               </div>
             </div>
@@ -73,9 +51,9 @@ export default function Team({ hasTitle, bgColor }) {
                   />
                 </div>
                 <div className="team-info text-white rounded-circle d-flex flex-column align-items-center justify-content-center">
-                  <h5 className="mb-0">JACOB CABATANA</h5>
-                  <h6>CEO | FOUNDER </h6>
-                  <ul className="list-inline team-social social-icon mt-4 text-white">
+                  <h5 className="mb-0">CONNER BROWN</h5>
+                  <h6>CFO | CO-FOUNDER</h6>
+                  {/* <ul className="list-inline team-social social-icon mt-4 text-white">
                     <li className="list-inline-item">
                       <a href="#/">
                         <span className="ti-facebook"></span>
@@ -96,10 +74,11 @@ export default function Team({ hasTitle, bgColor }) {
                         <span className="ti-dribbble"></span>
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>
+           
             <div className="col-lg-4 col-sm-6">
               <div className="single-team-member position-relative">
                 <div className="team-image">
@@ -110,9 +89,9 @@ export default function Team({ hasTitle, bgColor }) {
                   />
                 </div>
                 <div className="team-info text-white rounded-circle d-flex flex-column align-items-center justify-content-center">
-                  <h5 className="mb-0">CONNER BROWN</h5>
-                  <h6>CFO | CO-FOUNDER</h6>
-                  <ul className="list-inline team-social social-icon mt-4 text-white">
+                  <h5 className="mb-0">ZACH BERRIER</h5>
+                  <h6>CMO | CO-FOUNDER</h6>
+                  {/* <ul className="list-inline team-social social-icon mt-4 text-white">
                     <li className="list-inline-item">
                       <a href="#/">
                         <span className="ti-facebook"></span>
@@ -133,7 +112,7 @@ export default function Team({ hasTitle, bgColor }) {
                         <span className="ti-dribbble"></span>
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>

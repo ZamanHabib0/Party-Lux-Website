@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function PrivacyPolicy() {
+export default function Cookie() {
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
     document.body.appendChild(script);
   }, []);  return (
     <div className="container">
-      <div name="termly-embed" data-id="6112758d-9cb2-4999-be46-86d8e71ee8e2"></div>
+      <div name="termly-embed" data-id="ea3ee5ef-d689-46ae-8632-f31f883507c5"></div>
     </div>
   );
 }

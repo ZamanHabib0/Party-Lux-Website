@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-export default function PrivacyPolicy() {
+export default function EndUserLicenseAgrement() {
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
     document.body.appendChild(script);
   }, []);  return (
     <div className="container">
-      <div name="termly-embed" data-id="cb92fa34-7b35-4c4d-ada8-ab9dacedb5da"></div>
+      <div name="termly-embed" data-id="38d987ae-45d7-438a-8727-ed8a03dd49f5"></div>
     </div>
   );
 }

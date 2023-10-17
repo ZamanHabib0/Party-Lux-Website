@@ -1,4 +1,4 @@
-import { HashLink } from 'react-router-hash-link';
+
 
 export default function Price({ hasBg }) {
   return (
@@ -51,9 +51,9 @@ export default function Price({ hasBg }) {
                         $<span className="price font-weight-bolder">O</span>
                       </div>
                     </div>
-                    <a href="#/" className="button btn solid-btn" target=""  style={{color : "white"}}>
+                    {/* <a href="#/" className="button btn solid-btn" target=""  style={{color : "white"}}>
                      Already Unlocked
-                    </a>
+                    </a> */}
                     {/* <HashLink className= { "button btn solid-btn"   } 
                  smooth to='/'>
                       Already Unlocked
@@ -89,10 +89,10 @@ export default function Price({ hasBg }) {
                     {/* <a href="#/" className="unlock-btn" target="_blank">
                       Unlock Now
                     </a> */}
-                    <HashLink  className="button btn solid-btn" target=""  style={{color : "white"}}
+                    {/* <HashLink  className="button btn solid-btn" target=""  style={{color : "white"}}
                  smooth to='/'>
                      Unlock Now  
-                  </HashLink>
+                  </HashLink> */}
                 
                   </div>
                 </div>

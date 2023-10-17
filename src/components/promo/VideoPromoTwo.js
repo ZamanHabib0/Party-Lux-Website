@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function VideoPromoTwo() {
   const [isOpen, setOpen] = useState(false);
+  const videoPath = "assets/img/overreview.mp4";
   return (
     <>
       <section
@@ -31,20 +32,33 @@ export default function VideoPromoTwo() {
                 <h5 className="mt-4 text-white">Watch video overview</h5>
 
                 <div className="download-btn mt-5">
-                  <a href="#/" className="btn google-play-btn mr-3">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.partylux.dev"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className="btn google-play-btn mr-3"
+                  >
                     <span className="ti-android"></span> Google Play
                   </a>
-                  <a href="#/" className="btn app-store-btn">
+
+                  <a
+                    href="https://apps.apple.com/pk/app/party-lux/id6449225803"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className="btn app-store-btn"
+                  >
                     <span className="ti-apple"></span> App Store
                   </a>
                 </div>
               </div>
             </div>
           </div>
+          
           <ModalVideo
-            channel="youtube"
+          
+            channel="custom"
             isOpen={isOpen}
-            videoId="9No-FiEInLA"
+            url= { videoPath }
             onClose={() => setOpen(false)}
           />
         </div>

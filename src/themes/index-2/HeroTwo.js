@@ -25,9 +25,28 @@ export default function HeroTwo() {
                   Get Access To The Best Clubs,Bars and House Parties Nearby
                 </p>
 
-                <a href="#download" className="btn app-store-btn">
+                {/* <a href="#download" className="btn app-store-btn">
                   Download Now
-                </a>
+                </a> */}
+                <div className="download-btn mt-5">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.partylux.dev"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className="btn google-play-btn mr-3"
+                  >
+                    <span className="ti-android"></span> Google Play
+                  </a>
+
+                  <a
+                    href="https://apps.apple.com/pk/app/party-lux/id6449225803"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className="btn app-store-btn"
+                  >
+                    <span className="ti-apple"></span> App Store
+                  </a>
+                </div>
               </div>
             </div>
             <div className="col-md-6 col-lg-5">

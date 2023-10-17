@@ -3,6 +3,9 @@ import PrivacyPolicy from "../components/privacyPolicy/privacyPolicy.js";
 import Navbar from "../components/layout/header/Navbar";
 import Layout from "../components/layout/Layout";
 import PageHeader from "../components/team/PageHeader";
+
+
+
 export default function privacyPolicy() {
   return (
     <Layout>

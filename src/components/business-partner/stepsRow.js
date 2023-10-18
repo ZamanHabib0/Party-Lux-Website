@@ -1,7 +1,7 @@
 import React from 'react';
 
 function StepsRow({ currentIndex, onButtonClick }) {
-  const buttonCount = 7; // Number of buttons
+  const buttonCount = 8; // Number of buttons
   const buttons = [];
 
   for (let index = 0; index < buttonCount; index++) {
@@ -29,7 +29,7 @@ function StepsRow({ currentIndex, onButtonClick }) {
     <>
       <div className="d-flex justify-content-between text-light">
         <span className="text-left"></span>
-        <span className="text-right">{currentIndex + 1} / 7</span>
+        <span className="text-right">{currentIndex + 1} / 8</span>
       </div>
       <div className="steps-button-container">{buttons}</div>
     </>

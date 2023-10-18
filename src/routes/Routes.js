@@ -8,6 +8,7 @@ import PasswordReset from "../components/others/PasswordReset";
 import HomeTwo from "../themes/index-2/HomeTwo";
 import BecomePartner from "../pages/becomePartner";
 import ScrollToTop from "./ScrollToTop";
+import ProtectedRoute from "./protected";
 import PrivacyPolicy from "../pages/privacyPolicy.js";
 import TermsAndConditions from "../pages/TermsAndConditions.js";
 import EndUserLicenseAgrement from "../pages/EndUserLicenseAgrement.js";
@@ -15,7 +16,9 @@ import Disclaimer from "../pages/Disclaimer.js";
 import ReturnPolicy from "../pages/ReturnPolicy.js";
 import CookiePolicy from "../pages/CookiePolicy.js";
 import AcceptableUsePolicy from "../pages/AcceptableUsePolicy.js";
-// import SignupTwo from "../components/others/SignupTwo";
+import Signup from "../components/others/SignupTwo";
+import Login from "../pages/Login";
+import OTPVerification from  "../pages/otpVerfication.js";
 // import SignupPage from "../pages/SignupPage";
 // import BlogGrid from "../pages/BlogGrid";
 // import BlogWithSidebar from "../pages/BlogWithSidebar";
@@ -26,7 +29,7 @@ import AcceptableUsePolicy from "../pages/AcceptableUsePolicy.js";
 // import Review from "../pages/Review";
 // import Faq from "../pages/Faq";
 // import ThankYou from "../components/others/ThankYou";
-// import Login from "../pages/Login";
+
 
 const AppRoutes = () => {
   return (
@@ -38,7 +41,7 @@ const AppRoutes = () => {
         <Route path="/login-two" element={<LoginTwo />} />
         <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/become-partner" element={<BecomePartner />} />
+        <Route path="/become-partner" element={  <ProtectedRoute><BecomePartner /></ProtectedRoute>  } />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/end-user-license-agreement" element={<EndUserLicenseAgrement />} />
@@ -46,7 +49,9 @@ const AppRoutes = () => {
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/acceptable-use-policy" element={<AcceptableUsePolicy />} />
-        
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/otp-verification" element={<OTPVerification />} />
         {/* <Route path="/blog-grid" element={<BlogGrid />} />
         <Route path="/blog-sidebar" element={<BlogWithSidebar />} />
         <Route path="/blog-details" element={<BlogDetails />} />

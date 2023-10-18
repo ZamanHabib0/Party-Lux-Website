@@ -9,6 +9,7 @@ import FifthView from './fifthView';
 import SixthView from './sixthView';
 import ThankYou from './thankYou';
 import StepsRow from './stepsRow';
+import BusinessEssentials from './businessEssentials';
 // import GoogleMap from './googlemap';
 
 export default function MainView() {
@@ -16,7 +17,7 @@ export default function MainView() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % 7);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % 8);
   };
 
 
@@ -27,10 +28,11 @@ export default function MainView() {
     <ThirdView handleNext={handleNext} />,
     <FourthView handleNext={handleNext} />,
     <FifthView handleNext={handleNext} />,
+    <BusinessEssentials handleNext={handleNext} />,
     <SixthView handleNext={handleNext} />,
     <ThankYou />,
   ];
-
+  
   const handleStepClick = (newIndex) => {
     setCurrentIndex(newIndex);
   };

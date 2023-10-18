@@ -2839,7 +2839,89 @@ span.sub-title {
   }
 }
 
+/* Business Essential */
+  
+
+.essential-des-color{
+  color: #b1b1b1;
+}
+
+.male-color {
+  color: #00d1ff !important;
+}
+
+.female-color {
+  color: #db14ec !important;
+}
+/* Otp */
+
+.otp-txt-color{
+  color: #949cad;
+}
+
+.otp-txt-field {
+  background-color: #22252b;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+
+.otp-txt-field:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #383b41;
+  border-color: #383b41 !important;
+  color: whitesmoke;
+}
+
 /*login css*/
+
+.login-btn-div {
+  width: 100%;
+  border: 2px solid #db14ec;
+  height: 70px;
+  border-radius: 50px;
+}
+
+.login-btn {
+ 
+  color: white;
+  border-radius: 50px;
+  padding:17px 40px 17px 40px;
+  margin: 3px 0px 3px 0px;
+  width: 49%;
+}
+.login-btn:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+.signup-btn {
+  color: white;
+  border-radius: 50px;
+  padding: 17px 40px 17px 40px;
+  margin: 3px 0px 3px 0px;
+  width: 49%;
+}
+.signup-btn:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+.selected-login-btn {
+  background-image: linear-gradient(
+    to right,
+    #AD00FF,
+    #DB14EC
+  ) !important;
+  color: white;
+}
+
+.un-selected-login-btn{
+  background-color: #24272d;
+  color: white;
+}
+
 .login-signup-content {
   height: 100%;
   width: 100%;
@@ -3755,7 +3837,7 @@ input[type="file"] {
 }
 
 .steps-row-div {
-   width: 35%;
+   width: 40%;
 }
 
 .steps-button {

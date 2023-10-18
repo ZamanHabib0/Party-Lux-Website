@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/layout/Layout";
-import LoginComponent from "../components/Login/mainView";
+import OtpVerfication from "../components/Login/otpVerfication";
 
 export default function Login() {
    
@@ -15,7 +15,7 @@ export default function Login() {
             "url('assets/img/partner-bg.jpg')no-repeat center center / cover",
         }}>
 
-      <LoginComponent  />
+      <OtpVerfication  />
 
       </div>
     </Layout>

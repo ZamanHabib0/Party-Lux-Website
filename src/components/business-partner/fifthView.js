@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import Map from './googlemap';
+import Map from './googlemap';
 
 export default function FifthView(props) {
 
@@ -42,7 +42,37 @@ export default function FifthView(props) {
 
                 <h4 className="text-light text-left mt-3">Select Business Location</h4>
 
-                {/* <Map /> */}
+                <Map />
+
+            <div className='row justify-content-center '>
+
+            <div style={{width: "45%"}} className='m-1 mt-3 '>
+            <h6 className="text-light text-left mt-3 m-2">Longitude</h6>
+            <input
+                    type="text"
+                    className="form-control business-form-control "
+                    name="longitude"
+                    id="longitude"
+                    placeholder="Longitude"
+                    required="required"
+                // value={formData.email}
+                // onChange={handleInputChange}
+                />
+
+            </div>
+            <div style={{width: "45%"}}  className='m-1 mt-3'>
+            <h6 className="text-light text-left mt-3 m-2">latitude</h6>
+                <input
+                    type="text"
+                    className="form-control business-form-control"
+                    name="latitude"
+                    id="latitude"
+                    placeholder="latitude"
+                    required="required"
+                // value={formData.email}
+                // onChange={handleInputChange}
+                /></div>
+            </div>
 
                 <h4 className="text-light text-left mt-3">Business Images</h4>
 
@@ -50,7 +80,7 @@ export default function FifthView(props) {
 
                 <div className="mb-2 text-left">
                     <label class="custom-file-upload">
-                        <a  style={{ color: "#da13ec", fontWeight: "bold" }}> Click here</a> Upload your Business Images ,
+                        <a style={{ color: "#da13ec", fontWeight: "bold" }}> Click here</a> Upload your Business Images ,
                         Supported Formats: JPG, PNG,;
                         <br />  Max File Size:5MB.
                         <input

@@ -1,7 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import LoginConfirmation from "../dialogBox/successfullylogin";
 
 export default function OTPInput() {
+  const navigate = useNavigate();
   const [otp, setOTP] = useState(["", "", "", ""]);
+  const userId = localStorage.getItem("userId");
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState(null); // State to track errors
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+
+  const handleDialogBox = () => {
+   
+    setIsDialogOpen(false);
+  };
+
 
   const handleInputChange = (index, value) => {
     const newOTP = [...otp];
@@ -10,31 +25,45 @@ export default function OTPInput() {
   };
 
   const handleVerifyOTP = async () => {
-    const otpValue = otp.join(''); // Combine OTP digits into a single string
 
+      // Check if any of the OTP fields are empty
+  if (otp.some(value => value === "")) {
+    setError("Please fill in all OTP fields.");
+    return; // Do not proceed with verification
+  }
+
+    setUploading(true);
+    const otpValue = otp.join(''); // Combine OTP digits into a single string
+  
+
+  
     // Make an API request to verify the OTP
     try {
-      const response = await fetch('https://backend-partylux-production.up.railway.app/v1/mobile/auth/verify-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ otp: otpValue }),
-      });
-
-      console.log(response.status)
-
-      if (response.status === 200) {
-   
-        window.location.href = '/'; 
+      const response = await axios.post(
+        "https://backend-partylux-staging.up.railway.app/v1/mobile/auth/verify-otp",
+        {
+          userId: userId,
+          Otp: otpValue,
+        }
+      );
+  
+      if (response.data.status === 200) {
+        const data = response.data;
+        localStorage.setItem("authToken", data.data.authToken);
+        localStorage.removeItem("userId")
+        navigate("/");
+        setUploading(false);
       } else {
-        // OTP is not valid, show an alert
-        alert('OTP is not valid. Please try again.');
+        setError("OTP is not valid. Please try again."); 
+        setUploading(false);
+
       }
     } catch (error) {
-      console.error('Error verifying OTP:', error);
+      setError("OTP is not valid. Please try again."); 
+      setUploading(false);
     }
   };
+  
 
   return (
     <>
@@ -78,13 +107,19 @@ export default function OTPInput() {
                   ))}
                 </div>
               </div>
+              {error && <p className="custom-error-text text-left m-3">{error}</p>}
               <p className="otp-txt-color mt-4">Don't get the code? <a style={{ color: "#da13ec", fontWeight: "bold" }}>Resend</a></p>
               <button
                 className="become-partner-scroll-btn rounded-custom mt-3"
                 style={{ width: "100%", borderRadius: "10px" }}
-                onClick={handleVerifyOTP}
+                onClick={()=> {
+                  if(!uploading){
+                    handleVerifyOTP()
+                  }
+                }}
+                disabled={uploading} 
               >
-                Verify Now
+               {uploading ? 'Please wait...' : 'Verify Now'}  
               </button>
             </div>
           </div>
@@ -103,6 +138,15 @@ export default function OTPInput() {
           </div>
         </div>
       </div>
+      
+      {isDialogOpen && (
+        <LoginConfirmation
+        title = "Registered Successfully"
+          handleDialogBox={handleDialogBox}
+          isDialogOpen={isDialogOpen}
+          setIsDialogOpen={setIsDialogOpen}
+        />
+      )}
     </>
   );
 }

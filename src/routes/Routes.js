@@ -16,7 +16,7 @@ import Disclaimer from "../pages/Disclaimer.js";
 import ReturnPolicy from "../pages/ReturnPolicy.js";
 import CookiePolicy from "../pages/CookiePolicy.js";
 import AcceptableUsePolicy from "../pages/AcceptableUsePolicy.js";
-import Signup from "../components/others/SignupTwo";
+// import Signup from "../components/others/SignupTwo";
 import Login from "../pages/Login";
 import OTPVerification from  "../pages/otpVerfication.js";
 // import SignupPage from "../pages/SignupPage";
@@ -50,7 +50,7 @@ const AppRoutes = () => {
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/acceptable-use-policy" element={<AcceptableUsePolicy />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Login />} />
         <Route path="/otp-verification" element={<OTPVerification />} />
         {/* <Route path="/blog-grid" element={<BlogGrid />} />
         <Route path="/blog-sidebar" element={<BlogWithSidebar />} />

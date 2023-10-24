@@ -13,7 +13,11 @@ export default function SixthView(props) {
                 <p className="text-left mb-4">
                 Just click Submit and we will Review your Application. You’ll Receive an Email if you have been Selected.</p>
                 <button className= "become-partner-scroll-btn rounded-custom" style={{ width: "100%" , borderRadius : "10px"}}
-                 onClick={() => props.handleNext()}>
+                 onClick={() => {
+                console.log(  props.businessDescription)
+                  props.createBusiness()
+                 }}
+                 >
                   Submit
                 </button>
 

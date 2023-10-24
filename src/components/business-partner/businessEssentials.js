@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 
 export default function BusinessEssentials(props) {
+  
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [selectedAge, setSelectedAgeLimit] = useState([]);
+  const [selectedAttendanceLimit, setSelectedAttendanceLimit] = useState([]);
+  const [admissionFee, setAdmissionFee] = useState({
+    male: { free: false },
+    female: { free: false },
+  });
+
+  const [selectedMusicOptions, setSelectedMusicOptions] = useState([]);
+  const [selectedEntertainmentOptions, setSelectedEntertainmentOptions] = useState([]);
+  const [selectedDisclaimerOptions, setSelectedDisclaimerOptions] = useState([]);
+
+
   const [AttendaceLimit, setSelectedAttendaceLimit] = useState([]);
   const interestsData = [
     { id: 'EDM', label: 'EDM', value: 'EDM' },
@@ -41,45 +53,72 @@ export default function BusinessEssentials(props) {
   ];
 
   const MaximumAttendance = [
-    { id: '0-25People', label: '0-25 People', value: '0-25People' },
-    { id: '25-50People', label: '25-50 People', value: '25-50People' },
-    { id: '50-100People', label: '50-100 People', value: '50-100People' },
+    { id: '0-25People', label: '0-25 People', value: '0-25' },
+    { id: '25-50People', label: '25-50 People', value: '25-50' },
+    { id: '50-100People', label: '50-100 People', value: '50-100' },
     { id: 'unlimited', label: 'unlimited', value: 'unlimited' },
 
   ];
 
-  const handleCheckboxChange = (event) => {
+const handleCheckboxChange = (event, category) => {
     const { value, checked } = event.target;
+    
+    setSelectedInterests((prevInterests) => {
+      if (checked) return [...prevInterests, value];
+      return prevInterests.filter((interest) => interest !== value);
+    });
+
     if (checked) {
-      setSelectedInterests([...selectedInterests, value]);
+      if (category === "music") {
+        setSelectedMusicOptions((prevOptions) => [...prevOptions, value]);
+      } else if (category === "entertainment") {
+        setSelectedEntertainmentOptions((prevOptions) => [...prevOptions, value]);
+      } else if (category === "disclaimer") {
+        setSelectedDisclaimerOptions((prevOptions) => [...prevOptions, value]);
+      }
     } else {
-      setSelectedInterests(selectedInterests.filter((interest) => interest !== value));
+      if (category === "music") {
+        setSelectedMusicOptions((prevOptions) => prevOptions.filter((option) => option !== value));
+      } else if (category === "entertainment") {
+        setSelectedEntertainmentOptions((prevOptions) => prevOptions.filter((option) => option !== value));
+      } else if (category === "disclaimer") {
+        setSelectedDisclaimerOptions((prevOptions) => prevOptions.filter((option) => option !== value));
+      }
     }
   };
-
-
   const handleAgeCheckbox = (event, category) => {
     const { value, checked } = event.target;
-    if (checked) {
-      // When a checkbox is checked, deselect all other checkboxes in the same category.
-      setSelectedAgeLimit([value]);
-    } else {
-      // When a checkbox is unchecked, remove it from the selected interests.
-      setSelectedAgeLimit(selectedAge.filter((interest) => interest !== value));
-    }
+    setSelectedAgeLimit((prevAge) => {
+      if (checked) return [value];
+      return [];
+    });
   };
 
   const handleAttendaceCheckbox = (event, category) => {
     const { value, checked } = event.target;
-    if (checked) {
-      // When a checkbox is checked, deselect all other checkboxes in the same category.
-      setSelectedAttendaceLimit([value]);
-    } else {
-      // When a checkbox is unchecked, remove it from the selected interests.
-      setSelectedAttendaceLimit(AttendaceLimit.filter((interest) => interest !== value));
-    }
+    setSelectedAttendanceLimit((prevAttendance) => {
+      if (checked) return [value];
+      return [];
+    });
   };
 
+  const handleSubmit = () => {
+    const data = {
+      maxParticipants: selectedAttendanceLimit[0] || "0-25",
+      admissionFee: {
+        male: { free: admissionFee.male.free },
+        female: { free: admissionFee.female.free },
+      },
+      music: selectedMusicOptions, // Use the selected options from state
+      disclaimer: selectedDisclaimerOptions, // Use the selected options from state
+      entertainment: selectedEntertainmentOptions, // Use the selected options from state
+      ageLimit: selectedAge[0] || "15+ Year",
+      cancelationPolicy: "24 hrs",
+    };
+
+    props.setBusinessEssentials(data);
+    console.log(props.businessEssentials);
+  };
   return (
     <>
       <div className="partnerdata-container mt-5 p-3">
@@ -190,7 +229,7 @@ export default function BusinessEssentials(props) {
         <h5 className="text-light text-left mt-4">Music</h5>
         <div>
           {interestsData.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-3">
+            <div key={index} className="form-check form-check-inline pt-2 col-4">
               <input
                 type="checkbox"
                 id={interest.id}
@@ -198,7 +237,7 @@ export default function BusinessEssentials(props) {
                 value={interest.value}
                 className="form-check-input custom-checkbox-checked"
                 checked={selectedInterests.includes(interest.value)}
-                onChange={handleCheckboxChange}
+                onChange={(e) => handleCheckboxChange(e, 'music')}
               />
               <label className="form-check-label" htmlFor={interest.id}>
                 <p className="pl-2 m-0">{interest.label}</p>
@@ -209,9 +248,9 @@ export default function BusinessEssentials(props) {
 
         {/* Entertainment */}
         <h5 className="text-light text-left mt-4">Entertainment</h5>
-        <div >
+        <div className="" >
           {EntertainmentData.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-3">
+            <div key={index} className="form-check form-check-inline pt-2 col-4 ">
               <input
                 type="checkbox"
                 id={interest.id}
@@ -219,7 +258,7 @@ export default function BusinessEssentials(props) {
                 value={interest.value}
                 className="form-check-input custom-checkbox-checked"
                 checked={selectedInterests.includes(interest.value)}
-                onChange={handleCheckboxChange}
+                onChange={(e) => handleCheckboxChange(e, 'entertainment')}
               />
               <label className="form-check-label" htmlFor={interest.id}>
                 <p className="pl-2 m-0">{interest.label}</p>
@@ -232,19 +271,21 @@ export default function BusinessEssentials(props) {
                 <h5 className="text-light text-left mt-4 ">Disclaimer</h5>
         <div >
           {DisclaimerData.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-3">
-              <input
+            <div key={index} className="form-check form-check-inline pt-2 col-4">
+             <div className="text-left">
+             <input
                 type="checkbox"
                 id={interest.id}
                 name="interest"
                 value={interest.value}
                 className="form-check-input custom-checkbox-checked"
                 checked={selectedInterests.includes(interest.value)}
-                onChange={handleCheckboxChange}
+                onChange={(e) => handleCheckboxChange(e, 'disclaimer')}
               />
               <label className="form-check-label" htmlFor={interest.id}>
                 <p className="pl-2 m-0">{interest.label}</p>
               </label>
+             </div>
             </div>
           ))}
         </div>
@@ -253,7 +294,7 @@ export default function BusinessEssentials(props) {
                  <h5 className="text-light text-left mt-4">Age Limit</h5>
         <div >
           {AgeLimit.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-3">
+            <div key={index} className="form-check form-check-inline pt-2 col-4">
               <input
                 type="checkbox"
                 id={interest.id}
@@ -272,32 +313,35 @@ export default function BusinessEssentials(props) {
 
                  {/* Maximum Attendance */}
                  <h5 className="text-light text-left mt-4 ">Maximum Attendance</h5>
-        <div >
-          {MaximumAttendance.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-3">
-              <input
-                type="checkbox"
-                id={interest.id}
-                name="interest"
-                value={interest.value}
-                className="form-check-input custom-checkbox-checked"
-                checked={AttendaceLimit.includes(interest.value)}
-                onChange={(e) => handleAttendaceCheckbox(e, 'MaximumAttendance')}
-              />
-              <label className="form-check-label" htmlFor={interest.id}>
-                <p className="pl-2 m-0">{interest.label}</p>
-              </label>
-            </div>
-          ))}
-        </div>
+<div>
+  {MaximumAttendance.map((interest, index) => (
+    <div key={index} className="form-check form-check-inline pt-2 col-4">
+      <input
+        type="checkbox"
+        id={interest.id}
+        name="interest"
+        value={interest.value}
+        className="form-check-input custom-checkbox-checked"
+        checked={selectedAttendanceLimit.includes(interest.value)}
+        onChange={(e) => handleAttendaceCheckbox(e, 'MaximumAttendance')}
+      />
+      <label className="form-check-label" htmlFor={interest.id}>
+        <p className="pl-2 m-0">{interest.label}</p>
+      </label>
+    </div>
+  ))}
+</div>
 
         {/* Submit Button */}
         <button
           className="become-partner-scroll-btn rounded-custom mt-4"
           style={{ width: "100%", borderRadius: "10px" }}
-          onClick={() => props.handleNext()}
+          onClick={() => {
+            handleSubmit()
+            props.handleNext()
+          }}
         >
-          Submit
+          Next
         </button>
       </div>
     </>

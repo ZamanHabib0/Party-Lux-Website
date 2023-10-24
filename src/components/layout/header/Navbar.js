@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
+import LogoutConfirmation from "../../dialogBox/AuthDialogbox"
 
-const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Features = "#features", Team = "#team", Contact = "#contact", BecomeApartner = "/become-partner" }) => {
+const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Features = "#features", Team = "#team", Contact = "#contact", BecomeApartner = "/become-partner" , login = "/login" }) => {
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleDialogBox = () => {
+   
+    setIsDialogOpen(false);
+  };
+
 
   useEffect(() => {
+   
+    const authToken = localStorage.getItem('authToken');
+
+
     const stickyheader = document.querySelector(".header");
     setHeaderTop(stickyheader.offsetTop);
     window.addEventListener("scroll", handleScroll);
@@ -18,6 +32,15 @@ const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Featur
   const handleScroll = () => {
     setScroll(window.scrollY);
   };
+
+
+  const handleLogout = () => {
+    // Remove the authToken from local storage
+    localStorage.removeItem('authToken');
+    // Update the state
+    setAuthToken(null);
+  };
+
   return (
     <>
       <header className={`header ${classOption}`}>
@@ -85,6 +108,20 @@ const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Featur
                     Contact
                   </HashLink>
                 </li>
+                     <li className="nav-item">
+                  <HashLink className={`mr-3 ${scroll > headerTop ? "become-partner-btn" : "become-partner-scroll-btn"}`} to={ authToken ?    "/" : login }>
+                    {authToken ? (
+                  <>
+                      <span onClick={() => setIsDialogOpen(true)} 
+                      // onClick={handleLogout}
+                      >Logout
+                      <LogoutConfirmation handleDialogBox= {handleDialogBox} isDialogOpen = {isDialogOpen} setIsDialogOpen = {setIsDialogOpen} handleLogout = {handleLogout} />
+                      </span>  </>
+                    ) : (
+                      "Login / Register"
+                    )}
+                  </HashLink>
+                </li>
                 <li className="nav-item">
                   <HashLink className= { `${scroll > headerTop ? "become-partner-scroll-btn" : "become-partner-btn"} ` }
                  smooth to= {BecomeApartner}>
@@ -92,6 +129,8 @@ const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Featur
                   </HashLink>
                 
                 </li>
+
+           
               </ul>
             </div>
           </div>

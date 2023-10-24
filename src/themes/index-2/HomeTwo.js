@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import Footer from "../../components/layout/footer/Footer";
 import AboutApp from "../../components/about/AboutApp";
 import AccordionWithImg from "../../components/Faqs/AccordionWithImg";
@@ -14,18 +16,21 @@ import Subsribe from "../../components/newsletter/Subsribe";
 // import BrandCarousel from "../../components/testimonial/BrandCarousel";
 // import TestimonialTwo from "../../components/testimonial/TestimonialTwo";
 import Screenshot from "../../components/screenshot/Screenshot";
+import AlertDialog from '../../components/dialogBox/AuthDialogbox';
+// import { ReactDialogBox } from '';
 
 export default function HomeTwo() {
+
   return (
     <Layout>
-      <Navbar darkBg  />
+      <Navbar darkBg   />
       <HeroTwo />
       <PromoTwo />
       <AboutApp />
       <FeatureImg ImgSource="assets/img/image-10.png" />
       <VideoPromoTwo />
       <Price />
-      {/* <TestimonialTwo /> */}
+      {/* <AlertDialog isDialogOpen={isDialogOpen} handleLogout={handleLogout} /> */}
       <Screenshot hasBg />
       <TeamTwo />
       <AccordionWithImg />

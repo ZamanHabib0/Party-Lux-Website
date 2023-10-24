@@ -1,16 +1,41 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 
 export default function SecondView(props) {
   const [isClubSelected, setClubSelected] = useState(false);
   const [isBarSelected, setBarSelected] = useState(false);
+  const [error, setError] = useState(null); 
+
+  useEffect(() => {
+    // Initialize the selected category based on the businessCategory prop
+    if (props.BusinessCategory === "club") {
+      setClubSelected(true);
+      setBarSelected(false);
+    } else if (props.BusinessCategory === "bar") {
+      setClubSelected(false);
+      setBarSelected(true);
+    }
+  }, [props.businessCategory]);
 
   const toggleSelection = (type) => {
     if (type === "club") {
       setClubSelected(true);
       setBarSelected(false);
+      props.setBusinessCategory("club");
     } else if (type === "bar") {
       setClubSelected(false);
       setBarSelected(true);
+      props.setBusinessCategory("bar");
+    }
+  };
+
+  const handleNext = () => {
+    if (!props.businessName) {
+      setError("Please enter your business name.");
+    } else if (!isClubSelected && !isBarSelected) {
+      setError("Please select a business category.");
+    } else {
+      setError(null); // Reset error state if validation passes
+      props.handleNext();
     }
   };
 
@@ -25,8 +50,8 @@ export default function SecondView(props) {
           id="Business Name"
           placeholder="Write Your Business Name"
           required="required"
-          // value={formData.email}
-          // onChange={handleInputChange}
+          value={props.businessName}
+          onChange={(e) => props.setBusinessName(e.target.value)}
         />
         <h5 className="text-light text-left pt-3">Select Business Type</h5>
 
@@ -65,11 +90,15 @@ export default function SecondView(props) {
         </div>
          
          
-
+  {/* Error message for validation */}
+  {error && (
+          <div className="custom-error-text text-left m-3">{error}</div>
+        )}
         <button
           className="become-partner-scroll-btn rounded-custom "
           style={{ width: "100%", borderRadius: "10px" }}
-          onClick={() => props.handleNext()}
+          onClick={() => handleNext() }
+          // onClick={ console.log(props.BusinessCategory) }
         >
          Next
         </button>

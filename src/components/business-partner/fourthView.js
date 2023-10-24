@@ -31,6 +31,21 @@ export default function FourthView(props) {
 
   const canProceed = !Object.keys(businessHours).some((day) => isDayValid(day));
 
+  const transformedData = Object.keys(businessHours).map((day) => {
+    const isClose = !businessHours[day].isOpen;
+    const startTime = isClose ? '--:--' : businessHours[day].openTime;
+    const endTime = isClose ? '--:--' : businessHours[day].closeTime;
+  
+    return {
+      isClose,
+      bussinessDay: day,
+      startTime,
+      endTime,
+    };
+  });
+
+ 
+
   return (
     <>
       <div className="partnerdata-container mt-5 p-3">
@@ -75,7 +90,11 @@ export default function FourthView(props) {
         <button
           className="become-partner-scroll-btn rounded-custom"
           style={{ width: "100%", borderRadius: "10px" }}
-          onClick={() => props.handleNext()}
+          onClick={() => {
+            props.setbusinessWeek(transformedData)
+            // console.log(props.businessWeek[0])
+            props.handleNext()
+          }}
           disabled={!canProceed}
         >
           Next

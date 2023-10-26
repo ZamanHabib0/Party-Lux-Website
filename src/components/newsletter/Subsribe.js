@@ -15,7 +15,7 @@ export default function Subscribe() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/v1/mobile/support/newsletter", // Replace with your actual API endpoint
+        "https://backend-partylux-staging.up.railway.app/v1/mobile/support/newsletter", // Replace with your actual API endpoint
         { email }
       );
 

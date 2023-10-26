@@ -24,7 +24,7 @@ export default function Contact({ bgColor }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/v1/mobile/support/send-email-toSupport",
+        "https://backend-partylux-staging.up.railway.app/v1/mobile/support/send-email-toSupport",
         formData
       );
 

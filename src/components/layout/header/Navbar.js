@@ -109,12 +109,18 @@ const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Featur
                   </HashLink>
                 </li>
                      <li className="nav-item">
-                  <HashLink className={`mr-3 ${scroll > headerTop ? "become-partner-btn" : "become-partner-scroll-btn"}`} to={ authToken ?    "/" : login }>
+                  <HashLink className={`mr-3 ${authToken ? "" : `${scroll > headerTop ? "" : "become-partner-scroll-btn"}`}`} to={ authToken ?    "/" : login }>
                     {authToken ? (
                   <>
                       <span onClick={() => setIsDialogOpen(true)} 
                       // onClick={handleLogout}
-                      >Logout
+                      > 
+                         <img
+                            src="assets/img/logout.png"
+                            alt="img"
+                            width={"24px"}
+                            className=""
+                          />
                       <LogoutConfirmation handleDialogBox= {handleDialogBox} isDialogOpen = {isDialogOpen} setIsDialogOpen = {setIsDialogOpen} handleLogout = {handleLogout} />
                       </span>  </>
                     ) : (

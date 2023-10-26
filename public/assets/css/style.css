@@ -3085,6 +3085,8 @@ small {
     #AD00FF,
     #DB14EC
   ) !important;
+  border: 1px solid black !important;
+  padding: 4px;
 }
 
 

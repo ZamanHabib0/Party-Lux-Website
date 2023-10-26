@@ -24,24 +24,19 @@ const AnyReactComponent = ({ lat, lng }) => (
 
 const SimpleMap = (props) => {
 
+  const {
+    center,
+    pointerLocation,
+    zoom,
+    mapKey,
+    completeaddress,
+    setCenter,
+    setPointerLocation,
+    setZoom,
+    setMapKey,
+    setCompleteAddress,
+  } = props;
 
-
-  // const [location, setLocation] = useState({
-  //   type: "Point",
-  //   coordinates: [70.32902627, 28.42835602], // Default coordinates
-  //   radius: "50",
-  // });
-
-  const [center, setCenter] = useState({
-    lat: 28.42835602,
-    lng: 70.32902627
-  });
-  const [pointerLocation, setPointerLocation] = useState({
-    lat: 28.42835602,
-    lng: 70.32902627
-  });
-  const [zoom, setZoom] = useState(14);
-  const [mapKey, setMapKey] = useState(1);
 
   const handleApiLoaded = (map, maps) => {
     const mapStyle = [
@@ -69,15 +64,6 @@ const SimpleMap = (props) => {
         };
 
         const coordinates = [userLocation.lng, userLocation.lat];
-
-        // Update the location state with the new coordinates
-        // setLocation({
-        //   type: "Point",
-        //   coordinates,
-        //   radius: "50",
-        // });
-
-
 
         setCenter(userLocation);
         setPointerLocation(userLocation);
@@ -111,6 +97,8 @@ const SimpleMap = (props) => {
 
       if (response.data.status === "OK") {
         const address = response.data.results[0].formatted_address;
+   
+        setCompleteAddress(address)
         console.log(address);
       } else {
         console.error("Geocoding request failed");

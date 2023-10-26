@@ -1,6 +1,8 @@
-import React from "react";
+import React  from "react";
 
 export default function SixthView(props) {
+
+
   return (
     <>
            <div className="partnerdata-container mt-5 p-3 " >
@@ -12,13 +14,19 @@ export default function SixthView(props) {
                 />
                 <p className="text-left mb-4">
                 Just click Submit and we will Review your Application. You’ll Receive an Email if you have been Selected.</p>
+
+
+                {props.error && <p className="custom-error-text text-left">{props.error}</p>}
+
                 <button className= "become-partner-scroll-btn rounded-custom" style={{ width: "100%" , borderRadius : "10px"}}
-                 onClick={() => {
-                console.log(  props.businessDescription)
-                  props.createBusiness()
+                 onClick={() => {               
+                 if (!props.uploading) {
+                 props.createBusiness()
+                  }
                  }}
+                 disabled={props.uploading}
                  >
-                  Submit
+                {props.uploading ? 'Submiting...' : 'Submit'} 
                 </button>
 
             </div>

@@ -22,7 +22,7 @@ export default function HeroTwo() {
                   <span>Unlock</span> All The Party Secrets
                 </h1>
                 <p className="lead">
-                  Get Access To The Best Clubs,Bars and House Parties Nearby
+                  Get Access To The Best Clubs, Bars and House Parties Nearby
                 </p>
 
                 {/* <a href="#download" className="btn app-store-btn">

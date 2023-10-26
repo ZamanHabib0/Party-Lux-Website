@@ -19,7 +19,7 @@ function StepsRow({ currentIndex, onButtonClick }) {
       <button
         key={index}
         className={buttonClasses}
-        onClick={() => onButtonClick(index)}
+        // onClick={() => onButtonClick(index)}
         disabled={isDisabled}
       ></button>
     );
@@ -31,6 +31,7 @@ function StepsRow({ currentIndex, onButtonClick }) {
         <span className="text-left"></span>
         <span className="text-right">{currentIndex + 1} / 8</span>
       </div>
+      
       <div className="steps-button-container">{buttons}</div>
     </>
   );

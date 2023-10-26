@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 
 export default function BusinessEssentials(props) {
-  
-  const [selectedInterests, setSelectedInterests] = useState([]);
-  const [selectedAge, setSelectedAgeLimit] = useState([]);
-  const [selectedAttendanceLimit, setSelectedAttendanceLimit] = useState([]);
-  const [admissionFee, setAdmissionFee] = useState({
-    male: { free: false },
-    female: { free: false },
-  });
+  const {
+    selectedInterests,
+    setSelectedInterests,
+    selectedAge,
+    setSelectedAgeLimit,
+    selectedAttendanceLimit,
+    setSelectedAttendanceLimit,
+    admissionFee,
+    setAdmissionFee,
+    selectedMusicOptions,
+    setSelectedMusicOptions,
+    selectedEntertainmentOptions,
+    setSelectedEntertainmentOptions,
+    selectedDisclaimerOptions,
+    setSelectedDisclaimerOptions,
+    error,
+    setError,
+  } = props;
 
-  const [selectedMusicOptions, setSelectedMusicOptions] = useState([]);
-  const [selectedEntertainmentOptions, setSelectedEntertainmentOptions] = useState([]);
-  const [selectedDisclaimerOptions, setSelectedDisclaimerOptions] = useState([]);
-
-
-  const [AttendaceLimit, setSelectedAttendaceLimit] = useState([]);
   const interestsData = [
     { id: 'EDM', label: 'EDM', value: 'EDM' },
     { id: 'Country', label: 'Country', value: 'Country' },
@@ -40,7 +44,6 @@ export default function BusinessEssentials(props) {
     { id: 'BYOB', label: 'BYOB', value: 'BYOB' },
     { id: 'FREE', label: ' FREE', value: 'FREE' },
     { id: 'FOOD', label: 'FOOD', value: 'FOOD' },
-
   ];
 
   const AgeLimit = [
@@ -49,7 +52,6 @@ export default function BusinessEssentials(props) {
     { id: '18+Year', label: '18+ Year', value: '18+ Year' },
     { id: '30+Year', label: '30+ Year', value: '30+ Year' },
     { id: '50+Year', label: '50+ Year', value: '50+ Year' },
-
   ];
 
   const MaximumAttendance = [
@@ -57,12 +59,27 @@ export default function BusinessEssentials(props) {
     { id: '25-50People', label: '25-50 People', value: '25-50' },
     { id: '50-100People', label: '50-100 People', value: '50-100' },
     { id: 'unlimited', label: 'unlimited', value: 'unlimited' },
-
   ];
 
-const handleCheckboxChange = (event, category) => {
+  const checkAllboxChecked = () => {
+    if (
+      selectedInterests.length === 0 ||
+      selectedAge.length === 0 ||
+      selectedAttendanceLimit.length === 0 ||
+      selectedMusicOptions.length === 0 ||
+      selectedEntertainmentOptions.length === 0 ||
+      selectedDisclaimerOptions.length === 0
+    ) {
+      console.log("At least one of the arrays is empty");
+      setError("Choose at least one from every block");
+    } else {
+      props.handleNext();
+    }
+  };
+
+  const handleCheckboxChange = (event, category) => {
     const { value, checked } = event.target;
-    
+
     setSelectedInterests((prevInterests) => {
       if (checked) return [...prevInterests, value];
       return prevInterests.filter((interest) => interest !== value);
@@ -78,14 +95,21 @@ const handleCheckboxChange = (event, category) => {
       }
     } else {
       if (category === "music") {
-        setSelectedMusicOptions((prevOptions) => prevOptions.filter((option) => option !== value));
+        setSelectedMusicOptions((prevOptions) =>
+          prevOptions.filter((option) => option !== value)
+        );
       } else if (category === "entertainment") {
-        setSelectedEntertainmentOptions((prevOptions) => prevOptions.filter((option) => option !== value));
+        setSelectedEntertainmentOptions((prevOptions) =>
+          prevOptions.filter((option) => option !== value)
+        );
       } else if (category === "disclaimer") {
-        setSelectedDisclaimerOptions((prevOptions) => prevOptions.filter((option) => option !== value));
+        setSelectedDisclaimerOptions((prevOptions) =>
+          prevOptions.filter((option) => option !== value)
+        );
       }
     }
   };
+
   const handleAgeCheckbox = (event, category) => {
     const { value, checked } = event.target;
     setSelectedAgeLimit((prevAge) => {
@@ -106,8 +130,8 @@ const handleCheckboxChange = (event, category) => {
     const data = {
       maxParticipants: selectedAttendanceLimit[0] || "0-25",
       admissionFee: {
-        male: { free: admissionFee.male.free },
-        female: { free: admissionFee.female.free },
+        male: { free: admissionFee.male.free , amount : admissionFee.male.amount },
+        female: { free: admissionFee.female.free ,amount : admissionFee.male.amount},
       },
       music: selectedMusicOptions, // Use the selected options from state
       disclaimer: selectedDisclaimerOptions, // Use the selected options from state
@@ -119,113 +143,130 @@ const handleCheckboxChange = (event, category) => {
     props.setBusinessEssentials(data);
     console.log(props.businessEssentials);
   };
+
   return (
     <>
       <div className="partnerdata-container mt-5 p-3">
-        {/* <h5 className="text-light text-left">Business Essentials</h5>
+        <h5 className="text-light text-left m-0">Admission Fee</h5>
         <p className="text-left essential-des-color">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit
-        </p> */}
-
-        <h5 className="text-light text-left m-0">Addmission Fee</h5>
-        <p className="text-left essential-des-color">
-        Here you can set the Admission fee for your party for both Male and fee male
+          Here you can set the Admission fee for your party for both Male and Female.
         </p>
 
-
-  <h5 className="text-light text-left m-0 male-color">Male</h5>
-
-<div className="">
-<div  className="form-check form-check-inline pt-2 col-3">
+        <div className="">
+          <h5 className="text-light text-left m-0 male-color">Male</h5>
+          <div className="">
+            <div className="form-check form-check-inline pt-2 col-3">
               <input
                 type="checkbox"
-                id= "malefree"
-                name="interest"
-                value= "malefree"
+                id="malefree"
+                name="malefree"
                 className="form-check-input custom-checkbox-checked"
-                // checked={selectedInterests.includes(interest.value)}
-                // onChange={handleCheckboxChange}
+                checked={admissionFee.male.free}
+                onChange={(e) =>
+                  setAdmissionFee({
+                    ...admissionFee,
+                    male: { ...admissionFee.male, free: e.target.checked },
+                  })
+                }
               />
               <label className="form-check-label" htmlFor="malefree">
                 <p className="pl-2 m-0">Free</p>
               </label>
             </div>
 
-            <div  className="text-right form-check form-check-inline pt-2 col-8">
+            <div className="text-right form-check form-check-inline pt-2 col-8">
               <input
                 type="checkbox"
-                id= "male"
-                name="interest"
-                value= "male"
+                id="male"
+                name="male"
                 className="form-check-input custom-checkbox-checked"
-                // checked={selectedInterests.includes(interest.value)}
-                // onChange={handleCheckboxChange}
+                checked={!admissionFee.male.free}
+                onChange={(e) =>
+                  setAdmissionFee({
+                    ...admissionFee,
+                    male: { ...admissionFee.male, free: !e.target.checked },
+                  })
+                }
               />
-               <div className="pl-3" style={{width:"100%"}}>
-          <h6 className="text-light text-left">Amount</h6>
-        <input
-          type="text"
-          className="form-control business-form-control"
-          name="amount"
-          id="amount"
-          placeholder="074357890"
-          required="required"
-          // value={formData.email}
-          // onChange={handleInputChange}
-        />
-          </div>
+              <div className="pl-3" style={{ width: "100%" }}>
+                <h6 className="text-light text-left">Amount</h6>
+                <input
+                  type="text"
+                  className="form-control business-form-control"
+                  name="amount"
+                  id="amount"
+                  placeholder="Enter Amount"
+                  required="required"
+                  value={admissionFee.male.amount}
+                  onChange={(e) =>
+                    setAdmissionFee({
+                      ...admissionFee,
+                      male: { ...admissionFee.male, amount: e.target.value },
+                    })
+                  }
+                />
+              </div>
             </div>
-</div>
+          </div>
 
-<h5 className="text-light text-left m-0 female-color">Female</h5>
+          <h5 className="text-light text-left m-0 female-color">Female</h5>
 
-<div className="">
-<div  className="form-check form-check-inline pt-2 col-3">
+          <div className="">
+            <div className="form-check form-check-inline pt-2 col-3">
               <input
                 type="checkbox"
-                id= "Femalefree"
-                name="interest"
-                value= "Femalefree"
+                id="Femalefree"
+                name="Femalefree"
                 className="form-check-input custom-checkbox-checked"
-                // checked={selectedInterests.includes(interest.value)}
-                // onChange={handleCheckboxChange}
+                checked={admissionFee.female.free}
+                onChange={(e) =>
+                  setAdmissionFee({
+                    ...admissionFee,
+                    female: { ...admissionFee.female, free: e.target.checked },
+                  })
+                }
               />
               <label className="form-check-label" htmlFor="Femalefree">
                 <p className="pl-2 m-0">Free</p>
               </label>
             </div>
 
-            <div  className="text-right form-check form-check-inline pt-2 col-8">
+            <div className="text-right form-check form-check-inline pt-2 col-8">
               <input
                 type="checkbox"
-                id= "Female"
-                name="interest"
-                value= "Female"
+                id="Female"
+                name="Female"
                 className="form-check-input custom-checkbox-checked"
-                // checked={selectedInterests.includes(interest.value)}
-                // onChange={handleCheckboxChange}
+                checked={!admissionFee.female.free}
+                onChange={(e) =>
+                  setAdmissionFee({
+                    ...admissionFee,
+                    female: { ...admissionFee.female, free: !e.target.checked },
+                  })
+                }
               />
-               <div className="pl-3" style={{width:"100%"}}>
-          <h6 className="text-light text-left">Amount</h6>
-        <input
-          type="text"
-          className="form-control business-form-control"
-          name="amount"
-          id="amount"
-          placeholder="074357890"
-          required="required"
-          // value={formData.email}
-          // onChange={handleInputChange}
-        />
-          </div>
+              <div className="pl-3" style={{ width: "100%" }}>
+                <h6 className="text-light text-left">Amount</h6>
+                <input
+                  type="text"
+                  className="form-control business-form-control"
+                  name="amount"
+                  id="amount"
+                  placeholder="Enter Amount"
+                  required="required"
+                  value={admissionFee.female.amount}
+                  onChange={(e) =>
+                    setAdmissionFee({
+                      ...admissionFee,
+                      female: { ...admissionFee.female, amount: e.target.value },
+                    })
+                  }
+                />
+              </div>
             </div>
-</div>
-         
+          </div>
+        </div>
 
-
-  
-
-        {/* Music */}
         <h5 className="text-light text-left mt-4">Music</h5>
         <div>
           {interestsData.map((interest, index) => (
@@ -246,9 +287,8 @@ const handleCheckboxChange = (event, category) => {
           ))}
         </div>
 
-        {/* Entertainment */}
         <h5 className="text-light text-left mt-4">Entertainment</h5>
-        <div className="" >
+        <div className="">
           {EntertainmentData.map((interest, index) => (
             <div key={index} className="form-check form-check-inline pt-2 col-4 ">
               <input
@@ -332,13 +372,16 @@ const handleCheckboxChange = (event, category) => {
   ))}
 </div>
 
+{error && <p className="custom-error-text text-left">{error}</p>}
+
         {/* Submit Button */}
         <button
           className="become-partner-scroll-btn rounded-custom mt-4"
           style={{ width: "100%", borderRadius: "10px" }}
           onClick={() => {
+            checkAllboxChecked()
             handleSubmit()
-            props.handleNext()
+      
           }}
         >
           Next

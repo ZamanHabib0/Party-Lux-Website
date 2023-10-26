@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 
 export default function FourthView(props) {
-  const [businessHours, setBusinessHours] = useState({
-    monday: { isOpen: false, openTime: '', closeTime: '' },
-    tuesday: { isOpen: false, openTime: '', closeTime: '' },
-    wednesday: { isOpen: false, openTime: '', closeTime: '' },
-    thursday: { isOpen: false, openTime: '', closeTime: '' },
-    friday: { isOpen: false, openTime: '', closeTime: '' },
-    saturday: { isOpen: false, openTime: '', closeTime: '' },
-    sunday: { isOpen: false, openTime: '', closeTime: '' },
-  });
+
+
+  const { businessHours, setBusinessHours } = props;
 
   const handleDayChange = (day) => {
     setBusinessHours({

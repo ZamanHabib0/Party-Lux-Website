@@ -27,6 +27,8 @@ export default function FifthView(props) {
     setZoom,
     setMapKey,
     setCompleteAddress,
+    businessuploadedImages,
+    setBusinessuploadedImages
   } = props;
 
 
@@ -48,6 +50,12 @@ export default function FifthView(props) {
     const newImages = [...images];
     newImages.splice(index, 1); // Remove the image at the specified index
     setImages(newImages);
+  };
+
+  const handleUploadedImages = (index) => {
+    const newImages = [...businessuploadedImages];
+    newImages.splice(index, 1); // Remove the image at the specified index
+    setBusinessuploadedImages(newImages);
   };
 
   const uploadImages = async (files) => {
@@ -77,11 +85,17 @@ export default function FifthView(props) {
 
       if (response.data.status === 200) {
         const data = response.data;
-        const newImageURLs = Array.isArray(data.data) ? data.data : [];
+        let newImageURLs = Array.isArray(data.data) ? data.data : [];
 
-        // Append the new image URLs to the existing imageURLs state
+        if (businessuploadedImages.length !== 0) {
+          // If the first array is not empty, append both arrays
+          newImageURLs = [...businessuploadedImages, ...newImageURLs];
+        }
+        
+
         setImageURLs(newImageURLs);
-        console.log(imageURLs)
+
+       
 
 
         const mineCustomobject = {
@@ -175,8 +189,27 @@ export default function FifthView(props) {
         </div>
 
         <h4 className="text-light text-left mt-3">Business Images</h4>
+        {businessuploadedImages.length !== 0 ? (
+       <>
+        <h5 className="text-light text-left mt-3 ">Uploaded Images</h5>
+        <div className="image-preview-container mt-3 mb-3" style={imageContainerStyle}>
+            {businessuploadedImages.map((image, index) => (
+              <div className="image-preview-box" style={imageBoxStyle} key={index}>
+                <img src= {image} alt={`Image ${index}`} style={imageStyle} />
+                <button type="button" onClick={() => handleUploadedImages(index)} className="cancel-button"  >
 
+                  <img
+                    src="assets/img/cancel.png"
+                    width="20"
+                    alt="cancel"
+                    className="img-fluid"
+                  />
 
+                </button>
+              </div>
+            ))}
+          </div></>
+        ) : ( <></> )}
 
         <div className="mb-2 text-left">
           <label class="custom-file-upload">

@@ -3126,6 +3126,145 @@ small {
   opacity: 0.7;
 }
 
+/* Business Listing Page */
+
+.business-listing-tile{
+    border-radius: 20px !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
+
+}
+
+.listing-tile-data{
+ padding: 24px 20px 0px 4px !important;
+}
+
+.business-detail-dialog{
+  
+  width: 80%;
+  height: 80vh;
+  background-color: white;
+  overflow-y: auto;
+  border-radius: 20px;
+  
+
+}
+
+.carousel-btn{
+  width: 30px;
+  margin: 0px 5px 12px 0px;
+  border-radius: 0px !important;
+  border: none !important;
+  height: 5px;
+
+}
+
+.business-essential-element{
+   
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
+  display: inline-block;
+    
+
+}
+
+.business-detail-dialog::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 20px;
+  display: none;
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+.business-view-map{
+   
+  border-radius: 20px;
+  
+
+}
+
+.custom-dropdown-menu{
+  margin-top: 10px;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
+  border: none;
+}
+
+.business-detail-cross{
+  border-radius: 100px;
+  background-color: #e32a37;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
+  padding: 8px;
+  border: none;
+  font-size: 18px;
+
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+     
+/* toggle in label designing */
+.toggle {
+  position : relative ;
+  display : inline-block;
+  width : 86px;
+  height : 40px;
+  background-color: #adb5bd;
+  border-radius: 30px;
+  border: 2px solid #adb5bd;
+}
+     
+/* After slide changes */
+.toggle:after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  top: 3px; 
+  left: 3px;
+  transition:  all 0.5s;
+}
+     
+     
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+  left : 49px; 
+}
+     
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+}
+     
+/* Checkbox vanished */
+.checkbox { 
+  display : none;
+}
+
 /*=========================================
             25. BLOG SECTION CSS
 ============================================*/

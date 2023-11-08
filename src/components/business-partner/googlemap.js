@@ -77,8 +77,6 @@ const SimpleMap = (props) => {
 
   const handleMapChange = async (map) => {
     // Update the pointer location when the map center changes
-
-    console.log(props.location)
     setPointerLocation(map.center);
     props.setlocation({
       type: "Point",
@@ -99,7 +97,6 @@ const SimpleMap = (props) => {
         const address = response.data.results[0].formatted_address;
    
         setCompleteAddress(address)
-        console.log(address);
       } else {
         console.error("Geocoding request failed");
       }

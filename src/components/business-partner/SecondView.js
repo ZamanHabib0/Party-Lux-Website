@@ -98,7 +98,7 @@ export default function SecondView(props) {
           className="become-partner-scroll-btn rounded-custom "
           style={{ width: "100%", borderRadius: "10px" }}
           onClick={() => handleNext() }
-          // onClick={ console.log(props.BusinessCategory) }
+   
         >
          Next
         </button>

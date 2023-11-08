@@ -86,7 +86,6 @@ export default function FourthView(props) {
           style={{ width: "100%", borderRadius: "10px" }}
           onClick={() => {
             props.setbusinessWeek(transformedData)
-            // console.log(props.businessWeek[0])
             props.handleNext()
           }}
           disabled={!canProceed}

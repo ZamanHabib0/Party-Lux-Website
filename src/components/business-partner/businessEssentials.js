@@ -62,18 +62,25 @@ export default function BusinessEssentials(props) {
   ];
 
   const checkAllboxChecked = () => {
+    // const interestsSelected = selectedInterests.length > 0;
+    const ageSelected = selectedAge.length > 0;
+    const attendanceSelected = selectedAttendanceLimit.length > 0;
+    // const musicSelected = selectedMusicOptions.length > 0;
+    // const entertainmentSelected = selectedEntertainmentOptions.length > 0;
+    // const disclaimerSelected = selectedDisclaimerOptions.length > 0;
+  
     if (
-      selectedInterests.length === 0 ||
-      selectedAge.length === 0 ||
-      selectedAttendanceLimit.length === 0 ||
-      selectedMusicOptions.length === 0 ||
-      selectedEntertainmentOptions.length === 0 ||
-      selectedDisclaimerOptions.length === 0
+      // interestsSelected &&
+      ageSelected &&
+      attendanceSelected 
+      // musicSelected &&
+      // entertainmentSelected &&
+      // disclaimerSelected
     ) {
-      console.log("At least one of the arrays is empty");
-      setError("Choose at least one from every block");
-    } else {
+      // All blocks have at least one item selected
       props.handleNext();
+    } else {
+      setError("Choose at least one from every block");
     }
   };
 
@@ -128,7 +135,7 @@ export default function BusinessEssentials(props) {
 
   const handleSubmit = () => {
     const data = {
-      maxParticipants: selectedAttendanceLimit[0] || "0-25",
+      maxParticipants: selectedAttendanceLimit || "0-25",
       admissionFee: {
         male: { free: admissionFee.male.free , amount : admissionFee.male.amount },
         female: { free: admissionFee.female.free ,amount : admissionFee.male.amount},
@@ -136,12 +143,11 @@ export default function BusinessEssentials(props) {
       music: selectedMusicOptions, // Use the selected options from state
       disclaimer: selectedDisclaimerOptions, // Use the selected options from state
       entertainment: selectedEntertainmentOptions, // Use the selected options from state
-      ageLimit: selectedAge[0] || "15+ Year",
+      ageLimit: selectedAge || "15+ Year",
       cancelationPolicy: "24 hrs",
     };
 
     props.setBusinessEssentials(data);
-    console.log(props.businessEssentials);
   };
 
   return (
@@ -269,23 +275,24 @@ export default function BusinessEssentials(props) {
 
         <h5 className="text-light text-left mt-4">Music</h5>
         <div>
-          {interestsData.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-4">
-              <input
-                type="checkbox"
-                id={interest.id}
-                name="interest"
-                value={interest.value}
-                className="form-check-input custom-checkbox-checked"
-                checked={selectedInterests.includes(interest.value)}
-                onChange={(e) => handleCheckboxChange(e, 'music')}
-              />
-              <label className="form-check-label" htmlFor={interest.id}>
-                <p className="pl-2 m-0">{interest.label}</p>
-              </label>
-            </div>
-          ))}
-        </div>
+  {interestsData.map((interest, index) => (
+    <div key={index} className="form-check form-check-inline pt-2 col-4">
+      <input
+        type="checkbox"
+        id={interest.id}
+        name="interest"
+        value={interest.value}
+        className="form-check-input custom-checkbox-checked"
+        checked={selectedMusicOptions.includes(interest.value)}
+        onChange={(e) => handleCheckboxChange(e, 'music')}
+      />
+      <label className="form-check-label" htmlFor={interest.id}>
+        <p className="pl-2 m-0">{interest.label}</p>
+      </label>
+    </div>
+  ))}
+</div>
+
 
         <h5 className="text-light text-left mt-4">Entertainment</h5>
         <div className="">
@@ -297,7 +304,7 @@ export default function BusinessEssentials(props) {
                 name="interest"
                 value={interest.value}
                 className="form-check-input custom-checkbox-checked"
-                checked={selectedInterests.includes(interest.value)}
+                checked={selectedEntertainmentOptions.includes(interest.value)}
                 onChange={(e) => handleCheckboxChange(e, 'entertainment')}
               />
               <label className="form-check-label" htmlFor={interest.id}>
@@ -319,7 +326,7 @@ export default function BusinessEssentials(props) {
                 name="interest"
                 value={interest.value}
                 className="form-check-input custom-checkbox-checked"
-                checked={selectedInterests.includes(interest.value)}
+                checked={selectedDisclaimerOptions.includes(interest.value)}
                 onChange={(e) => handleCheckboxChange(e, 'disclaimer')}
               />
               <label className="form-check-label" htmlFor={interest.id}>

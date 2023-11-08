@@ -7,6 +7,7 @@ import NotFound from "../components/others/NotFound";
 import PasswordReset from "../components/others/PasswordReset";
 import HomeTwo from "../themes/index-2/HomeTwo";
 import BecomePartner from "../pages/becomePartner";
+import MyBusiness from "../pages/MyBusiness.js";
 import ScrollToTop from "./ScrollToTop";
 import ProtectedRoute from "./protected";
 import PrivacyPolicy from "../pages/privacyPolicy.js";
@@ -42,6 +43,8 @@ const AppRoutes = () => {
         <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/become-partner" element={  <ProtectedRoute><BecomePartner /></ProtectedRoute>  } />
+        <Route path="/update-business" element={  <ProtectedRoute><BecomePartner /></ProtectedRoute>  } />
+        <Route path="/my-business" element={  <ProtectedRoute><MyBusiness /></ProtectedRoute>  } />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/end-user-license-agreement" element={<EndUserLicenseAgrement />} />

@@ -28,7 +28,7 @@ export default function SignUpView(props) {
   if(response.data.error){
     setError(response.data.msg);
     setUploading(false);
-    console.log(response.data)
+
   }else{
     localStorage.setItem("userId", data.data.userId);
     navigate(`/otp-verification`);

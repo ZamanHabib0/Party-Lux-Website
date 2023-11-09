@@ -3134,6 +3134,32 @@ small {
 
 }
 
+.create-business-listing-tile {
+  border-radius: 20px !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  background-color: #eeeeee;
+  border-style: dashed !important;
+  border-color: black !important
+}
+
+
+.business-tile-creation-icon {
+  width: 80px; 
+  margin: auto;
+  height: 80px;
+  background-color: white; 
+  display: flex;
+  justify-content: center; 
+  border-radius: 100px;
+  align-items: center; 
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;  */
+}
+
+.ti-plus {
+  font-size: 30px;
+  color: grey; /* Set the color of the icon */
+}
+
 .listing-tile-data{
  padding: 24px 20px 0px 4px !important;
 }
@@ -3145,9 +3171,11 @@ small {
   background-color: white;
   overflow-y: auto;
   border-radius: 20px;
+  margin-top: 30px;
   
 
 }
+
 
 .carousel-btn{
   width: 30px;
@@ -3163,7 +3191,7 @@ small {
   padding: 10px;
   border-radius: 10px;
   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
   display: inline-block;
     
 
@@ -3200,6 +3228,13 @@ small {
   padding: 8px;
   border: none;
   font-size: 18px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center; 
+  border-radius: 100px;
+  align-items: center; 
+
 
 }
 
@@ -3228,7 +3263,7 @@ small {
 .toggle {
   position : relative ;
   display : inline-block;
-  width : 86px;
+  width : 70px;
   height : 40px;
   background-color: #adb5bd;
   border-radius: 30px;
@@ -3251,7 +3286,7 @@ small {
      
 /* Checkbox checked effect */
 .checkbox:checked + .toggle::after {
-  left : 49px; 
+  left : 33px; 
 }
      
 /* Checkbox checked toggle label bg color */

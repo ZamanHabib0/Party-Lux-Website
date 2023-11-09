@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
 import LogoutConfirmation from "../../dialogBox/AuthDialogbox"
 
-const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Features = "#features", Team = "#team", Contact = "#contact", BecomeApartner = "/become-partner" , login = "/login" }) => {
+const Navbar = ({ businessCount = 0, darkBg, classOption , Home = "#" , Unlock = '#pricing', Features = "#features", Team = "#team", Contact = "#contact", Mybusiness = "/my-business",BecomeApartner = "/become-partner" , login = "/login" }) => {
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
@@ -108,8 +108,15 @@ const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Featur
                     Contact
                   </HashLink>
                 </li>
+                <li className="nav-item">
+                  <HashLink className= { `mr-3  ${scroll > headerTop ? "" : "become-partner-scroll-btn "}` }
+                 smooth to= {businessCount >= 0 ? Mybusiness : BecomeApartner   }>
+                {businessCount >= 0 ? "View My Business" : "Become A Partner"}
+                  </HashLink>
+                
+                </li>
                      <li className="nav-item">
-                  <HashLink className={`mr-3 ${authToken ? "" : `${scroll > headerTop ? "" : "become-partner-scroll-btn"}`}`} to={ authToken ?    "/" : login }>
+                  <HashLink className={`${authToken ? "" : `${ scroll > headerTop ? "become-partner-scroll-btn" : "become-partner-btn"}`}`} to={ authToken ?    "/" : login }>
                     {authToken ? (
                   <>
                       <span onClick={() => setIsDialogOpen(true)} 
@@ -128,13 +135,7 @@ const Navbar = ({ darkBg, classOption , Home = "#" , Unlock = '#pricing', Featur
                     )}
                   </HashLink>
                 </li>
-                <li className="nav-item">
-                  <HashLink className= { `${scroll > headerTop ? "become-partner-scroll-btn" : "become-partner-btn"} ` }
-                 smooth to= {BecomeApartner}>
-                  Become a Partner
-                  </HashLink>
-                
-                </li>
+               
 
            
               </ul>

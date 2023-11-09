@@ -120,16 +120,16 @@ export default function BusinessEssentials(props) {
   const handleAgeCheckbox = (event, category) => {
     const { value, checked } = event.target;
     setSelectedAgeLimit((prevAge) => {
-      if (checked) return [value];
-      return [];
+      if (checked) return value;
+      return "";
     });
   };
 
   const handleAttendaceCheckbox = (event, category) => {
     const { value, checked } = event.target;
     setSelectedAttendanceLimit((prevAttendance) => {
-      if (checked) return [value];
-      return [];
+      if (checked) return value;
+      return "";
     });
   };
 

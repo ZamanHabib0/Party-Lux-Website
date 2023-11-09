@@ -9,6 +9,7 @@ export default function LoginView(props) {
   
 
   const [uploading, setUploading] = useState(false);
+  const [businessCount, setBusinessCount] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -51,6 +52,8 @@ export default function LoginView(props) {
         }
 
         localStorage.setItem("authToken", data.data.authToken);
+        await getBusinessCount()
+
         setIsDialogOpen(true);
         setUploading(false);
 
@@ -65,6 +68,37 @@ export default function LoginView(props) {
       setUploading(false);
     }
   };
+
+  const getBusinessCount = async ()=>{
+    const authToken = localStorage.getItem('authToken');
+  
+    // Check if the token exists
+    if (authToken) {
+      // Define the headers with the token
+      const headers = {
+        Authorization: `Bearer ${authToken}`,
+      };
+  
+      // Make the API request with the headers
+      axios.get('https://backend-partylux-staging.up.railway.app/v1/mobile/business/my-business', {
+        headers: headers,
+      })
+        .then((response) =>  {
+
+          const count = response.data.data.length;
+        
+          setBusinessCount(count)
+
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    } else {
+      // Handle the case where the token is missing from local storage
+      console.error('Authentication token is missing');
+    }
+  }
+
 
   return (
     <>
@@ -118,6 +152,7 @@ export default function LoginView(props) {
           handleDialogBox={handleDialogBox}
           isDialogOpen={isDialogOpen}
           setIsDialogOpen={setIsDialogOpen}
+          businessCount = {businessCount}
         />
       )}
     </>

@@ -8,8 +8,6 @@ export default function FifthView(props) {
     images,
     location,
     error,
-    imageURLs,
-    place,
     uploading,
     setImages,
     setlocation,

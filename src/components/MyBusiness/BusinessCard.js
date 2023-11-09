@@ -28,6 +28,7 @@ function BusinessListingTile(props) {
   };
 
   const handleDialogBox = () => {
+    document.body.style.overflow = 'hidden';
     setIsDialogOpen(true);
   };
 

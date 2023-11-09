@@ -81,28 +81,49 @@ const SimpleMap = (props) => {
     props.setlocation({
       type: "Point",
       coordinates: [
-        pointerLocation.lng,
-        pointerLocation.lat
+        +pointerLocation.lng.toFixed(5),  // Round to 5 decimal places
+    +pointerLocation.lat.toFixed(5),  // Round to 5 decimal places
       ],
       radius: "50",
     });
 
-    try {
-      const apiKey = "AIzaSyADipQDfFfvFUnv5sdZ4_0DAWFdvyiSf4Y";
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pointerLocation.lng},${pointerLocation.lat}&key=${apiKey}`
-      );
+    // try {
+    //   const apiKey = "AIzaSyADipQDfFfvFUnv5sdZ4_0DAWFdvyiSf4Y";
+    //   const response = await axios.get(
+    //     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pointerLocation.lng},${pointerLocation.lat}&key=${apiKey}`
+    //   );
 
-      if (response.data.status === "OK") {
-        const address = response.data.results[0].formatted_address;
+    //   if (response.data.status === "OK") {
+    //     const address = response.data.results[0].formatted_address;
    
-        setCompleteAddress(address)
+    //     setCompleteAddress(address)
+    //   } else {
+    //     console.error("Geocoding request failed");
+    //   }
+    // } catch (error) {
+    //   console.error("Error fetching location data", error);
+    // }
+
+
+    try {
+      const apiKey = "AIzaSyADipQDfFfvFUnv5sdZ4_0DAWFdvyiSf4Y"; // Replace with your Google Maps API key
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pointerLocation.lat},${pointerLocation.lng}&key=${apiKey}`
+      );
+    
+      if (response.data.status === "OK") {
+        const results = response.data.results[0];
+        const address = results.formatted_address;
+    
+        setCompleteAddress(address);
       } else {
         console.error("Geocoding request failed");
       }
     } catch (error) {
       console.error("Error fetching location data", error);
     }
+    
+    
 
 
   };

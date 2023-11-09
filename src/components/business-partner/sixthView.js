@@ -13,7 +13,8 @@ export default function SixthView(props) {
                   className= "partner-support-img"
                 />
                 <p className="text-left mb-4">
-                Click the "Update Business" button to submit your changes. You'll receive an email notification once your updates have been reviewed.</p>
+                {props.isUpdateBusiness ?    "Click the Update Business button to submit your changes. You'll receive an email notification once your updates have been reviewed." : 
+                "Just click Submit and we will Review your Application. You’ll Receive an Email if you have been Selected"}     </p>
 
 
                 {props.error && <p className="custom-error-text text-left">{props.error}</p>}

@@ -24,8 +24,8 @@ function LoginConfirmation(props) {
           }}><span className='p-3'>View Home Page</span></button>
           <button type="button" class="m-3  become-partner-btn text-light nav-item " onClick={() => {
             props.setIsDialogOpen(false);
-            navigate("/become-partner")
-          }}><span className='p-3'>Become A Partner</span> </button>
+            {props.businessCount >= 0 ?    navigate("/my-business")  :   navigate("/become-partner")}
+          }}><span className='p-3'>{props.businessCount >= 0 ? "View My Business" : "Become A Partner"}   </span> </button>
           </div>
         </div>
       </Popup>

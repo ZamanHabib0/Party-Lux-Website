@@ -11,11 +11,13 @@ import ThankYou from './thankYou';
 import StepsRow from './stepsRow';
 import BusinessEssentials from './businessEssentials';
 import axios from "axios";
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function MainView() {
 
   const locationObj = useLocation();
+
+  const navigate = useNavigate();
 
   const isUpdateBusiness = locationObj.pathname.includes('update-business');
 
@@ -65,8 +67,8 @@ export default function MainView() {
   // sixth component
 
   const [selectedInterests, setSelectedInterests] = useState([]);
-  const [selectedAge, setSelectedAgeLimit] = useState([]);
-  const [selectedAttendanceLimit, setSelectedAttendanceLimit] = useState([]);
+  const [selectedAge, setSelectedAgeLimit] = useState("");
+  const [selectedAttendanceLimit, setSelectedAttendanceLimit] = useState("");
   const [admissionFee, setAdmissionFee] = useState({
     male: { free: true, amount: 0 },
     female: { free: true, amount: 0 },
@@ -245,7 +247,7 @@ export default function MainView() {
   
       const mergedObject = { ...combinedData, ...businessAddress, ...businessEssentials };
       axios
-        .put(`http://localhost:8080/v1/mobile/business/update-business/${businessId}`, mergedObject, {
+        .put(`https://backend-partylux-staging.up.railway.app/v1/mobile/business/update-business/${businessId}`, mergedObject, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
@@ -343,6 +345,7 @@ export default function MainView() {
 
         <div>
           <img
+          style={{ cursor:  "pointer" }} onClick={()=> navigate("/")}
             src="assets/img/logo-color-1x.png"
             width="230"
             alt="logo"

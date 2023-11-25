@@ -110,8 +110,8 @@ const Navbar = ({ businessCount = 0, darkBg, classOption , Home = "#" , Unlock =
                 </li>
                 <li className="nav-item">
                   <HashLink className= { `mr-3  ${scroll > headerTop ? "" : "become-partner-scroll-btn "}` }
-                 smooth to= {businessCount >= 0 ? Mybusiness : BecomeApartner   }>
-                {businessCount >= 0 ? "View My Business" : "Become A Partner"}
+                 smooth to= {businessCount > 0 ? Mybusiness : BecomeApartner   }>
+                {businessCount > 0 ? "My Business" : "Become A Partner"}
                   </HashLink>
                 
                 </li>

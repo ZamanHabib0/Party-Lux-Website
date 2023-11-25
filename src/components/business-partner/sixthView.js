@@ -14,7 +14,7 @@ export default function SixthView(props) {
                 />
                 <p className="text-left mb-4">
                 {props.isUpdateBusiness ?    "Click the Update Business button to submit your changes. You'll receive an email notification once your updates have been reviewed." : 
-                "Just click Submit and we will Review your Application. You’ll Receive an Email if you have been Selected"}     </p>
+                "Just click 'Submit,' and we will review your application. You'll receive an email if you have been selected."}     </p>
 
 
                 {props.error && <p className="custom-error-text text-left">{props.error}</p>}

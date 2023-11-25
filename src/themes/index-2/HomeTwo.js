@@ -43,6 +43,7 @@ export default function HomeTwo() {
           const count = response.data.data.length;
         
           setBusinessCount(count)
+          console.log("count" + count)
 
         })
         .catch((error) => {

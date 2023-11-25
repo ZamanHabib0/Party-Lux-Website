@@ -13,17 +13,19 @@ export default function ThankYou(props) {
       >
          <div className="text-center p-5">
             <h3 className="text-light">
-            We Have Received Your <br/> Application
+            {props.isUpdateBusiness ? <> We Have Received Your <br/> Updated Application</>   : <> We Have Received Your <br/> Application</>} 
+              
+
             </h3>
             
            <div className="pt-3">
            <a
-                    href="/"
+                    href="/my-business"
               
                     rel='noopener noreferrer'
                     className="btn google-play-btn mr-3"
                   >
-                    Back to Home
+                    View My Business
                   </a>
            </div>
          </div>

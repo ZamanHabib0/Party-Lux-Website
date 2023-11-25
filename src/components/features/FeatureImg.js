@@ -11,7 +11,7 @@ export default function FeatureImg({ ImgSource }) {
                 {/* <span className="text-uppercase color-secondary sub-title">
                   Best features
                 </span> */}
-                <h2>Our Team Collectively Has Over 15 Year Experience Partying, We Make An App To Make Your Life Easier</h2>
+                <h2>Our Team Collectively Has Over 30 Year Experience Partying, We Make An App To Make Your Life Easier</h2>
                 {/* <p>
                   Objectively deliver professional value with diverse
                   web-readiness. Collaboratively transition wireless customer
@@ -30,9 +30,9 @@ export default function FeatureImg({ ImgSource }) {
                   </div>
                 </div>
                 <div className="icon-text">
-                  <h5>Entering /Leaving Locations</h5>
+                  <h5>Entering/Leaving Locations</h5>
                   <p className="mb-0">
-                    Receive an alert whenever youre nearby a party so you don't get fomo!
+                  Receive an alert whenever you're nearby a party so you don't experience FOMO!
                   </p>
                 </div>
               </div>
@@ -45,7 +45,7 @@ export default function FeatureImg({ ImgSource }) {
                 <div className="icon-text">
                   <h5>Verfied Photos</h5>
                   <p className="mb-0">
-                    With every ratio , theres a photo to go with it, getting rif of all those catfishes! 
+                  With every ratio, there's a photo to go with it, getting rid of all those catfishes 
                   </p>
                 </div>
               </div>
@@ -96,7 +96,7 @@ export default function FeatureImg({ ImgSource }) {
                 <div className="icon-text">
                   <h5>Party Ratios</h5>
                   <p className="mb-0">
-                   With party ratios , you'll see that it's worth the drive
+                  With party ratios, you'll see that it's worth the drive
                   </p>
                 </div>
               </div>

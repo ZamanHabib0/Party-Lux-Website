@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import LoginView from './LoginView.js';
 import SignUpView from './SignUpView.js';
 import OTPVerification from './otpVerfication.js';
@@ -18,11 +18,32 @@ export default function MainView() {
     handleTabChange(tab);
   };
 
+  const [alertErrorMessage, setAlertErrorMessage] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlertErrorMessage("");
+    }, 2000);
+
+    return () => clearTimeout(timer); // Clear the timer if the component unmounts or the alert is closed manually
+  }, [alertErrorMessage]);
+
   // Check the URL to determine which component to display
   const currentURL = window.location.pathname;
 
   return (
     <>
+    
+    <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'absolute', top: 0, right: 0, zIndex: 9999 }}>
+        {alertErrorMessage && (
+          <div className=''>
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+              {alertErrorMessage}
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className="container">
         <div>
           <img
@@ -38,7 +59,7 @@ export default function MainView() {
             <div className="partnerdata-container mt-5 p-3">
               <div className="login-btn-div">
                 {currentURL === '/otp-verification' ? (
-                  <OTPVerification />
+                  <OTPVerification setAlertErrorMessage = {setAlertErrorMessage} />
                 ) : (
                   <>
                     <a
@@ -57,7 +78,7 @@ export default function MainView() {
                     >
                       <b> Sign Up</b>
                     </a>
-                    {selectedTab === 'login' ? <LoginView /> : <SignUpView />}
+                    {selectedTab === 'login' ? <LoginView setAlertErrorMessage = {setAlertErrorMessage} /> : <SignUpView setAlertErrorMessage = {setAlertErrorMessage}  />}
                   </>
                 )}
               </div>

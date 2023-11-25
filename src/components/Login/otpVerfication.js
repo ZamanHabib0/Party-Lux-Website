@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginConfirmation from "../dialogBox/successfullylogin";
 
-export default function OTPInput() {
+
+export default function OTPInput(props) {
   const navigate = useNavigate();
   const [otp, setOTP] = useState(["", "", "", ""]);
   const userId = localStorage.getItem("userId");
@@ -18,26 +19,35 @@ export default function OTPInput() {
   };
 
 
-  const handleInputChange = (index, value) => {
+  const handleInputChange =  (index, value) => {
+    setError(null);
     const newOTP = [...otp];
     newOTP[index] = value;
     setOTP(newOTP);
+  
+    if (value === "") {
+      // If the current input field is cleared, move focus to the previous input field
+      if (index > 0) {
+        document.getElementById(`otp-input-${index - 1}`).focus();
+      }
+    } else {
+      // If a digit is entered, move focus to the next input field
+      if (index < 3) {
+        document.getElementById(`otp-input-${index + 1}`).focus();
+      }
+    }
   };
 
   const handleVerifyOTP = async () => {
-
-      // Check if any of the OTP fields are empty
-  if (otp.some(value => value === "")) {
-    setError("Please fill in all OTP fields.");
-    return; // Do not proceed with verification
-  }
-
+    // Check if any of the OTP fields are empty
+    if (otp.some(value => value === "")) {
+      setError("Please fill in all OTP fields.");
+      return; // Do not proceed with verification
+    }
+  
     setUploading(true);
     const otpValue = otp.join(''); // Combine OTP digits into a single string
   
-
-  
-    // Make an API request to verify the OTP
     try {
       const response = await axios.post(
         "https://backend-partylux-staging.up.railway.app/v1/mobile/auth/verify-otp",
@@ -47,22 +57,69 @@ export default function OTPInput() {
         }
       );
   
-      if (response.data.status === 200) {
-        const data = response.data;
+      const data = response.data;
+  
+      if (data.status === 200) {
         localStorage.setItem("authToken", data.data.authToken);
-        localStorage.removeItem("userId")
-        navigate("/");
-        setUploading(false);
+        localStorage.removeItem("userId");
+        setIsDialogOpen(true)
       } else {
-        setError("OTP is not valid. Please try again."); 
-        setUploading(false);
+        // props.setAlertErrorMessage("OTP is not valid. Please try again.");
+        setError("OTP is not valid. Please try again.");
 
       }
     } catch (error) {
-      setError("OTP is not valid. Please try again."); 
+      // props.setAlertErrorMessage("OTP is not valid. Please try again.");
+      setError("OTP is not valid. Please try again.");
+    } finally {
       setUploading(false);
     }
   };
+
+  const [resendTimer, setResendTimer] = useState(30);
+
+  useEffect(() => {
+    let timer;
+
+    if (resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [resendTimer]);
+
+  const handleResendOTP = async () => {
+    if (uploading || resendTimer > 0) {
+      return; // Don't allow resend while uploading or during the timer
+    }
+
+    try {
+      setUploading(true);
+
+      // Call your OTP resend API here
+      // Replace "yourResendApiUrl" with the actual URL for OTP resend
+      const response = await axios.post("https://backend-partylux-staging.up.railway.app/v1/mobile/auth/resend-otp", {
+        userId: userId,
+      });
+
+      // Handle the response as needed
+      if (response.data.status === 200) {
+        // Resend successful
+        setResendTimer(30); // Reset the timer
+      } else {
+        setError("Failed to resend OTP. Please try again.");
+      }
+    } catch (error) {
+      setError("Failed to resend OTP. Please try again.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   
 
   return (
@@ -108,7 +165,21 @@ export default function OTPInput() {
                 </div>
               </div>
               {error && <p className="custom-error-text text-left m-3">{error}</p>}
-              <p className="otp-txt-color mt-4">Don't get the code? <a style={{ color: "#da13ec", fontWeight: "bold" }}>Resend</a></p>
+              <p className="otp-txt-color mt-4">
+          Don't get the code?{" "}
+          <span
+            style={{
+              color: "#da13ec",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+            onClick={handleResendOTP}
+          >
+            Resend
+          </span>{" "}
+          {resendTimer > 0 ? `in ${resendTimer}s` : ""}
+        </p>
+              {/* <p className="otp-txt-color mt-4">Don't get the code? <a style={{ color: "#da13ec", fontWeight: "bold" }}><span  >Resend</span></a></p> */}
               <button
                 className="become-partner-scroll-btn rounded-custom mt-3"
                 style={{ width: "100%", borderRadius: "10px" }}

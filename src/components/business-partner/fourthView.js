@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function FourthView(props) {
-
-
   const { businessHours, setBusinessHours } = props;
 
   const handleDayChange = (day) => {
-    setBusinessHours({
-      ...businessHours,
-      [day]: { ...businessHours[day], isOpen: !businessHours[day].isOpen },
-    });
+    setBusinessHours((prevBusinessHours) => ({
+      ...prevBusinessHours,
+      [day]: { ...prevBusinessHours[day], isOpen: !prevBusinessHours[day].isOpen },
+    }));
   };
 
   const handleTimeChange = (day, type, value) => {
-    setBusinessHours({
-      ...businessHours,
-      [day]: { ...businessHours[day], [type]: value },
-    });
+    setBusinessHours((prevBusinessHours) => ({
+      ...prevBusinessHours,
+      [day]: { ...prevBusinessHours[day], [type]: value },
+    }));
   };
 
   const isDayValid = (day) => {
@@ -29,7 +27,10 @@ export default function FourthView(props) {
     const isClose = !businessHours[day].isOpen;
     const startTime = isClose ? '--:--' : businessHours[day].openTime;
     const endTime = isClose ? '--:--' : businessHours[day].closeTime;
-  
+
+    console.log("day" + day)
+    
+
     return {
       isClose,
       bussinessDay: day,
@@ -37,8 +38,6 @@ export default function FourthView(props) {
       endTime,
     };
   });
-
- 
 
   return (
     <>
@@ -81,14 +80,19 @@ export default function FourthView(props) {
             </div>
           ))}
         </div>
+
         <button
           className="become-partner-scroll-btn rounded-custom"
           style={{ width: "100%", borderRadius: "10px" }}
           onClick={() => {
-            props.setbusinessWeek(transformedData)
-            props.handleNext()
+            if (!canProceed) {
+              props.setAlertErrorMessage("Please select time for open days.");
+            } else {
+              console.log(transformedData)
+              props.setbusinessWeek(transformedData);
+              props.handleNext();
+            }
           }}
-          disabled={!canProceed}
         >
           Next
         </button>

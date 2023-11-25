@@ -12,7 +12,11 @@ export default function BusinessList() {
   const [businesses, setBusinesses] = useState([]);
   const [currentDayData, setCurrentDayData] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [alertErrorMessage, setAlertErrorMessage] = useState("");
+  const [setBusinessStateMessage, SetBusinessStateMessage] = useState("");
+ 
   const navigate = useNavigate();
+  
 
 
   useEffect(() => {
@@ -38,6 +42,8 @@ export default function BusinessList() {
           setCurrentDayData(currentDay)
 
           const updatedBusinesses = response.data.data.map((business) => {
+
+          
 
 
 
@@ -79,13 +85,42 @@ export default function BusinessList() {
 
 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlertErrorMessage(null);
+      SetBusinessStateMessage(null);
+    }, 2000);
 
+    return () => clearTimeout(timer); // Clear the timer if the component unmounts or the alert is closed manually
+  }, [setBusinessStateMessage ,alertErrorMessage]);
 
   return (
     
       <Layout>
+    
+    <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'fixed', top: 0, right: 0, zIndex: 9999 }}>
+        {alertErrorMessage && (
+          <div className=''>
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+              {alertErrorMessage}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'fixed', top: 0, right: 0, zIndex: 9999 }}>
+        {setBusinessStateMessage && (
+          <div className=''>
+            <div className="alert alert-success alert-dismissible fade show" role="alert">
+              {setBusinessStateMessage}
+            </div>
+          </div>
+        )}
+      </div>
+
 
       <Navbar darkBg Home="/" Unlock='/#pricing' Features="/#features" Team="/#team" Contact="/#contact" BecomeApartner="/become-partner" />
+    
       <body style={{overflow : "hidden"}}>
       <PageHeader HeaderTitle="My Business" Parent="Pages" PageTitle="My Business" />
       <div className="container mt-5" >
@@ -105,6 +140,9 @@ export default function BusinessList() {
                 endTime={business.businessWeek[currentDayData].endTime}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                setAlertErrorMessage = {setAlertErrorMessage}
+                SetBusinessStateMessage = {SetBusinessStateMessage}
+            
 
               />
             </div>

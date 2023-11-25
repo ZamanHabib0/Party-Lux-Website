@@ -1,9 +1,9 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import CaroselSlider from "../caroselslider/caroselslider.js"
 import Map from "./displayingMap.js";
 import DeleteBox from "./DeleteBusiness.js";
-import UpdateBox from "./DeleteBusiness.js";
+import UpdateBox from "./updateBusiness.js";
 import axios from 'axios';
 import SuccessfullyDeleted from './SuccessFullyDeleted.js';
 import { useNavigate } from 'react-router-dom';
@@ -13,18 +13,21 @@ function BusinessDetailBox(props) {
     const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [isSuccessfullyDeleted, setSuccessfullyDeleted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [isBusinessActive, setIsBusinessActive] = useState(true);
+    const [isBusinessActive, setIsBusinessActive] = useState(null);
     const navigate = useNavigate();
 
-    const [businessId, setBusinessId] = useState("")
+    // const [businessId, setBusinessId] = useState("")
 
-    
-  useEffect(() => {
-    // Initialize the state of the toggle based on the business state from props
-    const businessOpen = (props.businessData?.businessState == "close") ? false : true
-    setIsBusinessActive(businessOpen);
 
-  }, [props.isBusinessActive]);
+
+
+      useEffect(() => {
+        // Initialize the state of the toggle based on the business state from props
+        const businessOpen = (props.businessData?.businessState === "close") ? false : true;
+        setIsBusinessActive(businessOpen);
+
+        // Specify dependencies for the useEffect
+    }, [props.businessData?.businessState]);
 
     const businessWeekData = [
         { day: 'Monday', startTime: '09:15 PM', endTime: '09:15 PM' },
@@ -80,7 +83,7 @@ function BusinessDetailBox(props) {
 
                 setSuccessfullyDeleted(true)
                 setDeleteDialogOpen(false)
-        
+
             })
             .catch((error) => {
                 // Handle errors
@@ -90,39 +93,40 @@ function BusinessDetailBox(props) {
     };
 
     const handleToggle = async () => {
-        // Get the token from local storage
-        const authToken = localStorage.getItem('authToken');
 
-        const ActualBusinessState = (isBusinessActive) ? "close" : "open"
+        const authToken = localStorage.getItem('authToken');
+    
+        const ActualBusinessState = !isBusinessActive ?  "open"  : "close";
+    
+        console.log(ActualBusinessState);
     
         // Prepare the request data
         const requestData = {
             businessId: props.businessData?._id,
-          businessState: ActualBusinessState,
+            businessState: ActualBusinessState,
         };
-    
-        // Make an API request to update the business state
+        
         try {
-          const response = await fetch('https://backend-partylux-staging.up.railway.app/v1/mobile/business/updateBusinessState', {
-            method: 'PATCH',
-            headers: {
-              'Authorization': `Bearer ${authToken}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-          });
-    
-          if (response.status === 200) {
-            // If the update is successful, update the state variable
-            setIsBusinessActive(!isBusinessActive);
-          } else {
-            // Handle errors or show a message to the user
-            console.error('Failed to update business state');
-          }
+            const response = await axios.patch('https://backend-partylux-staging.up.railway.app/v1/mobile/business/updateBusinessState', requestData, {
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.data.status === 200) {
+                // If the update is successful, update the state variable
+                setIsBusinessActive(prevState => !prevState);
+                props.SetBusinessStateMessage("Business state has updated")
+                props.setAlertErrorMessage("")
+            } else {
+                // Handle errors or show a message to the user
+                console.log('Failed to update business state');
+            }
         } catch (error) {
-          console.error('Error:', error);
+            console.log('Error:', error);
         }
-      };
+    };
 
     return (
         <div>
@@ -130,8 +134,8 @@ function BusinessDetailBox(props) {
                 <div className='black-overlay' >
                     <div className="business-detail-dialog ">
                         <div className='container '>
-                            <h3 className='text-dark mb-5'></h3>
-                            <div className=' d-flex pb-4 justify-content-between'>
+                     
+                            <div className='mt-4 d-flex pb-4 justify-content-between'>
                                 <h4 className="card-text mb-auto" style={{ fontSize: "30px" }}>Business Detail</h4>
                                 <h5 className='pl-2 text-white business-detail-cross' style={{ fontSize: "16px", cursor: "pointer" }} onClick={() => props.setIsDialogOpen(false)}> <span className='ti-close'></span> </h5>
 
@@ -148,28 +152,30 @@ function BusinessDetailBox(props) {
 
                                     <div className='business-view-map mt-4 '>
 
-                                        <Map latitude={props.businessData ? props.businessData.location.coordinates[0] : ""} longitude={props.businessData ? props.businessData.location.coordinates[1] : ""} />
+                                        <Map latitude={props.businessData ? props.businessData.location.coordinates[0]   : ""} longitude={props.businessData ? props.businessData.location.coordinates[1] : ""} />
 
                                     </div>
 
                                     <div className='d-flex justify-content-between p-4'>
                                         <div className=' d-flex  '>
                                             <h5 className="card-text mb-auto" >latitude: </h5>
-                                            <h6 className='pl-2 ' >{props.businessData ? props.businessData.location.coordinates[0] : ""}</h6>
+                                            <h6 className='pl-2 ' >{props.businessData ? props.businessData.location.coordinates[0].toFixed(5) : ""}</h6>
 
                                         </div>
 
                                         <div className=' d-flex  '>
                                             <h5 className="card-text mb-auto" >Logitude: </h5>
-                                            <h6 className='pl-2 ' >{props.businessData ? props.businessData.location.coordinates[1] : ""}</h6>
+                                            <h6 className='pl-2 ' >{props.businessData ? props.businessData.location.coordinates[1].toFixed(5) : ""}</h6>
 
                                         </div>
                                     </div>
 
                                     <h4 className="card-text mb-auto pt-5" style={{ fontSize: "25px" }}>Business Description: </h4>
-                                    <p className='mt-3'>
+                                    <div style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
+                                   <p className='mt-3'>
                                         {props.businessData ? props.businessData.note : "No description is available"}$
                                     </p>
+                                   </div>
 
 
 
@@ -185,27 +191,30 @@ function BusinessDetailBox(props) {
                                     </div>
 
                                     <div className='d-flex justify-content-between'>
-                                        <div className=' d-flex pb-4'>
+                                        <div className=' d-flex pb-4 mt-2'>
                                             <h4 className="card-text mb-auto" style={{ fontSize: "20px" }}>Category: </h4>
                                             <h5 className='pl-2' style={{ fontSize: "20px" }}> {props.businessData ? capitalizeFirstLetter(props.businessData.bussinessCategory) : "No business category available"} </h5>
 
                                         </div>
                                         <div className='row'>
-                                            <h5 style={{margin : "10px"}}>Live</h5>
+                                            <h5 style={{ margin: "10px" }}>{(isBusinessActive) ? "Open" : "Close"}</h5>
                                             <input
-        type="checkbox"
-        id="switch"
-        className="checkbox"
-        checked={isBusinessActive}
-        onChange={handleToggle}
-      />
-      <label htmlFor="switch" className="toggle"></label>
+                                                type="checkbox"
+                                                id="switch"
+                                                className="checkbox"
+                                                checked={isBusinessActive}
+                                                onChange={()=> {
+                                                    handleToggle()
+                                                  
+                                                }}
+                                            />
+                                            <label htmlFor="switch" className="toggle"></label>
                                         </div>
                                     </div>
 
                                     <div className=" ">
                                         <h4 className="card-text mb-auto pb-4" style={{ fontSize: "20px" }}>Business Weeks </h4>
-                                        <button className="btn btn-secondary  d-flex justify-content-between" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ width: '100%' }}>
+                                        <button className="btn dropdown-weeks-bg d-flex justify-content-between" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ width: '100%' }}>
                                             <p className='m-0 p-2'>Monday</p> <span className='ti-angle-down p-2'></span>
                                         </button>
                                         <ul className="dropdown-menu custom-dropdown-menu mt-3  " style={{ width: '95%' }}>
@@ -282,20 +291,29 @@ function BusinessDetailBox(props) {
                                     </div>
 
                                     <div className='d-flex justify-content-end '>
-
-                                        <button type="button" className="m-3 pt-2 pb-2 btn-success   dialogbtn-radius" onClick={() => handleUpdateDialogBox()}><span className='p-3' >Update</span></button>
+                                        <button type="button" className="m-3 pt-2 pb-2 btn-success   dialogbtn-radius" onClick={() => {
+                                            if(isBusinessActive){
+                                                props.setAlertErrorMessage("Please close the business state first")
+                                                props.setBusinessStateMessage("")
+                                            }else{
+                                                handleUpdateDialogBox()
+                                            }
+                                           
+                                        }}><span className='p-3' >Update</span></button>
                                         <button type="button" className="m-3 p-2 btn btn-danger dialogbtn-radius " onClick={() => {
-                                            setBusinessId(props.businessData?._id)
+                                            // setBusinessId(props.businessData?._id)
                                             handleDeteleDialogBox()
                                         }} ><span className='p-3'> Delete</span></button>
 
                                     </div>
+                                   
                                 </div>
 
                             </div>
 
                             <DeleteBox
-                                title="Are You Sure You Want To Delete"
+                            mainTitle = "Delete"
+                                title="Are you sure you want to delete ?"
                                 handleFunction={deleteBusiness}
                                 handleDialogBox={handleUpdateDialogBox}
                                 btnText={loading ? 'Please Wait...' : 'Delete'}
@@ -304,7 +322,7 @@ function BusinessDetailBox(props) {
                             />
 
                             <UpdateBox
-                                title="Are You Sure You Want To Update"
+                                title="Are you sure you want to update ?"
                                 handleDialogBox={handleUpdateDialogBox}
                                 btnText="Update"
                                 isDialogOpen={isUpdateDialogOpen}

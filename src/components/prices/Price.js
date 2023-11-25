@@ -15,10 +15,10 @@ export default function Price({ hasBg }) {
               <div className="col-md-8">
                 <div className="section-heading text-center mb-5">
                   <h2>
-                    Affordable MemberShips
+                  Affordable Memberships
                   </h2>
                   <p className="lead">
-                    We know our main audience are college students,we've made our membersip the price of one drink.
+                  We know our main audience is college students. we've made our membership the price of one drink.
                   </p>
                 </div>
               </div>

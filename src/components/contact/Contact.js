@@ -38,7 +38,7 @@ export default function Contact({ bgColor }) {
           company: "",
           message: "",
         });
-        
+
         setTimeout(() => {
           setSuccessMessage("");
         }, 3000);
@@ -53,7 +53,35 @@ export default function Contact({ bgColor }) {
       }, 3000);
     }
 
-   
+
+
+
+  };
+
+  const handlePhoneField = (event) => {
+    const { name, value } = event.target;
+
+    // Check if the entered value contains only numbers and operators
+    if (/^[0-9+*/-]*$/.test(value)) {
+      // Update the formData with the valid input
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
+  };
+
+  const handleTextareaChange = (event) => {
+    const { name, value } = event.target;
+  
+    // Validate input length and content
+    if (value.length <= 750 && !/<[^>]*>/g.test(value)) {
+      // Update the formData with the valid input
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
 
@@ -72,10 +100,7 @@ export default function Contact({ bgColor }) {
               <div className="section-heading">
                 <h2>Contact With Us</h2>
                 <p>
-                  It's very easy to get in touch with us. Just use the contact
-                  form or pay us a visit for a coffee at the office. Dynamically
-                  innovate competitive technology after an expanded array of
-                  leadership.
+                  Reach out effortlessly! Use our contact form or stop by for coffee at our office. We're here to innovate and would love to connect with you!
                 </p>
               </div>
               <div className="footer-address">
@@ -84,12 +109,12 @@ export default function Contact({ bgColor }) {
                 </h6>
                 <p>1223 PICCADILLY DR HURLBURT FIELD, FL 32544</p>
                 <ul>
-                 
+
                   <li>
                     <span>
                       Email :
                       <a href="mailto:SUPPORT@PARTYLUX.APP">
-                       SUPPORT@PARTYLUX.APP
+                      support@Partylux.app
                       </a>
                     </span>
                   </li>
@@ -145,7 +170,7 @@ export default function Contact({ bgColor }) {
                         id="phone"
                         placeholder="Your Phone"
                         value={formData.phone}
-                        onChange={handleInputChange}
+                        onChange={handlePhoneField}
                       />
                     </div>
                   </div>
@@ -173,13 +198,16 @@ export default function Contact({ bgColor }) {
                         cols="25"
                         placeholder="Message"
                         value={formData.message}
-                        onChange={handleInputChange}
+                        onChange={handleTextareaChange}
                       ></textarea>
+                     <div className="mt-2" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+  <p>{formData.message.length}/750</p>
+</div>
                     </div>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-sm-12 mt-3">
+                  <div className="col-sm-12 ">
                     <button
                       type="submit"
                       className="btn solid-btn"
@@ -192,31 +220,31 @@ export default function Contact({ bgColor }) {
               </form>
               <p className="form-message"></p>
               {successMessage && (
-            <div className="alert alert-success alert-dismissible fade show" role="alert">
-              {successMessage}
-              <button
-                type="button"
-                className="close"
-                onClick={() => setSuccessMessage("")}
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          )}
-          {errorMessage && (
-            <div className="alert alert-danger alert-dismissible fade show" role="alert">
-              {errorMessage}
-              <button
-                type="button"
-                className="close"
-                onClick={() => setErrorMessage("")}
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          )}
+                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                  {successMessage}
+                  <button
+                    type="button"
+                    className="close"
+                    onClick={() => setSuccessMessage("")}
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              )}
+              {errorMessage && (
+                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                  {errorMessage}
+                  <button
+                    type="button"
+                    className="close"
+                    onClick={() => setErrorMessage("")}
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

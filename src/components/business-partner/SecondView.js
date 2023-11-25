@@ -1,20 +1,27 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function SecondView(props) {
   const [isClubSelected, setClubSelected] = useState(false);
   const [isBarSelected, setBarSelected] = useState(false);
-  const [error, setError] = useState(null); 
+  const [businessNameError, setbusinessNameError] = useState(null);
+  const [businessCategoryError, setbusinessCategoryError] = useState(null);
 
   useEffect(() => {
     // Initialize the selected category based on the businessCategory prop
-    if (props.BusinessCategory === "club") {
+    if (props.businessCategory === "club") {
       setClubSelected(true);
       setBarSelected(false);
-    } else if (props.BusinessCategory === "bar") {
+    } else if (props.businessCategory === "bar") {
       setClubSelected(false);
       setBarSelected(true);
+    } else {
+      // Default to "club" or another category if businessCategory is not provided
+      setClubSelected(true);
+      setBarSelected(false);
+      props.setBusinessCategory("club");
     }
   }, [props.businessCategory]);
+  
 
   const toggleSelection = (type) => {
     if (type === "club") {
@@ -30,11 +37,12 @@ export default function SecondView(props) {
 
   const handleNext = () => {
     if (!props.businessName) {
-      setError("Please enter your business name.");
+      setbusinessNameError("Please enter your business name.");
     } else if (!isClubSelected && !isBarSelected) {
-      setError("Please select a business category.");
+      setbusinessCategoryError("Please select a business category.");
     } else {
-      setError(null); // Reset error state if validation passes
+      setbusinessNameError(null); 
+      setbusinessCategoryError(null)
       props.handleNext();
     }
   };
@@ -53,14 +61,16 @@ export default function SecondView(props) {
           value={props.businessName}
           onChange={(e) => props.setBusinessName(e.target.value)}
         />
+         {businessNameError && !props.businessName && (
+            <div className="custom-error-text text-left mt-2">{businessNameError}</div>
+          )}
         <h5 className="text-light text-left pt-3">Select Business Type</h5>
 
-        <div className="row d-flex justify-content-center pb-5">
+        <div className="row d-flex justify-content-between p-3">
           <button
-            className={`selection-btn ${
-              isClubSelected ? "selected-btn-bg" : "un-selected-btn-bg"
-            }`}
-            style={{ width: "43%" }}
+            className={`selection-btn ${isClubSelected ? "selected-btn-bg" : "un-selected-btn-bg"
+              }`}
+            style={{ width: "45%" }}
             onClick={() => toggleSelection("club")}
           >
             <img
@@ -73,10 +83,9 @@ export default function SecondView(props) {
           </button>
 
           <button
-            className={`selection-btn ${
-              isBarSelected ? "selected-btn-bg" : "un-selected-btn-bg"
-            }`}
-            style={{ width: "43%" }}
+            className={`selection-btn ${isBarSelected ? "selected-btn-bg" : "un-selected-btn-bg"
+              }`}
+            style={{ width: "45%" }}
             onClick={() => toggleSelection("bar")}
           >
             <img
@@ -88,20 +97,22 @@ export default function SecondView(props) {
             <p className="d-inline p-2">Bar</p>
           </button>
         </div>
-         
-         
-  {/* Error message for validation */}
-  {error && (
-          <div className="custom-error-text text-left m-3">{error}</div>
+
+
+        {/* Error message for validation */}
+        {businessCategoryError  && !isBarSelected && !isClubSelected && (
+          <div className="custom-error-text text-left">{businessCategoryError}</div>
         )}
-        <button
+       <div className="pt-5">
+       <button
           className="become-partner-scroll-btn rounded-custom "
           style={{ width: "100%", borderRadius: "10px" }}
-          onClick={() => handleNext() }
-   
+          onClick={() => handleNext()}
+
         >
-         Next
+          Next
         </button>
+       </div>
       </div>
     </>
   );

@@ -18,6 +18,9 @@ export default function BusinessEssentials(props) {
     setSelectedDisclaimerOptions,
     error,
     setError,
+    alertErrorMessage,
+    setAlertErrorMessage
+
   } = props;
 
   const interestsData = [
@@ -68,19 +71,22 @@ export default function BusinessEssentials(props) {
     // const musicSelected = selectedMusicOptions.length > 0;
     // const entertainmentSelected = selectedEntertainmentOptions.length > 0;
     // const disclaimerSelected = selectedDisclaimerOptions.length > 0;
-  
-    if (
-      // interestsSelected &&
-      ageSelected &&
-      attendanceSelected 
-      // musicSelected &&
-      // entertainmentSelected &&
-      // disclaimerSelected
-    ) {
-      // All blocks have at least one item selected
-      props.handleNext();
+
+    if (!admissionFee.male.free && admissionFee.male.amount === "" || !admissionFee.female.free && admissionFee.female.amount === "") {
+      setAlertErrorMessage("Please enter Price of Business ticket");
+    } else if (
+      selectedAge.length == 0 ||
+      selectedAttendanceLimit.length == 0 ||
+      selectedMusicOptions.length == 0 ||
+      selectedEntertainmentOptions.length == 0 ||
+      selectedDisclaimerOptions.length == 0) {
+      setAlertErrorMessage("Please select at least one option from every block.");
     } else {
-      setError("Choose at least one from every block");
+      setAlertErrorMessage(null);
+      // setbusinessNameError(null); 
+      // setbusinessCategoryError(null)
+
+      props.handleNext();
     }
   };
 
@@ -134,11 +140,15 @@ export default function BusinessEssentials(props) {
   };
 
   const handleSubmit = () => {
+
+
+
+
     const data = {
       maxParticipants: selectedAttendanceLimit || "0-25",
       admissionFee: {
-        male: { free: admissionFee.male.free , amount : admissionFee.male.amount },
-        female: { free: admissionFee.female.free ,amount : admissionFee.male.amount},
+        male: { free: admissionFee.male.free, amount: admissionFee.male.amount },
+        female: { free: admissionFee.female.free, amount: admissionFee.female.amount },
       },
       music: selectedMusicOptions, // Use the selected options from state
       disclaimer: selectedDisclaimerOptions, // Use the selected options from state
@@ -147,7 +157,11 @@ export default function BusinessEssentials(props) {
       cancelationPolicy: "24 hrs",
     };
 
+
+
     props.setBusinessEssentials(data);
+
+
   };
 
   return (
@@ -204,16 +218,23 @@ export default function BusinessEssentials(props) {
                   placeholder="Enter Amount"
                   required="required"
                   value={admissionFee.male.amount}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    // Allow digits (0-9) and a dot for decimal point
+                    const inputValue = e.target.value.replace(/[^0-9.]/g, '');
+
                     setAdmissionFee({
                       ...admissionFee,
-                      male: { ...admissionFee.male, amount: e.target.value },
-                    })
-                  }
+                      male: { ...admissionFee.male, amount: inputValue },
+                    });
+                  }}
                 />
+
               </div>
             </div>
           </div>
+          {/* {!admissionFee.male.free && admissionFee.male.amount === "" && (
+          <p className="text-danger">Please enter the price.</p>
+        )} */}
 
           <h5 className="text-light text-left m-0 female-color">Female</h5>
 
@@ -226,6 +247,7 @@ export default function BusinessEssentials(props) {
                 className="form-check-input custom-checkbox-checked"
                 checked={admissionFee.female.free}
                 onChange={(e) =>
+
                   setAdmissionFee({
                     ...admissionFee,
                     female: { ...admissionFee.female, free: e.target.checked },
@@ -261,13 +283,17 @@ export default function BusinessEssentials(props) {
                   placeholder="Enter Amount"
                   required="required"
                   value={admissionFee.female.amount}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    // Allow digits (0-9) and a dot for decimal point
+                    const inputValue = e.target.value.replace(/[^0-9.]/g, '');
+
                     setAdmissionFee({
                       ...admissionFee,
-                      female: { ...admissionFee.female, amount: e.target.value },
-                    })
-                  }
+                      female: { ...admissionFee.female, amount: inputValue },
+                    });
+                  }}
                 />
+
               </div>
             </div>
           </div>
@@ -275,23 +301,23 @@ export default function BusinessEssentials(props) {
 
         <h5 className="text-light text-left mt-4">Music</h5>
         <div>
-  {interestsData.map((interest, index) => (
-    <div key={index} className="form-check form-check-inline pt-2 col-4">
-      <input
-        type="checkbox"
-        id={interest.id}
-        name="interest"
-        value={interest.value}
-        className="form-check-input custom-checkbox-checked"
-        checked={selectedMusicOptions.includes(interest.value)}
-        onChange={(e) => handleCheckboxChange(e, 'music')}
-      />
-      <label className="form-check-label" htmlFor={interest.id}>
-        <p className="pl-2 m-0">{interest.label}</p>
-      </label>
-    </div>
-  ))}
-</div>
+          {interestsData.map((interest, index) => (
+            <div key={index} className="form-check form-check-inline pt-2 col-4">
+              <input
+                type="checkbox"
+                id={interest.id}
+                name="interest"
+                value={interest.value}
+                className="form-check-input custom-checkbox-checked"
+                checked={selectedMusicOptions.includes(interest.value)}
+                onChange={(e) => handleCheckboxChange(e, 'music')}
+              />
+              <label className="form-check-label" htmlFor={interest.id}>
+                <p className="pl-2 m-0">{interest.label}</p>
+              </label>
+            </div>
+          ))}
+        </div>
 
 
         <h5 className="text-light text-left mt-4">Entertainment</h5>
@@ -314,13 +340,14 @@ export default function BusinessEssentials(props) {
           ))}
         </div>
 
-                {/* Disclaimer */}
-                <h5 className="text-light text-left mt-4 ">Disclaimer</h5>
-        <div >
+        {/* Disclaimer */}
+
+
+<h5 className="text-light text-left mt-4">Disclaimer</h5>
+        <div className="">
           {DisclaimerData.map((interest, index) => (
-            <div key={index} className="form-check form-check-inline pt-2 col-4">
-             <div className="text-left">
-             <input
+            <div key={index} className="form-check form-check-inline pt-2 col-4 ">
+              <input
                 type="checkbox"
                 id={interest.id}
                 name="interest"
@@ -332,13 +359,12 @@ export default function BusinessEssentials(props) {
               <label className="form-check-label" htmlFor={interest.id}>
                 <p className="pl-2 m-0">{interest.label}</p>
               </label>
-             </div>
             </div>
           ))}
         </div>
 
-                 {/* Age Limit */}
-                 <h5 className="text-light text-left mt-4">Age Limit</h5>
+        {/* Age Limit */}
+        <h5 className="text-light text-left mt-4">Age Limit</h5>
         <div >
           {AgeLimit.map((interest, index) => (
             <div key={index} className="form-check form-check-inline pt-2 col-4">
@@ -358,28 +384,28 @@ export default function BusinessEssentials(props) {
           ))}
         </div>
 
-                 {/* Maximum Attendance */}
-                 <h5 className="text-light text-left mt-4 ">Maximum Attendance</h5>
-<div>
-  {MaximumAttendance.map((interest, index) => (
-    <div key={index} className="form-check form-check-inline pt-2 col-4">
-      <input
-        type="checkbox"
-        id={interest.id}
-        name="interest"
-        value={interest.value}
-        className="form-check-input custom-checkbox-checked"
-        checked={selectedAttendanceLimit.includes(interest.value)}
-        onChange={(e) => handleAttendaceCheckbox(e, 'MaximumAttendance')}
-      />
-      <label className="form-check-label" htmlFor={interest.id}>
-        <p className="pl-2 m-0">{interest.label}</p>
-      </label>
-    </div>
-  ))}
-</div>
+        {/* Maximum Attendance */}
+        <h5 className="text-light text-left mt-4 ">Maximum Attendance</h5>
+        <div>
+          {MaximumAttendance.map((interest, index) => (
+            <div key={index} className="form-check form-check-inline pt-2 col-4">
+              <input
+                type="checkbox"
+                id={interest.id}
+                name="interest"
+                value={interest.value}
+                className="form-check-input custom-checkbox-checked"
+                checked={selectedAttendanceLimit.includes(interest.value)}
+                onChange={(e) => handleAttendaceCheckbox(e, 'MaximumAttendance')}
+              />
+              <label className="form-check-label" htmlFor={interest.id}>
+                <p className="pl-2 m-0">{interest.label}</p>
+              </label>
+            </div>
+          ))}
+        </div>
 
-{error && <p className="custom-error-text text-left">{error}</p>}
+        {error && <p className="custom-error-text text-left">{error}</p>}
 
         {/* Submit Button */}
         <button
@@ -388,7 +414,7 @@ export default function BusinessEssentials(props) {
           onClick={() => {
             checkAllboxChecked()
             handleSubmit()
-      
+
           }}
         >
           Next

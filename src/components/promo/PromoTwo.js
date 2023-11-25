@@ -55,7 +55,7 @@ export default function PromoTwo() {
                     <span className="ti-vector icon-md color-secondary"></span>
                   </div>
                   <div className="pt-2 pb-3">
-                    <h5>DIGITAL MARKETING</h5>
+                    <h5>Nearby Parties</h5>
                     <p className="text-muted mb-0">
                     WE CREATED A PLATFORM SPECIFICALLY FOR USERS AND BUSINESSES       
                     <br></br>

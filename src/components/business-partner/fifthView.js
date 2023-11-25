@@ -7,11 +7,11 @@ export default function FifthView(props) {
   const {
     images,
     location,
-    error,
+    // error,
     uploading,
     setImages,
     setlocation,
-    setError,
+    // setError,
     setImageURLs,
     setPlace,
     setUploading,
@@ -26,8 +26,11 @@ export default function FifthView(props) {
     setMapKey,
     setCompleteAddress,
     businessuploadedImages,
-    setBusinessuploadedImages
+    setBusinessuploadedImages,
+    isUpdateBusiness
   } = props;
+
+  const [error, setError] = useState(null);
 
 
   const handleChange = async (e) => {
@@ -58,66 +61,67 @@ export default function FifthView(props) {
 
   const uploadImages = async (files) => {
     setUploading(true);
+  
     try {
-
       const authToken = localStorage.getItem('authToken');
-
-
+  
       const formData = new FormData();
       files.forEach((file, index) => {
         formData.append(`uploadedImages`, file);
       });
-
+  
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${authToken}`,
         },
       };
-
+  
       const response = await axios.post(
         "https://backend-partylux-staging.up.railway.app/v1/mobile/users/upload-multiple-photo",
         formData,
         config
       );
-
+  
       if (response.data.status === 200) {
         const data = response.data;
         let newImageURLs = Array.isArray(data.data) ? data.data : [];
-
+  
         if (businessuploadedImages.length !== 0) {
           // If the first array is not empty, append both arrays
           newImageURLs = [...businessuploadedImages, ...newImageURLs];
+        } else {
+          // Note: Corrected assignment from `businessuploadedImages` to `setBusinessuploadedImages`
+          setBusinessuploadedImages(newImageURLs);
+          setImages([]);
         }
-        
-
+  
         setImageURLs(newImageURLs);
-
-       
-
-
+  
         const mineCustomobject = {
           place: completeaddress,
           location: location,
           photos: newImageURLs,
-          businessProfile: ""
-        }
-
-        props.setbusinessAddress(mineCustomobject)
-
+          businessProfile: "",
+        };
+  
+        props.setbusinessAddress(mineCustomobject);
+  
         setUploading(false);
         props.handleNext();
       } else {
         setUploading(false);
-        // console.error('Image upload failed');
-        setError(response.data.data.msg);
+        console.log("response.error.message")
+        console.log(response.error.message)
+        setError(response.error.message);
       }
     } catch (error) {
       setUploading(false);
-      //   console.error('Image upload failed', error);
-      setError('Image upload failed', error);
+      setError('Image upload failed: ' + error.message);  // Use `error.message` directly
+      console.error(error);  // Log the full error for debugging purposes
     }
   };
+  
 
 
 
@@ -242,21 +246,39 @@ export default function FifthView(props) {
           </div>
 
         </div>
-        {error && <p className="custom-error-text text-left">{error}</p>} {/* Display error message if error exists */}
-
-
-
-
-
+        
+        {error && (
+  <p className="custom-error-text text-left">
+    {error}
+    {console.log('Error state:', error)} {/* Add this line */}
+  </p>
+)}
 
 
         <button
           className="become-partner-scroll-btn rounded-custom"
           style={{ width: '100%', borderRadius: '10px' }}
           onClick={async () => {
-            if (!uploading) {
-              await uploadImages(images);
-            }
+            if(isUpdateBusiness){
+              if(images.length === 0){
+                props.handleNext();
+              }else{
+                if (!uploading) {
+                  await uploadImages(images);
+                  setError("")
+                }
+              }
+               }else{
+                if(images.length === 0 && businessuploadedImages.length === 0){
+                  setError("Please upload 1 image at least. ")
+                }else{
+                  if (!uploading) {
+                    await uploadImages(images);
+                    setError("")
+                  }
+                }
+               }
+           
           }}
           disabled={uploading} // Disable the button when uploading is in progress
         >
@@ -266,11 +288,6 @@ export default function FifthView(props) {
     </>
   );
 }
-
-const labelStyle = {
-  marginBottom: '1rem',
-  fontFamily: 'Arial, sans-serif',
-};
 
 const imageContainerStyle = {
   display: 'flex',

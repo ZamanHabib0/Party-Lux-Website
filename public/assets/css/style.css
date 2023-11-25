@@ -446,8 +446,9 @@ b {
 .become-partner-btn{
   border-radius: 30px !important;;
   padding: 12px !important;
-  background-color: #0a0d14 !important;
+  background-color: white !important;
   border: none !important;
+  color: black !important;
 }
 
 .become-partner-scroll-btn{
@@ -3065,11 +3066,11 @@ small {
 }
 
 .confirmation-dialog {
-  width: 35%;
+  width: 37%;
   padding: 40px;
   color: white;
   border-radius: 20px;
-  background-color: black;
+  background-color: #0a0f16;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
   text-align: center; /* Center the text content within the dialog */
 }
@@ -3168,8 +3169,28 @@ small {
   
   width: 80%;
   height: 80vh;
-  background-color: white;
+  background-color: black;
+  color: white;
   overflow-y: auto;
+  border-radius: 20px;
+  margin-top: 30px;
+  
+
+}
+
+.business-detail-dialog h4 {
+  color: white;
+}
+
+.business-detail-dialog h5 {
+  color: white;
+}
+
+.image-enlarge-dialog{
+  
+  width: 80%;
+  height: 80vh;
+  background-color: black;
   border-radius: 20px;
   margin-top: 30px;
   
@@ -3190,11 +3211,16 @@ small {
    
   padding: 10px;
   border-radius: 10px;
-  background-color: white;
+  background-color: #0a0f16;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
   display: inline-block;
     
 
+}
+
+.dropdown-weeks-bg{
+  background-color: #0a0f16;
+  color: white;
 }
 
 .business-detail-dialog::-webkit-scrollbar {
@@ -3217,6 +3243,8 @@ small {
 .custom-dropdown-menu{
   margin-top: 10px;
   border-radius: 20px !important;
+  background-color: #0a0f16;
+  color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
   border: none;
 }
@@ -3263,8 +3291,8 @@ small {
 .toggle {
   position : relative ;
   display : inline-block;
-  width : 70px;
-  height : 40px;
+  width : 60px;
+  height : 35px;
   background-color: #adb5bd;
   border-radius: 30px;
   border: 2px solid #adb5bd;
@@ -3274,8 +3302,8 @@ small {
 .toggle:after {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   background-color: #ffffff;
   top: 3px; 
@@ -3286,13 +3314,18 @@ small {
      
 /* Checkbox checked effect */
 .checkbox:checked + .toggle::after {
-  left : 33px; 
+  left : 26px; 
 }
      
 /* Checkbox checked toggle label bg color */
 .checkbox:checked + .toggle {
-  background-color: #007bff;
-  border: 2px solid #007bff;
+  /* background-color: #007bff; */
+  background-image: linear-gradient(
+    to right,
+    #AD00FF,
+    #DB14EC
+  ) !important;
+  border: 2px solid transparent;
 }
      
 /* Checkbox vanished */

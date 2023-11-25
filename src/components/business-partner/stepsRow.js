@@ -29,7 +29,7 @@ function StepsRow({ currentIndex, onButtonClick }) {
     <>
       <div className="d-flex justify-content-between text-light">
         <span className="text-left"></span>
-        <span className="text-right">{currentIndex + 1} / 8</span>
+        <span className="text-right">{currentIndex + 1}  <span className='font-weight-bold'>/ 8</span> </span>
       </div>
       
       <div className="steps-button-container">{buttons}</div>

@@ -15,10 +15,18 @@ export default function LoginView(props) {
     password: "",
   });
 
-  const [error, setError] = useState(null); // State to track errors
+  const [emilError, setEmailError] = useState(null); // State to track errors
+  const [passwordError, setPasswordError] = useState(null); // State to track errors
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    setEmailError(null);
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handlepasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordError(null);
     setFormData({ ...formData, [name]: value });
   };
 
@@ -29,11 +37,27 @@ export default function LoginView(props) {
     setIsDialogOpen(false);
   };
 
-  
+    
 
 
   const handleLogin = async () => {
     setUploading(true);
+  
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setEmailError("Please enter a valid email address");
+      setUploading(false);
+      return;
+    }
+  
+    // Password validation
+    if (formData.password.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+      setUploading(false);
+      return;
+    }
+  
     try {
       const response = await axios.post(
         "https://backend-partylux-staging.up.railway.app/v1/mobile/auth/signin",
@@ -42,29 +66,28 @@ export default function LoginView(props) {
           password: formData.password,
         }
       );
-
+  
       if (response.data.status === 200) {
         const data = response.data;
-      
-        if(data.data.isVerified == false) {
+  
+        if (data.data.isVerified === false) {
           localStorage.setItem("userId", data.data.userId);
           navigate("/otp-verification");
         }
-
+  
         localStorage.setItem("authToken", data.data.authToken);
-        await getBusinessCount()
-
+        await getBusinessCount();
+  
         setIsDialogOpen(true);
         setUploading(false);
-
-    
       } else {
-        setError("Wrong email or password");
         setUploading(false);
+        props.setAlertErrorMessage("Wrong email or password");
+    
       }
     } catch (error) {
       // Handle network errors
-      setError("Wrong email or password"); 
+      props.setAlertErrorMessage("Wrong email or password");
       setUploading(false);
     }
   };
@@ -106,7 +129,7 @@ export default function LoginView(props) {
       <input
         type="email"
         className={`form-control business-form-control ${
-          error ? "border-danger" : ""
+          emilError ? "border-danger" : ""
         }`}
         name="email"
         id="Email"
@@ -115,23 +138,27 @@ export default function LoginView(props) {
         value={formData.email}
         onChange={handleInputChange}
       />
+
+{emilError && <p className="custom-error-text text-left mt-2">{emilError}</p>}
+
       <h6 className="text-left text-light m-2 mt-3">Password</h6>
       <input
         type="password"
-        className={`form-control business-form-control mb-4 ${
-          error ? "border-danger" : ""
+        className={`form-control business-form-control  ${
+          passwordError ? "border-danger" : ""
         }`}
         name="password"
         id="Password"
         placeholder="Password"
         required="required"
         value={formData.password}
-        onChange={handleInputChange}
+        onChange={handlepasswordChange}
       />
 
-      {error && <p className="custom-error-text text-left">{error}</p>} {/* Display error message if error exists */}
+      {passwordError && <p className="custom-error-text text-left mt-2">{passwordError}</p>}
  
-      <button
+    <div className="mt-4">
+    <button
         className="become-partner-scroll-btn rounded-custom mb-3"
         style={{ width: "100%", borderRadius: "10px" }}
         onClick={()=>  
@@ -145,6 +172,7 @@ export default function LoginView(props) {
       >
         {uploading ? 'Please Wait...' : 'LogIn'}  
       </button>
+    </div>
 
       {isDialogOpen && (
         <LoginConfirmation

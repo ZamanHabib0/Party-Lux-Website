@@ -57,9 +57,9 @@ function BusinessListingTile(props) {
 
   return (
     <>
-      <BusinessDetail isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} businessData={businessData} />
+      <BusinessDetail SetBusinessStateMessage = {props.SetBusinessStateMessage} setAlertErrorMessage = {props.setAlertErrorMessage} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} businessData={businessData} />
       <Loading
-        title = "login Successfully"
+        title = "login Successfully" 
           handleDialogBox={handleDialogBox}
           isDialogOpen={props.isLoading}
           setIsDialogOpen={setIsDialogOpen}
@@ -72,7 +72,8 @@ function BusinessListingTile(props) {
                 <img
                   src={props.image || 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'}
                   alt="businessImg"
-                  style={{ borderRadius: "30px" }}
+                  style={{ objectFit: "cover",borderRadius: "30px" }}
+                  
                   className="p-3"
                   width="180"
                   height="180"
@@ -86,8 +87,17 @@ function BusinessListingTile(props) {
               </div>
               <div className="mb-1 text-muted mt-2 mb-4"><strong>Timming:</strong> {props.startTime} - {props.endTime}  </div>
               <div className=' d-flex justify-content-between mt-3'>
-                <p className="card-text mb-auto">{props.place}</p>
-                <h5 className='pl-2'>{props.price === 'Free' ? 'Free' : `${props.price} $`}</h5>
+              <p className="card-text mb-auto" style={{ width: "80%" }}>
+  {props.place.length <= 45 ? (
+    props.place
+  ) : (
+    <>
+      {props.place.slice(0, 45)}
+      {"..."}
+    </>
+  )}
+</p>
+                <h5 className=''>{props.price === 'Free' ? 'Free' : `${props.price} $`}</h5>
               </div>
             </div>
           </>

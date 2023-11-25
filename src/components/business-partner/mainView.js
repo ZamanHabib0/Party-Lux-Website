@@ -29,6 +29,7 @@ export default function MainView() {
   const [businessuploadedImages, setBusinessuploadedImages] = useState([]);
   const [businessEssentials, setBusinessEssentials] = useState({});
   const [error, setError] = useState(null);
+  const [alertErrorMessage, setAlertErrorMessage] = useState("");
 
   const [businessHours, setBusinessHours] = useState({
     monday: { isOpen: false, openTime: '', closeTime: '' },
@@ -78,6 +79,14 @@ export default function MainView() {
   const [selectedDisclaimerOptions, setSelectedDisclaimerOptions] = useState([]);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlertErrorMessage("");
+    }, 2000);
+
+    return () => clearTimeout(timer); // Clear the timer if the component unmounts or the alert is closed manually
+  }, [alertErrorMessage]);
+
+  useEffect(() => {
 
 
     if (isUpdateBusiness) {
@@ -105,6 +114,7 @@ export default function MainView() {
               // Update your state variables with the new data
               setBusinessName(updatebusinessData.bussinessName);
               setBusinessCategory(updatebusinessData.bussinessCategory);
+            console.log(updatebusinessData.bussinessCategory)
               setBusinessDescription(updatebusinessData.note);
               setBusinessHours({
                 monday: { isOpen: !updatebusinessData.businessWeek[0].isClose, openTime: updatebusinessData.businessWeek[0].startTime, closeTime: updatebusinessData.businessWeek[0].endTime },
@@ -126,7 +136,7 @@ export default function MainView() {
               setSelectedAgeLimit(updatebusinessData.ageLimit);
               setSelectedAttendanceLimit(updatebusinessData.maxParticipants)
 
-        
+
 
               // Update other state variables as needed
 
@@ -144,18 +154,14 @@ export default function MainView() {
         console.error('Authentication token is missing');
       }
     }
-  }, []);
-
-
-
-
+  });
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % 8);
   };
 
   const handlePrevios = () => {
-    if (currentIndex == 0) {
+    if (currentIndex === 0) {
 
     } else {
       setCurrentIndex((prevIndex) => (prevIndex - 1) % 8);
@@ -169,12 +175,13 @@ export default function MainView() {
 
   const createBusiness = async () => {
     setUploading(true);
-   
-   
+
+
     // if (currentIndex < components.length - 1) {
     //   setCurrentIndex((prevIndex) => prevIndex + 1);
     // } else {
     // Create the combined object with collected data
+    console.log("businessWeek" + businessWeek.bussinessDay)
     const combinedData = {
       businessWeek: businessWeek,
       note: businessDescription,
@@ -212,39 +219,22 @@ export default function MainView() {
     // }
   };
 
-  const updateBusinessWithToken =  () => {
+  const updateBusinessWithToken = () => {
     setUploading(true);
 
     // Retrieve the authentication token from local storage
     const authToken = localStorage.getItem('authToken');
     const businessId = localStorage.getItem('businessId');
-  
+
     if (authToken) {
-      // Define the request data
-      const requestData = {
-        bussinessName : businessName,
-        bussinessCategory : BusinessCategory,
-        note: businessDescription,
-      photos: images,
-      location : location,
-      place: place,
-      music: selectedInterests,
-      ageLimit: selectedAge,
-      maxParticipants : selectedAttendanceLimit,
-      entertainment: selectedEntertainmentOptions,
-      disclaimer: selectedDisclaimerOptions,
-      admissionFee : admissionFee,
-      businessWeek : businessHours
-
-      };
-
+ 
       const combinedData = {
         businessWeek: businessWeek,
         note: businessDescription,
         bussinessName: businessName,
         bussinessCategory: BusinessCategory,
       };
-  
+
       const mergedObject = { ...combinedData, ...businessAddress, ...businessEssentials };
       axios
         .put(`https://backend-partylux-staging.up.railway.app/v1/mobile/business/update-business/${businessId}`, mergedObject, {
@@ -255,10 +245,10 @@ export default function MainView() {
         .then((response) => {
 
           if (response.data.status === 200) {
-            const businessId = localStorage.removeItem('businessId');
+         localStorage.removeItem('businessId');
             if (currentIndex < components.length - 1) {
               setCurrentIndex((prevIndex) => prevIndex + 1);
-             
+
               setUploading(false);
             }
           } else {
@@ -279,14 +269,17 @@ export default function MainView() {
       console.error('Authentication token is missing');
     }
   }
-  
+
+
+
+
 
   const components = [
-    <FirstView handleNext={handleNext} isUpdateBusiness ={isUpdateBusiness} />,
+    <FirstView handleNext={handleNext} isUpdateBusiness={isUpdateBusiness} />,
     <SecondView handleNext={handleNext} businessName={businessName} setBusinessName={setBusinessName} BusinessCategory={BusinessCategory} setBusinessCategory={setBusinessCategory} />,
     <ThirdView handleNext={handleNext} businessDescription={businessDescription} setBusinessDescription={setBusinessDescription} />,
-    <FourthView handleNext={handleNext} businessWeek={businessWeek} setbusinessWeek={setbusinessWeek} businessHours={businessHours} setBusinessHours={setBusinessHours} />,
-    <FifthView handleNext={handleNext} businessAddress={businessAddress} setbusinessAddress={setbusinessAddress} images={images}
+    <FourthView alertErrorMessage={alertErrorMessage} setAlertErrorMessage={setAlertErrorMessage} handleNext={handleNext} businessWeek={businessWeek} setbusinessWeek={setbusinessWeek} businessHours={businessHours} setBusinessHours={setBusinessHours} />,
+    <FifthView isUpdateBusiness ={isUpdateBusiness} handleNext={handleNext} businessAddress={businessAddress} setbusinessAddress={setbusinessAddress} images={images}
       location={location}
       error={error}
       imageURLs={imageURLs}
@@ -308,10 +301,10 @@ export default function MainView() {
       setZoom={setZoom}
       setMapKey={setMapKey}
       setCompleteAddress={setCompleteAddress}
-      businessuploadedImages= {businessuploadedImages}
-      setBusinessuploadedImages = {setBusinessuploadedImages}
+      businessuploadedImages={businessuploadedImages}
+      setBusinessuploadedImages={setBusinessuploadedImages}
     />,
-    <BusinessEssentials handleNext={handleNext} businessEssentials={businessEssentials} setBusinessEssentials={setBusinessEssentials}
+    <BusinessEssentials alertErrorMessage={alertErrorMessage} setAlertErrorMessage={setAlertErrorMessage} handleNext={handleNext} businessEssentials={businessEssentials} setBusinessEssentials={setBusinessEssentials}
       selectedInterests={selectedInterests}
       setSelectedInterests={setSelectedInterests}
       selectedAge={selectedAge}
@@ -329,8 +322,8 @@ export default function MainView() {
       error={error}
       setError={setError}
     />,
-    <SixthView isUpdateBusiness = {isUpdateBusiness} updateBusinessWithToken = {updateBusinessWithToken} createBusiness={createBusiness} error={error} uploading={uploading} />,
-    <ThankYou />,
+    <SixthView  isUpdateBusiness={isUpdateBusiness} updateBusinessWithToken={updateBusinessWithToken} createBusiness={createBusiness} error={error} uploading={uploading} />,
+    <ThankYou isUpdateBusiness={isUpdateBusiness} />,
   ];
 
 
@@ -339,13 +332,22 @@ export default function MainView() {
 
   return (
     <>
+      <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'absolute', top: 0, right: 0, zIndex: 9999 }}>
+        {alertErrorMessage && (
+          <div className=''>
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+              {alertErrorMessage}
+            </div>
+          </div>
+        )}
+      </div>
 
-      <div className="container"
+      <div className="container" style={{ position: "relative" }}
       >
 
         <div>
           <img
-          style={{ cursor:  "pointer" }} onClick={()=> navigate("/")}
+            style={{ cursor: "pointer" }} onClick={() => navigate("/")}
             src="assets/img/logo-color-1x.png"
             width="230"
             alt="logo"
@@ -353,7 +355,7 @@ export default function MainView() {
           />
           <div className="d-flex justify-content-between">
             <div className='back-btn-partner'>
-              {currentIndex == 7 ? (
+              {currentIndex === 7 || currentIndex === 0 ? (
                 <span></span>
               ) : (
                 <span className="ti-arrow-left text-white" onClick={handlePrevios} style={{ fontSize: "25px", cursor: "pointer" }}></span>
@@ -397,7 +399,9 @@ export default function MainView() {
 
           )}
 
-          {/* <div className="col-md-1"></div> */}
+
+
+
         </div>
       </div>
 

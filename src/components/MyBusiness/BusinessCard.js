@@ -40,7 +40,7 @@ function BusinessListingTile(props) {
     };
 
     try {
-      const response = await axios.post('https://backend-partylux-staging.up.railway.app/v1/mobile/business/business-detail', requestData, {
+      const response = await axios.post('https://backend-partylux-production.up.railway.app/v1/mobile/business/business-detail', requestData, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -64,16 +64,13 @@ function BusinessListingTile(props) {
           isDialogOpen={props.isLoading}
           setIsDialogOpen={setIsDialogOpen}
         />
-      <div className="row g-0 border business-listing-tile overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style={{ cursor: isClickable ? "pointer" : "not-allowed" }} onClick={handleClick}>
-       
-          <>
+      <div className="row g-0 border business-listing-tile overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style={{ cursor: isClickable ? "pointer" : "not-allowed" }} onClick={handleClick}> 
             <div className="rounded">
               <div style={{ width: "180px", height: "180px" }}>
                 <img
                   src={props.image || 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'}
                   alt="businessImg"
                   style={{ objectFit: "cover",borderRadius: "30px" }}
-                  
                   className="p-3"
                   width="180"
                   height="180"
@@ -100,11 +97,11 @@ function BusinessListingTile(props) {
                 <h5 className=''>{props.price === 'Free' ? 'Free' : `${props.price} $`}</h5>
               </div>
             </div>
-          </>
-      
       </div>
     </>
   );
 }
+
+
 
 export default BusinessListingTile;

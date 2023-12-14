@@ -22,6 +22,9 @@ import axios from "axios";
 export default function HomeTwo() {
 
   const [businessCount, setBusinessCount] = useState(null);
+  const [dangerAlertErrorMessage, setdangerAlertErrorMessage] = useState("");
+  const [successAlertErrorMessage, setSuccessAlertErrorMessage] = useState("");
+
 
   useEffect(()  =>  {
     // Retrieve the token from local storage
@@ -35,7 +38,7 @@ export default function HomeTwo() {
       };
   
       // Make the API request with the headers
-      axios.get('https://backend-partylux-staging.up.railway.app/v1/mobile/business/my-business', {
+      axios.get('https://backend-partylux-production.up.railway.app/v1/mobile/business/my-business', {
         headers: headers,
       })
         .then((response) =>  {
@@ -57,7 +60,25 @@ export default function HomeTwo() {
 
   return (
     <Layout>
-      <Navbar darkBg businessCount = {businessCount}   />
+         <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'fixed', top: 0, right: 0, zIndex: 9999 }}>
+        {successAlertErrorMessage && (
+          <div className=''>
+            <div className="alert alert-success alert-dismissible fade show" role="alert">
+              {successAlertErrorMessage}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'fixed', top: 0, right: 0, zIndex: 9999 }}>
+        {dangerAlertErrorMessage && (
+          <div className=''>
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+              {dangerAlertErrorMessage}
+            </div>
+          </div>
+        )}
+      </div>
+      <Navbar darkBg businessCount = {businessCount}   style={{overflow : "hidden"}}  />
       <HeroTwo />
       <PromoTwo />
       <AboutApp />
@@ -70,9 +91,9 @@ export default function HomeTwo() {
       <AccordionWithImg />
       {/* <LatestNewsOne light bgColor="gray-light-bg" /> */}
       
-      <Contact bgColor="gray-light-bg" />
+      <Contact  setdangerAlertErrorMessage = {setdangerAlertErrorMessage} successAlertErrorMessage = {setSuccessAlertErrorMessage} bgColor="gray-light-bg" />
       {/* <BrandCarousel /> */}
-      <Subsribe />
+      <Subsribe setdangerAlertErrorMessage = {setdangerAlertErrorMessage} successAlertErrorMessage = {setSuccessAlertErrorMessage} />
       <Footer space />
     </Layout>
   );

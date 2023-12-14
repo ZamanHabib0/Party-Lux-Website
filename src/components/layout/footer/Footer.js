@@ -117,7 +117,7 @@ export default function Footer({ space }) {
                           <span className="ti-email mr-2"></span>
                           <a href="mailto:SUPPORT@PARTYLUX.APP">
                             {" "}
-                            SUPPORT@PARTYLUX.APP
+                            support@partylux.app
                           </a>
                         </li>
                         <li className="mb-2 d-flex align-items-center">

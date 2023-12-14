@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Popup from 'reactjs-popup';
+import  useLockBodyScroll  from "./disableScroll";
 
 function LogoutConfirmation(props) {
-
-
+  useLockBodyScroll();
   return (
     <div>
       <Popup open={props.isDialogOpen} closeOnDocumentClick={false} >

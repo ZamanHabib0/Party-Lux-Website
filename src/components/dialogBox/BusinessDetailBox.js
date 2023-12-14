@@ -71,7 +71,7 @@ function BusinessDetailBox(props) {
 
         // Make a DELETE request to delete the business
         axios
-            .delete('https://backend-partylux-staging.up.railway.app/v1/mobile/business/delete-business', {
+            .delete('https://backend-partylux-production.up.railway.app/v1/mobile/business/delete-business', {
                 headers: {
                     Authorization: `Bearer ${authToken}`
                 },
@@ -94,6 +94,9 @@ function BusinessDetailBox(props) {
 
     const handleToggle = async () => {
 
+        setLoading(true)
+
+
         const authToken = localStorage.getItem('authToken');
     
         const ActualBusinessState = !isBusinessActive ?  "open"  : "close";
@@ -107,7 +110,7 @@ function BusinessDetailBox(props) {
         };
         
         try {
-            const response = await axios.patch('https://backend-partylux-staging.up.railway.app/v1/mobile/business/updateBusinessState', requestData, {
+            const response = await axios.patch('https://backend-partylux-production.up.railway.app/v1/mobile/business/updateBusinessState', requestData, {
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
                     'Content-Type': 'application/json',
@@ -117,14 +120,18 @@ function BusinessDetailBox(props) {
             if (response.data.status === 200) {
                 // If the update is successful, update the state variable
                 setIsBusinessActive(prevState => !prevState);
+                setLoading(false)
                 props.SetBusinessStateMessage("Business state has updated")
                 props.setAlertErrorMessage("")
+                
             } else {
                 // Handle errors or show a message to the user
                 console.log('Failed to update business state');
+                setLoading(false)
             }
         } catch (error) {
             console.log('Error:', error);
+            setLoading(false)
         }
     };
 
@@ -186,7 +193,7 @@ function BusinessDetailBox(props) {
 
                                     <div className=' d-flex pb-4'>
                                         <h4 className="card-text mb-auto" style={{ fontSize: "30px" }}>Title: </h4>
-                                        <h5 className='pl-2' style={{ fontSize: "30px" }}> {props.businessData ? capitalizeFirstLetter(props.businessData.bussinessName) : "No business name available"} </h5>
+                                        <p className='pl-2 m-0 p-0' style={{ fontSize: "30px" }}> {props.businessData ? capitalizeFirstLetter(props.businessData.bussinessName) : "No business name available"} </p>
 
                                     </div>
 
@@ -204,7 +211,10 @@ function BusinessDetailBox(props) {
                                                 className="checkbox"
                                                 checked={isBusinessActive}
                                                 onChange={()=> {
-                                                    handleToggle()
+
+                                                    if(!loading){
+                                                        handleToggle()
+                                                    }
                                                   
                                                 }}
                                             />

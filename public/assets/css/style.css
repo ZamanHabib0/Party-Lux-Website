@@ -204,6 +204,7 @@ body {
   color: #707070;
   font-weight: 400;
   line-height: 1.75;
+  overflow: "hidden";
 }
 
 p {
@@ -3174,6 +3175,7 @@ small {
   overflow-y: auto;
   border-radius: 20px;
   margin-top: 30px;
+  padding: 20px;
   
 
 }
@@ -3211,7 +3213,7 @@ small {
    
   padding: 10px;
   border-radius: 10px;
-  background-color: #0a0f16;
+  background-color: #4D4D4D;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; 
   display: inline-block;
     
@@ -3219,7 +3221,7 @@ small {
 }
 
 .dropdown-weeks-bg{
-  background-color: #0a0f16;
+  background-color: #4D4D4D;
   color: white;
 }
 

@@ -50,7 +50,7 @@ export default function OTPInput(props) {
   
     try {
       const response = await axios.post(
-        "https://backend-partylux-staging.up.railway.app/v1/mobile/auth/verify-otp",
+        "https://backend-partylux-production.up.railway.app/v1/mobile/auth/verify-otp",
         {
           userId: userId,
           Otp: otpValue,
@@ -102,7 +102,7 @@ export default function OTPInput(props) {
 
       // Call your OTP resend API here
       // Replace "yourResendApiUrl" with the actual URL for OTP resend
-      const response = await axios.post("https://backend-partylux-staging.up.railway.app/v1/mobile/auth/resend-otp", {
+      const response = await axios.post("https://backend-partylux-production.up.railway.app/v1/mobile/auth/resend-otp", {
         userId: userId,
       });
 
@@ -178,6 +178,11 @@ export default function OTPInput(props) {
             Resend
           </span>{" "}
           {resendTimer > 0 ? `in ${resendTimer}s` : ""}
+        </p>
+        <p className="otp-txt-color mt-4 " style={{textAlign : "start"}}>
+   <span className="text-light" > Note:</span> Please check your spam folder if you haven't received our email
+          
+        
         </p>
               {/* <p className="otp-txt-color mt-4">Don't get the code? <a style={{ color: "#da13ec", fontWeight: "bold" }}><span  >Resend</span></a></p> */}
               <button

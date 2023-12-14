@@ -42,7 +42,7 @@ export default function FourthView(props) {
   return (
     <>
       <div className="partnerdata-container mt-5 p-3">
-        <h4 className="text-light text-left">Business Description</h4>
+        <h4 className="text-light text-left">Business Timmings</h4>
         <div className="container text-left">
           {Object.keys(businessHours).map((day) => (
             <div className="row mb-3" key={day}>

@@ -7,11 +7,11 @@ export default function FifthView(props) {
   const {
     images,
     location,
-    // error,
+    error,
     uploading,
     setImages,
     setlocation,
-    // setError,
+    setError,
     setImageURLs,
     setPlace,
     setUploading,
@@ -27,10 +27,11 @@ export default function FifthView(props) {
     setCompleteAddress,
     businessuploadedImages,
     setBusinessuploadedImages,
-    isUpdateBusiness
+    isUpdateBusiness,
+    setAlertErrorMessage
   } = props;
 
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState("ASd");
 
 
   const handleChange = async (e) => {
@@ -78,7 +79,7 @@ export default function FifthView(props) {
       };
   
       const response = await axios.post(
-        "https://backend-partylux-staging.up.railway.app/v1/mobile/users/upload-multiple-photo",
+        "https://backend-partylux-production.up.railway.app/v1/mobile/users/upload-multiple-photo",
         formData,
         config
       );
@@ -113,11 +114,12 @@ export default function FifthView(props) {
         setUploading(false);
         console.log("response.error.message")
         console.log(response.error.message)
-        setError(response.error.message);
+        setAlertErrorMessage("response.error.message");
       }
+    
     } catch (error) {
       setUploading(false);
-      setError('Image upload failed: ' + error.message);  // Use `error.message` directly
+      setAlertErrorMessage('Image upload failed: ' + "File too large");  // Use `error.message` directly
       console.error(error);  // Log the full error for debugging purposes
     }
   };
@@ -214,7 +216,7 @@ export default function FifthView(props) {
         ) : ( <></> )}
 
         <div className="mb-2 text-left">
-          <label class="custom-file-upload">
+          <label className="custom-file-upload">
             <a style={{ color: "#da13ec", fontWeight: "bold" }}> Click here</a> Upload your Business Images ,
             Supported Formats: JPG, PNG,;
             <br />  Max File Size:5MB.
@@ -264,17 +266,19 @@ export default function FifthView(props) {
                 props.handleNext();
               }else{
                 if (!uploading) {
+                  setAlertErrorMessage("")
                   await uploadImages(images);
-                  setError("")
+                  
                 }
               }
                }else{
                 if(images.length === 0 && businessuploadedImages.length === 0){
-                  setError("Please upload 1 image at least. ")
+                  setAlertErrorMessage("Please upload 1 image at least. ")
                 }else{
                   if (!uploading) {
+                    setAlertErrorMessage("")
                     await uploadImages(images);
-                    setError("")
+                   
                   }
                 }
                }

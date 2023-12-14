@@ -60,7 +60,7 @@ export default function LoginView(props) {
   
     try {
       const response = await axios.post(
-        "https://backend-partylux-staging.up.railway.app/v1/mobile/auth/signin",
+        "https://backend-partylux-production.up.railway.app/v1/mobile/auth/signin",
         {
           email: formData.email,
           password: formData.password,
@@ -103,7 +103,7 @@ export default function LoginView(props) {
       };
   
       // Make the API request with the headers
-      axios.get('https://backend-partylux-staging.up.railway.app/v1/mobile/business/my-business', {
+      axios.get('https://backend-partylux-production.up.railway.app/v1/mobile/business/my-business', {
         headers: headers,
       })
         .then((response) =>  {

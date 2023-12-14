@@ -119,7 +119,11 @@ const Navbar = ({ businessCount = 0, darkBg, classOption , Home = "#" , Unlock =
                   <HashLink className={`${authToken ? "" : `${ scroll > headerTop ? "become-partner-scroll-btn" : "become-partner-btn"}`}`} to={ authToken ?    "/" : login }>
                     {authToken ? (
                   <>
-                      <span onClick={() => setIsDialogOpen(true)} 
+                      <span onClick={() => {
+                        document.body.style.overflow = 'hidden';
+
+                        setIsDialogOpen(true)
+                      }} 
                       // onClick={handleLogout}
                       > 
                          <img

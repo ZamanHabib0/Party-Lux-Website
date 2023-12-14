@@ -33,7 +33,7 @@ export default function BusinessList() {
       document.body.style.overflow = 'auto';
 
       // Make the API request with the headers
-      axios.get('https://backend-partylux-staging.up.railway.app/v1/mobile/business/my-business', {
+      axios.get('https://backend-partylux-production.up.railway.app/v1/mobile/business/my-business', {
         headers: headers,
       })
         .then((response) => {
@@ -79,12 +79,6 @@ export default function BusinessList() {
     }
   }, []);
 
-
-
-
-
-
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlertErrorMessage(null);
@@ -98,7 +92,7 @@ export default function BusinessList() {
     
       <Layout>
     
-    <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'fixed', top: 0, right: 0, zIndex: 9999 }}>
+    <div className='d-flex justify-content-end m-4' style={{ width: "30%", position: 'fixed', top: 0, right: 0, zIndex: 9999 ,  }}>
         {alertErrorMessage && (
           <div className=''>
             <div className="alert alert-danger alert-dismissible fade show" role="alert">
@@ -121,9 +115,9 @@ export default function BusinessList() {
 
       <Navbar darkBg Home="/" Unlock='/#pricing' Features="/#features" Team="/#team" Contact="/#contact" BecomeApartner="/become-partner" />
     
-      <body style={{overflow : "hidden"}}>
+      <div style={{overflow : "hidden"}}>
       <PageHeader HeaderTitle="My Business" Parent="Pages" PageTitle="My Business" />
-      <div className="container mt-5" >
+      <div className="container mt-5"  >
 
         <div className="row">
           {businesses.map((business, index) => (
@@ -142,9 +136,7 @@ export default function BusinessList() {
                 setIsLoading={setIsLoading}
                 setAlertErrorMessage = {setAlertErrorMessage}
                 SetBusinessStateMessage = {SetBusinessStateMessage}
-            
-
-              />
+/>
             </div>
           ))}
           <div className='col-md-6 pl-5 pr-5 pb-4'>
@@ -168,7 +160,7 @@ export default function BusinessList() {
           </div>
         </div>
       </div>
-      </body>
+      </div>
     </Layout>
   
   );

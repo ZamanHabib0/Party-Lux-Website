@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Subscribe() {
+export default function Subscribe(props) {
   const [email, setEmail] = useState("");
-  const [subscribeSuccess, setSubscribeSuccess] = useState(false);
-  const [subscribeError, setSubscribeError] = useState(false);
+  const [subscribeSuccess, setSubscribeSuccess] = useState("");
+  const [subscribeError, setSubscribeError] = useState("");
 
   const handleInputChange = (e) => {
     setEmail(e.target.value);
@@ -15,28 +15,34 @@ export default function Subscribe() {
 
     try {
       const response = await axios.post(
-        "https://backend-partylux-staging.up.railway.app/v1/mobile/support/newsletter", // Replace with your actual API endpoint
+        "https://backend-partylux-production.up.railway.app/v1/mobile/support/newsletter", // Replace with your actual API endpoint
         { email }
       );
 
       if (response.status === 200) {
-        setSubscribeSuccess(true);
-        setSubscribeError(false);
+        props.successAlertErrorMessage("Subscribed successfully!");
+        props.setdangerAlertErrorMessage("");
         setEmail(""); // Clear the email input field
 
         // Automatically hide the success message after 3 seconds
         setTimeout(() => {
-          setSubscribeSuccess(false);
+          props.successAlertErrorMessage("");
+        }, 3000);
+      }else{
+        
+        props.successAlertErrorMessage("User already Subscribed");
+        setTimeout(() => {
+          props.successAlertErrorMessage("");
         }, 3000);
       }
     } catch (error) {
       console.error("Error subscribing:", error);
-      setSubscribeSuccess(false);
-      setSubscribeError(true);
+      props.successAlertErrorMessage("");
+      props.setdangerAlertErrorMessage("Subscription failed. Please try again later.");
 
       // Automatically hide the error message after 3 seconds
       setTimeout(() => {
-        setSubscribeError(false);
+        props.setdangerAlertErrorMessage("");
       }, 3000);
     }
   };

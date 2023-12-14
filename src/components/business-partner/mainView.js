@@ -102,7 +102,7 @@ export default function MainView() {
 
         const fetchBusinessData = async () => {
           try {
-            const response = await axios.post('https://backend-partylux-staging.up.railway.app/v1/mobile/business/business-detail', requestData, {
+            const response = await axios.post('https://backend-partylux-production.up.railway.app/v1/mobile/business/business-detail', requestData, {
               headers: {
                 Authorization: `Bearer ${authToken}`
               }
@@ -154,7 +154,7 @@ export default function MainView() {
         console.error('Authentication token is missing');
       }
     }
-  });
+  } ,[] );
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % 8);
@@ -195,7 +195,7 @@ export default function MainView() {
     try {
       // Make a POST request to the API with authToken
       const authToken = localStorage.getItem('authToken');
-      const response = await axios.post('https://backend-partylux-staging.up.railway.app/v1/mobile/business/create-business', mergedObject, {
+      const response = await axios.post('https://backend-partylux-production.up.railway.app/v1/mobile/business/create-business', mergedObject, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -237,7 +237,7 @@ export default function MainView() {
 
       const mergedObject = { ...combinedData, ...businessAddress, ...businessEssentials };
       axios
-        .put(`https://backend-partylux-staging.up.railway.app/v1/mobile/business/update-business/${businessId}`, mergedObject, {
+        .put(`https://backend-partylux-production.up.railway.app/v1/mobile/business/update-business/${businessId}`, mergedObject, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
@@ -279,7 +279,7 @@ export default function MainView() {
     <SecondView handleNext={handleNext} businessName={businessName} setBusinessName={setBusinessName} BusinessCategory={BusinessCategory} setBusinessCategory={setBusinessCategory} />,
     <ThirdView handleNext={handleNext} businessDescription={businessDescription} setBusinessDescription={setBusinessDescription} />,
     <FourthView alertErrorMessage={alertErrorMessage} setAlertErrorMessage={setAlertErrorMessage} handleNext={handleNext} businessWeek={businessWeek} setbusinessWeek={setbusinessWeek} businessHours={businessHours} setBusinessHours={setBusinessHours} />,
-    <FifthView isUpdateBusiness ={isUpdateBusiness} handleNext={handleNext} businessAddress={businessAddress} setbusinessAddress={setbusinessAddress} images={images}
+    <FifthView setAlertErrorMessage={setAlertErrorMessage} isUpdateBusiness ={isUpdateBusiness} handleNext={handleNext} businessAddress={businessAddress} setbusinessAddress={setbusinessAddress} images={images}
       location={location}
       error={error}
       imageURLs={imageURLs}
@@ -369,7 +369,6 @@ export default function MainView() {
 
 
         <div className="row  justify-content-between">
-          {/* <div className="col-md-1"></div> */}
           {currentIndex === components.length - 1 ? (
             <ThankYou />
           ) : (
@@ -396,12 +395,7 @@ export default function MainView() {
                 </div>
               </div>
             </>
-
           )}
-
-
-
-
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Contact({ bgColor }) {
+export default function Contact(props) {
   // Define state variables to store form data
   const [formData, setFormData] = useState({
     name: "",
@@ -24,13 +24,13 @@ export default function Contact({ bgColor }) {
 
     try {
       const response = await axios.post(
-        "https://backend-partylux-staging.up.railway.app/v1/mobile/support/send-email-toSupport",
+        "https://backend-partylux-production.up.railway.app/v1/mobile/support/send-email-toSupport",
         formData
       );
 
       if (response.status === 200) {
-        setSuccessMessage("Message sent successfully!");
-        setErrorMessage(""); // Clear any previous error messages
+        props.successAlertErrorMessage("Message sent successfully!");
+        props.setdangerAlertErrorMessage(""); // Clear any previous error messages
         setFormData({
           name: "",
           email: "",
@@ -40,14 +40,14 @@ export default function Contact({ bgColor }) {
         });
 
         setTimeout(() => {
-          setSuccessMessage("");
+          props.successAlertErrorMessage("");
         }, 3000);
 
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      setSuccessMessage(""); // Clear any previous success messages
-      setErrorMessage("An error occurred while sending the message. Please try again.");
+      props.successAlertErrorMessage(""); // Clear any previous success messages
+      props.setdangerAlertErrorMessage("An error occurred while sending the message. Please try again.");
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
@@ -89,7 +89,7 @@ export default function Contact({ bgColor }) {
     <>
       <section
         id="contact"
-        className={`contact-us ptb-100 ${bgColor ? "gray-light-bg" : ""}`}
+        className={`contact-us ptb-100 gray-light-bg `}
       >
         <div className="container">
           <div className="row">
@@ -114,7 +114,7 @@ export default function Contact({ bgColor }) {
                     <span>
                       Email :
                       <a href="mailto:SUPPORT@PARTYLUX.APP">
-                      support@Partylux.app
+                      support@partylux.app
                       </a>
                     </span>
                   </li>
@@ -225,7 +225,7 @@ export default function Contact({ bgColor }) {
                   <button
                     type="button"
                     className="close"
-                    onClick={() => setSuccessMessage("")}
+                    onClick={() => props.successAlertErrorMessage("")}
                     aria-label="Close"
                   >
                     <span aria-hidden="true">&times;</span>
@@ -238,7 +238,7 @@ export default function Contact({ bgColor }) {
                   <button
                     type="button"
                     className="close"
-                    onClick={() => setErrorMessage("")}
+                    onClick={() => props.setdangerAlertErrorMessage("")}
                     aria-label="Close"
                   >
                     <span aria-hidden="true">&times;</span>

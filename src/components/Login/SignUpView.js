@@ -64,7 +64,7 @@ export default function SignUpView(props) {
 
 
     try {
-      const response = await axios.post("https://backend-partylux-staging.up.railway.app/v1/mobile/auth/signup", formData);
+      const response = await axios.post("https://backend-partylux-production.up.railway.app/v1/mobile/auth/signup", formData);
 
       if (response.data.status === 200) {
         const data = response.data;
